@@ -1,46 +1,47 @@
 import React from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import useStyles from './styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import Container from '@material-ui/core/Container'
+import { Switch, Link, Route } from 'react-router-dom'
+import Loginpage from '../Loginpage/Loginpage'
+import Signuppage from '../Signuppage/Signuppage'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
-)
+const Navbar: React.FC = () => {
+    const classes = useStyles()
 
-export default function ButtonAppBar() {
-  const classes = useStyles()
-
-  return (
-    <div className={classes.root}>
-      <AppBar position='static'>
-        <Toolbar>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='menu'>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' className={classes.title}>
-            News
-          </Typography>
-          <Button color='inherit'>Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  )
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Link to="/">
+                        <Button color="inherit">Home</Button>
+                    </Link>
+                    <Typography variant="h5" className={classes.title}>
+                        Jp-bet
+                    </Typography>
+                    <Link to="/signup">
+                        <Button color="inherit">Signup</Button>
+                    </Link>
+                    <Link to="/login">
+                        <Button color="inherit">Login</Button>
+                    </Link>
+                </Toolbar>
+            </AppBar>
+            <Switch>
+                <Container maxWidth="md">
+                    <Route path="/login">
+                        <Loginpage />
+                    </Route>
+                    <Route path="/signup">
+                        <Signuppage />
+                    </Route>
+                </Container>
+            </Switch>
+        </div>
+    )
 }
+
+export default Navbar
