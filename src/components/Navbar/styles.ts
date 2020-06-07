@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
             flexGrow: 1,
             textAlign: 'center',
         },
+        link : {
+            textDecoration: 'none',
+            color: 'white'
+            
+        }
     })
 )
 

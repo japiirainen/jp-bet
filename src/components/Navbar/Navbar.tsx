@@ -16,16 +16,16 @@ const Navbar: React.FC = () => {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <Link to="/">
+                    <Link className={classes.link} to="/">
                         <Button color="inherit">Home</Button>
                     </Link>
                     <Typography variant="h5" className={classes.title}>
                         Jp-bet
                     </Typography>
-                    <Link to="/signup">
+                    <Link className={classes.link} to="/signup">
                         <Button color="inherit">Signup</Button>
                     </Link>
-                    <Link to="/login">
+                    <Link className={classes.link} to="/login">
                         <Button color="inherit">Login</Button>
                     </Link>
                 </Toolbar>
