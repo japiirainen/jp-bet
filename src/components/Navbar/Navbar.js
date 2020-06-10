@@ -9,7 +9,7 @@ import { Switch, Link, Route } from 'react-router-dom'
 import Loginpage from '../Loginpage/Loginpage'
 import Signuppage from '../Signuppage/Signuppage'
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
     const classes = useStyles()
 
     return (

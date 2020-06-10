@@ -16,6 +16,9 @@ const useStyles = makeStyles({
         marginTop: 10,
         marginBottom: 10,
     },
+    header: {
+        marginBottom: 25,
+    },
 })
 
 export default useStyles
