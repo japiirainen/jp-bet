@@ -5,35 +5,56 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import { TextField } from '@material-ui/core'
 
 const Signuppage: React.FC = () => {
     const classes = useStyles()
-    const bull = <span className={classes.bullet}>•</span>
+
 
     return (
         <Card className={classes.root}>
             <CardContent>
-                <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    gutterBottom
-                >
-                    Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    be{bull}nev{bull}o{bull}lent
+                <Typography variant="h4" component="h2">
+                    Signup
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    adjective
+                    Welcome to JP-bet! You can sign up below
                 </Typography>
-                <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                <Typography variant="h5" component="p">
+                    Email:
                 </Typography>
+                <TextField
+                    className={classes.textfield}
+                    id="standard-basic"
+                    label="Your email"
+                />
+                 <Typography variant="h5" component="p">
+                    Username:
+                </Typography>
+                <TextField
+                    className={classes.textfield}
+                    id="standard-basic"
+                    label="Your username"
+                />
+                <Typography variant="h5" component="p">
+                    Password:
+                </Typography>
+                <TextField
+                    className={classes.textfield}
+                    id="standard-basic"
+                    label="Your password"
+                />
+                <Typography variant="h5" component="p">
+                    Confirm password:
+                </Typography>
+                <TextField
+                    className={classes.textfield}
+                    id="standard-basic"
+                    label="re-enter password"
+                />
             </CardContent>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="large">Signup</Button>
             </CardActions>
         </Card>
     )

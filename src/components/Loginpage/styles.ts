@@ -2,19 +2,19 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
-        
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
+        width: '200px',
+        minWidth: '100%',
+        marginTop: '5rem',
     },
     pos: {
         marginBottom: 12,
+    },
+    input: {
+        marginBottom: 20,
+    },
+    typo: {
+        marginTop: 10,
+        marginBottom: 10,
     },
 })
 
