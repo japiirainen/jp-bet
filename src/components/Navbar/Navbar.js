@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import { Switch, Link, Route } from 'react-router-dom'
-import Loginpage from '../Loginpage/Loginpage'
+import Loginpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
 
 const Navbar = () => {
@@ -25,14 +25,14 @@ const Navbar = () => {
                     <Link className={classes.link} to="/signup">
                         <Button color="inherit">Signup</Button>
                     </Link>
-                    <Link className={classes.link} to="/login">
-                        <Button color="inherit">Login</Button>
+                    <Link className={classes.link} to="/signin">
+                        <Button color="inherit">Signin</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
             <Switch>
-                <Container maxWidth="md">
-                    <Route path="/login">
+                <Container maxWidth="sm">
+                    <Route path="/signin">
                         <Loginpage />
                     </Route>
                     <Route path="/signup">
