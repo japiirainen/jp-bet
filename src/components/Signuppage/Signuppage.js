@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -13,10 +14,12 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Copyright from '../Copyright/copyright'
 import useStyles from './styles'
+import { onSignup } from '../../apiclient'
+import jwt from 'jsonwebtoken'
 
 const SignUp = () => {
     const classes = useStyles()
-
+    const [redirect, setRedirect] = useState()
     const [inputs, setInputs] = useState({
         username: '',
         email: '',
@@ -26,8 +29,24 @@ const SignUp = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setInputs((i) => ({ ...i, [name]: value }))
+        setInputs((input) => ({ ...input, [name]: value }))
     }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        onSignup(inputs)
+            .then(({ token }) => {
+                localStorage.setItem('JPBET_TOKEN', token)
+                localStorage.setItem(
+                    'JPBET_USER',
+                    JSON.stringify(jwt.decode(token))
+                )
+                setRedirect('/')
+            })
+            .catch((e) => console.error(e))
+    }
+
+    if (redirect) return <Redirect to={redirect} />
 
     return (
         <Container component="main" maxWidth="xs">
@@ -101,6 +120,7 @@ const SignUp = () => {
                         variant="contained"
                         color="inherit"
                         className={classes.submit}
+                        onClick={onSubmit}
                     >
                         Sign Up
                     </Button>

@@ -3,10 +3,11 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(4),
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'space-bethween'
+    
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
