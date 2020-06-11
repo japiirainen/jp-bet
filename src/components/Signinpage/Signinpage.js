@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography'
 import useStyles from './styles'
 import Container from '@material-ui/core/Container'
 
-export default function SignIn() {
+const SignIn = () => {
     const classes = useStyles()
 
     return (
@@ -29,6 +29,7 @@ export default function SignIn() {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
+                    
                         variant="outlined"
                         margin="normal"
                         required
@@ -58,19 +59,19 @@ export default function SignIn() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
+                        color="inherit"
                         className={classes.submit}
                     >
                         Sign In
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            <Link color="inherit" href="#" variant="body2">
                                 Forgot password?
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="/signup" variant="body2">
+                            <Link color="inherit" href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
@@ -83,3 +84,5 @@ export default function SignIn() {
         </Container>
     )
 }
+
+export default SignIn

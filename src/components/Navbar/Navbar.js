@@ -14,7 +14,7 @@ const Navbar = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" color="inherit">
                 <Toolbar>
                     <Link className={classes.link} to="/">
                         <Button color="inherit">Home</Button>

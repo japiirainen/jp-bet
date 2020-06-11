@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -14,8 +14,20 @@ import Container from '@material-ui/core/Container'
 import Copyright from '../Copyright/copyright'
 import useStyles from './styles'
 
-export default function SignUp() {
+const SignUp = () => {
     const classes = useStyles()
+
+    const [inputs, setInputs] = useState({
+        username: '',
+        email: '',
+        password: '',
+    })
+    const { username, email, password } = inputs
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setInputs((i) => ({ ...i, [name]: value }))
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -29,29 +41,21 @@ export default function SignUp() {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                             <TextField
-                                autoComplete="fname"
-                                name="firstName"
+                                autoComplete="username"
+                                name="username"
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="firstName"
-                                label="First Name"
+                                id="username"
+                                label="Username"
                                 autoFocus
-                            />
+                                onChange={handleChange}
+                                value={username}
+                            ></TextField>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
-                            />
-                        </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
@@ -61,6 +65,8 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                onChange={handleChange}
+                                value={email}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -73,6 +79,8 @@ export default function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={handleChange}
+                                value={password}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -80,7 +88,7 @@ export default function SignUp() {
                                 control={
                                     <Checkbox
                                         value="allowExtraEmails"
-                                        color="primary"
+                                        color="default"
                                     />
                                 }
                                 label="I agree with the terms of service"
@@ -91,14 +99,18 @@ export default function SignUp() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
+                        color="inherit"
                         className={classes.submit}
                     >
                         Sign Up
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="/login" variant="body2">
+                            <Link
+                                color="inherit"
+                                href="/signin"
+                                variant="body2"
+                            >
                                 Already have an account? Sign in
                             </Link>
                         </Grid>
@@ -111,3 +123,5 @@ export default function SignUp() {
         </Container>
     )
 }
+
+export default SignUp
