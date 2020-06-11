@@ -1,12 +1,10 @@
 import React from 'react'
-import clsx from 'clsx'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Chip from '@material-ui/core/Chip'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import useStyles from './styles'
@@ -16,7 +14,7 @@ export default function DetailedExpansionPanel() {
 
     return (
         <div className={classes.root}>
-            <ExpansionPanel defaultExpanded>
+            <ExpansionPanel>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1c-content"
@@ -24,38 +22,35 @@ export default function DetailedExpansionPanel() {
                 >
                     <div className={classes.column}>
                         <Typography className={classes.heading}>
-                            Location
+                            Counter-Strike
                         </Typography>
                     </div>
                     <div className={classes.column}>
                         <Typography className={classes.secondaryHeading}>
-                            Select trip destination
+                            Team1 name
+                        </Typography>
+                    </div>
+                    <div className={classes.column}>
+                        <Typography className={classes.secondaryHeading}>
+                            vs
+                        </Typography>
+                    </div>
+                    <div className={classes.column}>
+                        <Typography className={classes.secondaryHeading}>
+                            Team2 name
                         </Typography>
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails className={classes.details}>
                     <div className={classes.column} />
                     <div className={classes.column}>
-                        <Chip label="Barbados" onDelete={() => {}} />
-                    </div>
-                    <div className={clsx(classes.column, classes.helper)}>
-                        <Typography variant="caption">
-                            Select your destination of choice
-                            <br />
-                            <a
-                                href="#secondary-heading-and-columns"
-                                className={classes.link}
-                            >
-                                Learn more
-                            </a>
-                        </Typography>
+                        <Typography>odds and other stuff</Typography>
                     </div>
                 </ExpansionPanelDetails>
                 <Divider />
                 <ExpansionPanelActions>
-                    <Button size="small">Cancel</Button>
-                    <Button size="small" color="inherit">
-                        Save
+                    <Button variant="outlined" size="medium" color="inherit">
+                        make a bet
                     </Button>
                 </ExpansionPanelActions>
             </ExpansionPanel>

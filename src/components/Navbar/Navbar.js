@@ -4,10 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
-import { Switch, Link, Route } from 'react-router-dom'
-import Loginpage from '../Signinpage/Signinpage'
-import Signuppage from '../Signuppage/Signuppage'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const classes = useStyles()
@@ -17,7 +14,9 @@ const Navbar = () => {
             <AppBar position="static" color="inherit">
                 <Toolbar>
                     <Link className={classes.link} to="/">
-                        <Button color="inherit">Home</Button>
+                        <Button variant="text" color="inherit">
+                            Home
+                        </Button>
                     </Link>
                     <Typography variant="h5" className={classes.title}>
                         Jp-bet
@@ -30,16 +29,6 @@ const Navbar = () => {
                     </Link>
                 </Toolbar>
             </AppBar>
-            <Switch>
-                <Container maxWidth="sm">
-                    <Route path="/signin">
-                        <Loginpage />
-                    </Route>
-                    <Route path="/signup">
-                        <Signuppage />
-                    </Route>
-                </Container>
-            </Switch>
         </div>
     )
 }
