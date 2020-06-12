@@ -8,7 +8,13 @@ const Matches = (props) => {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        getMatches(token).then(setMatches).catch(console.error)
+        setLoading(true)
+        setError(null)
+        getMatches(token)
+            .then(setMatches)
+            .catch((error) => {
+                setError(error)
+            })
     }, [])
 
     return (

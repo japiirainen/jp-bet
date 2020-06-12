@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar'
 import Copyright from '../Copyright/copyright'
 import Button from '@material-ui/core/Button'
@@ -13,9 +14,38 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import useStyles from './styles'
 import Container from '@material-ui/core/Container'
+import { onSignin } from '../../apiclient'
+import jwt from 'jsonwebtoken'
 
 const SignIn = () => {
     const classes = useStyles()
+    const [redirect, setRedirect] = useState()
+    const [inputs, setInputs] = useState({
+        email: '',
+        password: '',
+    })
+    const { email, password } = inputs
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setInputs((input) => ({ ...input, [name]: value }))
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        onSignin(inputs)
+            .then(({ token }) => {
+                localStorage.setItem('JPBET_TOKEN', token)
+                localStorage.setItem(
+                    'JPBET_USER',
+                    JSON.stringify(jwt.decode(token))
+                )
+                setRedirect('/')
+            })
+            .catch((e) => console.error(e))
+    }
+
+    if (redirect) return <Redirect to={redirect} />
 
     return (
         <Container component="main" maxWidth="xs">
@@ -29,7 +59,6 @@ const SignIn = () => {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
-                    
                         variant="outlined"
                         margin="normal"
                         required
@@ -39,6 +68,8 @@ const SignIn = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={handleChange}
+                        value={email}
                     />
                     <TextField
                         variant="outlined"
@@ -50,6 +81,8 @@ const SignIn = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={handleChange}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -61,6 +94,7 @@ const SignIn = () => {
                         variant="contained"
                         color="inherit"
                         className={classes.submit}
+                        onClick={onSubmit}
                     >
                         Sign In
                     </Button>
@@ -71,7 +105,11 @@ const SignIn = () => {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link color="inherit" href="/signup" variant="body2">
+                            <Link
+                                color="inherit"
+                                href="/signup"
+                                variant="body2"
+                            >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
