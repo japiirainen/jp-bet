@@ -6,11 +6,11 @@ import Loginpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
-import { darkTheme } from './Themeprovider'
+import { lightTheme } from './Themeprovider'
 
 const App = () => {
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={lightTheme}>
             <Paper style={{ height: '100vh' }}>
                 <Navbar />
                 <Container maxWidth="sm">
