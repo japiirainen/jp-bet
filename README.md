@@ -8,3 +8,5 @@
 -   [x] render match data on frontpage
 -   [] useAuth hook somehow
 -   [] render match data on frontpage
+-   [] odds on frontpage
+-   [] make a bet button checks for auth and redirects

@@ -9,11 +9,8 @@ import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import useStyles from './styles'
 
-
 const Match = (props) => {
     const classes = useStyles()
-
-    
 
     return (
         <div className={classes.root}>
@@ -25,7 +22,7 @@ const Match = (props) => {
                 >
                     <div className={classes.column}>
                         <Typography className={classes.heading}>
-                        {props.category}
+                            {props.category}
                         </Typography>
                     </div>
                     <div className={classes.column}>
@@ -48,6 +45,8 @@ const Match = (props) => {
                     <div className={classes.column} />
                     <div className={classes.column}>
                         <Typography>{props.category}</Typography>
+                        <Typography>{props.odds.team2Win}</Typography>
+                        <Typography>{props.odds.team1Win}</Typography>
                     </div>
                 </ExpansionPanelDetails>
                 <Divider />
