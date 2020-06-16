@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar'
 import Matches from '../Matches'
 import Loginpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
+import Footer from '../Footer'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
@@ -26,6 +27,7 @@ const App = () => {
                         </Route>
                     </Switch>
                 </Container>
+                <Footer />
             </Paper>
         </ThemeProvider>
     )

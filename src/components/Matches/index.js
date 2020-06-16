@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Match from './match'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { getMatches, token } from '../../apiclient'
 
 const Matches = (props) => {
@@ -12,6 +13,7 @@ const Matches = (props) => {
         setError(null)
         getMatches(token)
             .then(setMatches)
+            .then(setLoading(false))
             .catch((error) => {
                 setError(error)
             })
@@ -19,9 +21,11 @@ const Matches = (props) => {
 
     return (
         <>
-            {matches.map((match) => (
-                <Match key={match._id} {...match} />
-            ))}
+            {loading ? (
+                <CircularProgress color="secondary" />
+            ) : (
+                matches.map((match) => <Match key={match._id} {...match} />)
+            )}
         </>
     )
 }
