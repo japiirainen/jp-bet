@@ -18,7 +18,7 @@ const Footer = () => {
       <Slide direction="up" in>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1">My sticky footer can be found here.</Typography>
+          <Typography variant="body1">My placeholder text. need to think what to put here</Typography>
           <Copyright />
         </Container>
       </footer>

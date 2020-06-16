@@ -1,6 +1,7 @@
-export const endpoint = 'http://localhost:1337'
-export const token =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGY2M2Y0M2M2MTU3MjYzMjg5NGY0NyIsImlhdCI6MTU5MTY5ODQyMCwiZXhwIjoxNjAwMzM4NDIwfQ.rp-VE6oqGqqMIlRutzOHtnknEPqv3w4UY5yg5UQZ568'
+import { Config } from './config'
+
+export const endpoint = Config.endpoint
+export const token = Config.token
 
 export async function getMatches(authToken) {
     const resp = await fetch(`${endpoint}/api/v1/match`, {

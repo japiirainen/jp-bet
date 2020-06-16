@@ -6,6 +6,7 @@ import { getMatches, token } from '../../apiclient'
 const Matches = (props) => {
     const [matches, setMatches] = useState([])
     const [loading, setLoading] = useState(true)
+    // eslint-disable-next-line
     const [error, setError] = useState(null)
 
     useEffect(() => {
