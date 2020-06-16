@@ -12,4 +12,5 @@
 -   [] make a bet button checks for auth and redirects
 -   [] make logout feature + conditional rendering in navbar
 -   [x] frontpage loading
--   [x] Footer
+-   [] Footer fixes
+-   [] config token not working for some reason
