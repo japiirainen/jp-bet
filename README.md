@@ -12,5 +12,6 @@
 -   [] make a bet button checks for auth and redirects
 -   [] make logout feature + conditional rendering in navbar
 -   [x] frontpage loading
--   [] Footer fixes
+-   [] Footer fixes!!
 -   [] config token not working for some reason
+-   [] https://usehooks.com/ useAuth hook or https://medium.com/better-programming/building-basic-react-authentication-e20a574d5e71

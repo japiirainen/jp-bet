@@ -27,7 +27,6 @@ const App = () => {
                         </Route>
                     </Switch>
                 </Container>
-                <Footer />
             </Paper>
         </ThemeProvider>
     )
