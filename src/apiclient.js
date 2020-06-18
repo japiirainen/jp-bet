@@ -52,5 +52,3 @@ export const onSignin = async (data) => {
         throw e
     }
 }
-
-

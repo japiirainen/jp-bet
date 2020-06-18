@@ -16,37 +16,43 @@ import useStyles from './styles'
 import Container from '@material-ui/core/Container'
 import Grow from '@material-ui/core/Grow'
 import { onSignin } from '../../apiclient'
+import { useAuth } from '../../context/auth'
 import jwt from 'jsonwebtoken'
 
 const SignIn = () => {
+    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [isError, setIsError] = useState(false)
     const classes = useStyles()
-    const [redirect, setRedirect] = useState()
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
     })
     const { email, password } = inputs
+    const { setAuthTokens } = useAuth()
 
     const handleChange = (e) => {
         const { name, value } = e.target
         setInputs((input) => ({ ...input, [name]: value }))
     }
 
-    const onSubmit = (e) => {
+    const postLogin = (e) => {
         e.preventDefault()
         onSignin(inputs)
             .then(({ token }) => {
-                localStorage.setItem('JPBET_TOKEN', token)
+                setAuthTokens(token)
                 localStorage.setItem(
                     'JPBET_USER',
                     JSON.stringify(jwt.decode(token))
                 )
-                setRedirect('/')
+                setLoggedIn(true)
+                //setRedirect('/')
             })
-            .catch((e) => console.error(e))
+            .catch((e) => {
+                setIsError(true)
+            })
     }
 
-    if (redirect) return <Redirect to={redirect} />
+    if (isLoggedIn) return <Redirect to="/" />
 
     return (
         <Grow in>
@@ -98,7 +104,7 @@ const SignIn = () => {
                             variant="contained"
                             color="inherit"
                             className={classes.submit}
-                            onClick={onSubmit}
+                            onClick={postLogin}
                         >
                             Sign In
                         </Button>
@@ -120,6 +126,11 @@ const SignIn = () => {
                         </Grid>
                     </form>
                 </div>
+                {isError && (
+                    <Typography>
+                        The username or password provided were incorrect!
+                    </Typography>
+                )}
                 <Box mt={8}>
                     <Copyright />
                 </Box>

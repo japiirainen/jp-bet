@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import Matches from '../Matches'
@@ -12,9 +12,17 @@ import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../context/auth'
 
-const App = () => {
+const App = (props) => {
+    const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
+    const [authTokens, setAuthTokens] = useState(existingTokens)
+
+    const setTokens = (data) => {
+        localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
+        setAuthTokens(data)
+    }
+
     return (
-        <AuthContext.Provider value={false}>
+        <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
             <ThemeProvider theme={lightTheme}>
                 <Paper style={{ height: '100vh' }}>
                     <Navbar />
