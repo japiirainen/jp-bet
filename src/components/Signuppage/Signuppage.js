@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
+import { Alert } from '../Alert'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
@@ -16,39 +17,44 @@ import Grow from '@material-ui/core/Grow'
 import Copyright from '../Copyright/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../apiclient'
+import { useAuth } from '../../context/auth'
 import jwt from 'jsonwebtoken'
 
 const SignUp = () => {
     const classes = useStyles()
 
-    const [redirect, setRedirect] = useState()
+    const [isLoggedIn, setLoggedIn] = useState()
+    const [isError, setIsError] = useState()
     const [inputs, setInputs] = useState({
         username: '',
         email: '',
         password: '',
     })
     const { username, email, password } = inputs
+    const { setAuthTokens } = useAuth()
 
     const handleChange = (e) => {
         const { name, value } = e.target
         setInputs((input) => ({ ...input, [name]: value }))
     }
 
-    const onSubmit = (e) => {
+    const postSignup = (e) => {
         e.preventDefault()
         onSignup(inputs)
             .then(({ token }) => {
-                localStorage.setItem('JPBET_TOKEN', token)
+                setAuthTokens(token)
                 localStorage.setItem(
                     'JPBET_USER',
                     JSON.stringify(jwt.decode(token))
                 )
-                setRedirect('/')
+                setLoggedIn(true)
             })
-            .catch((e) => console.error(e))
+            .catch((e) => {
+                setIsError(true)
+            })
     }
 
-    if (redirect) return <Redirect to={redirect} />
+    if (isLoggedIn) return <Redirect to="/" />
 
     return (
         <Grow in>
@@ -123,7 +129,7 @@ const SignUp = () => {
                             variant="contained"
                             color="inherit"
                             className={classes.submit}
-                            onClick={onSubmit}
+                            onClick={postSignup}
                         >
                             Sign Up
                         </Button>
@@ -140,6 +146,11 @@ const SignUp = () => {
                         </Grid>
                     </form>
                 </div>
+                {isError && (
+                    <Alert severity="error">
+                        need to do validation for this!!
+                    </Alert>
+                )}
                 <Box mt={5}>
                     <Copyright />
                 </Box>

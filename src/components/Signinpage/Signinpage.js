@@ -37,7 +37,7 @@ const SignIn = () => {
         setInputs((input) => ({ ...input, [name]: value }))
     }
 
-    const postLogin = (e) => {
+    const postSignin = (e) => {
         e.preventDefault()
         onSignin(inputs)
             .then(({ token }) => {
@@ -105,7 +105,7 @@ const SignIn = () => {
                             variant="contained"
                             color="inherit"
                             className={classes.submit}
-                            onClick={postLogin}
+                            onClick={postSignin}
                         >
                             Sign In
                         </Button>
