@@ -1,36 +1,33 @@
 import React from 'react'
+import Hamburger from './Hamburger'
 import useStyles from './styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
+import HomeIcon from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
 
-const Navbar = () => {
+const Navbar = (props) => {
     const classes = useStyles()
 
-    const { authTokens, setAuthTokens } = useAuth()
+    const { authTokens } = useAuth()
 
-    const logOut = () => {
-        setAuthTokens()
-    }
+  
 
     if (authTokens) return (<div className={classes.root}>
         <AppBar position="static" color="secondary">
             <Toolbar>
                 <Link className={classes.link} to="/">
                     <Button variant="text" color="inherit">
-                        Home
+                        <HomeIcon />
                     </Button>
                 </Link>
                 <Typography variant="h5" className={classes.title}>
                     Jp-bet
                 </Typography>
-                 <Link className={classes.link} to="/account">
-                    <Button color="inherit">My Account</Button>
-                </Link>
-                    <Button color="inherit" onClick={logOut}>Logout</Button>
+                 <Hamburger />
             </Toolbar>
         </AppBar>
     </div>)
@@ -41,7 +38,7 @@ const Navbar = () => {
                 <Toolbar>
                     <Link className={classes.link} to="/">
                         <Button variant="text" color="inherit">
-                            Home
+                            <HomeIcon />
                         </Button>
                     </Link>
                     <Typography variant="h5" className={classes.title}>
