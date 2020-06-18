@@ -9,6 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
+import { Alert } from '../Alert'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
@@ -20,9 +21,10 @@ import { useAuth } from '../../context/auth'
 import jwt from 'jsonwebtoken'
 
 const SignIn = () => {
+    const classes = useStyles()
+
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isError, setIsError] = useState(false)
-    const classes = useStyles()
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
@@ -45,7 +47,6 @@ const SignIn = () => {
                     JSON.stringify(jwt.decode(token))
                 )
                 setLoggedIn(true)
-                //setRedirect('/')
             })
             .catch((e) => {
                 setIsError(true)
@@ -127,9 +128,9 @@ const SignIn = () => {
                     </form>
                 </div>
                 {isError && (
-                    <Typography>
-                        The username or password provided were incorrect!
-                    </Typography>
+                    <Alert severity="error">
+                        Username or password incorrect!
+                    </Alert>
                 )}
                 <Box mt={8}>
                     <Copyright />

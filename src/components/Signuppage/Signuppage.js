@@ -20,6 +20,7 @@ import jwt from 'jsonwebtoken'
 
 const SignUp = () => {
     const classes = useStyles()
+
     const [redirect, setRedirect] = useState()
     const [inputs, setInputs] = useState({
         username: '',
