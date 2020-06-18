@@ -15,3 +15,4 @@
 -   [] Footer fixes!!
 -   [] config token not working for some reason
 -   [] https://usehooks.com/ useAuth hook or https://medium.com/better-programming/building-basic-react-authentication-e20a574d5e71
+-   [] admin page

@@ -4,31 +4,34 @@ import Navbar from '../Navbar/Navbar'
 import Matches from '../Matches'
 import Loginpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
-import Footer from '../Footer'
+import PrivateRoute from '../PrivateRoute'
+import Admin from '../Admin'
+//import Footer from '../Footer'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
+import { AuthContext } from '../../context/auth'
 
 const App = () => {
     return (
-        <ThemeProvider theme={lightTheme}>
-            <Paper style={{ height: '100vh' }}>
-                <Navbar />
-                <Container maxWidth="sm">
-                    <Switch>
-                        <Route exact path="/">
-                            <Matches />
-                        </Route>
-                        <Route path="/signin">
-                            <Loginpage />
-                        </Route>
-                        <Route path="/signup">
-                            <Signuppage />
-                        </Route>
-                    </Switch>
-                </Container>
-            </Paper>
-        </ThemeProvider>
+        <AuthContext.Provider value={false}>
+            <ThemeProvider theme={lightTheme}>
+                <Paper style={{ height: '100vh' }}>
+                    <Navbar />
+                    <Container maxWidth="sm">
+                        <Switch>
+                            <Route exact path="/" component={Matches} />
+
+                            <Route path="/signin" component={Loginpage} />
+
+                            <Route path="/signup" component={Signuppage} />
+
+                            <PrivateRoute path="/admin" component={Admin} />
+                        </Switch>
+                    </Container>
+                </Paper>
+            </ThemeProvider>
+        </AuthContext.Provider>
     )
 }
 
