@@ -22,7 +22,7 @@ const Hamburger = () => {
   const { setAuthTokens, authTokens } = useAuth()
 
   const handleLogOut = () => {
-    setAuthTokens(localStorage.clear())
+    setAuthTokens()
     return <Redirect to="/"/>
 }
 

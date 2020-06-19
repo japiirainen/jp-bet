@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Match from './match'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { Alert } from '../Alert'
 import { getMatches, token } from '../../apiclient'
 
 const Matches = (props) => {
@@ -26,6 +27,9 @@ const Matches = (props) => {
                 <CircularProgress color="secondary" />
             ) : (
                 matches.map((match) => <Match key={match._id} {...match} />)
+            )}
+            {error && (
+                <Alert severity="error">Username or password incorrect!</Alert>
             )}
         </>
     )
