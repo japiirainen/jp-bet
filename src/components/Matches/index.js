@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Match from './match'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { Alert } from '../Alert'
-import { getMatches, token } from '../../apiclient'
+import { getMatches, token } from '../../Utils/apiclient'
 
 const Matches = (props) => {
     const [matches, setMatches] = useState([])
