@@ -20,7 +20,7 @@ const App = (props) => {
 
     const setTokens = (data) => {
         localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
-        setAuthTokens(data)
+        return setAuthTokens(data)
     }
 
     return (

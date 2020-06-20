@@ -21,9 +21,8 @@ const Hamburger = () => {
 
     const { setAuthTokens, authTokens } = useAuth()
 
-    const handleLogOut = () => {
+    function logOut() {
         setAuthTokens()
-        return <Redirect to="/" />
     }
 
     const handleAccount = () => {
@@ -67,7 +66,7 @@ const Hamburger = () => {
                         Settings
                     </MenuItem>
                 </Link>
-                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+                <MenuItem onClick={logOut}>Logout</MenuItem>
             </Menu>
         </div>
     )

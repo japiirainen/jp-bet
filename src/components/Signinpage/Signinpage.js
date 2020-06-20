@@ -18,10 +18,12 @@ import Container from '@material-ui/core/Container'
 import Grow from '@material-ui/core/Grow'
 import { onSignin } from '../../apiclient'
 import { useAuth } from '../../context/auth'
-import jwt from 'jsonwebtoken'
+//import jwt from 'jsonwebtoken'
 
-const SignIn = () => {
+const SignIn = (props) => {
     const classes = useStyles()
+
+    const referer = '/' || props.location.state.referer
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isError, setIsError] = useState(false)
@@ -42,10 +44,6 @@ const SignIn = () => {
         onSignin(inputs)
             .then(({ token }) => {
                 setAuthTokens(token)
-                localStorage.setItem(
-                    'JPBET_USER',
-                    JSON.stringify(jwt.decode(token))
-                )
                 setLoggedIn(true)
             })
             .catch((e) => {
@@ -53,7 +51,9 @@ const SignIn = () => {
             })
     }
 
-    if (isLoggedIn) return <Redirect to="/" />
+    if (isLoggedIn) {
+        return <Redirect to={referer} />
+    }
 
     return (
         <Grow in>

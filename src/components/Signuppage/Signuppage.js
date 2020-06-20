@@ -18,13 +18,14 @@ import Copyright from '../Copyright/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../apiclient'
 import { useAuth } from '../../context/auth'
-import jwt from 'jsonwebtoken'
+//import jwt from 'jsonwebtoken'
 
-const SignUp = () => {
+const SignUp = (props) => {
     const classes = useStyles()
+    const referer = '/' || props.location.state.referer
 
-    const [isLoggedIn, setLoggedIn] = useState()
-    const [isError, setIsError] = useState()
+    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [isError, setIsError] = useState(false)
     const [inputs, setInputs] = useState({
         username: '',
         email: '',
@@ -43,10 +44,6 @@ const SignUp = () => {
         onSignup(inputs)
             .then(({ token }) => {
                 setAuthTokens(token)
-                localStorage.setItem(
-                    'JPBET_USER',
-                    JSON.stringify(jwt.decode(token))
-                )
                 setLoggedIn(true)
             })
             .catch((e) => {
@@ -54,7 +51,9 @@ const SignUp = () => {
             })
     }
 
-    if (isLoggedIn) return <Redirect to="/" />
+    if (isLoggedIn) {
+        return <Redirect to={referer} />
+    }
 
     return (
         <Grow in>
