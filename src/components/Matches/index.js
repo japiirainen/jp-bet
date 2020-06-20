@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+// eslint-disable-next-line
+import useFetch from '../../Utils/useFetch'
 import Match from './match'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { Alert } from '../Alert'
@@ -7,9 +9,8 @@ import { getMatches, token } from '../../Utils/apiclient'
 const Matches = (props) => {
     const [matches, setMatches] = useState([])
     const [loading, setLoading] = useState(true)
-    // eslint-disable-next-line
     const [error, setError] = useState(null)
-
+    //TODO: change to use  useFetch
     useEffect(() => {
         setLoading(true)
         setError(null)

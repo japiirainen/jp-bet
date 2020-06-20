@@ -16,7 +16,13 @@ const useFetch = (initialUrl, skip = false) => {
             if (skip) return
             setIsLoading(true)
             try {
-                const response = await fetch(url)
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization:
+                            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGY2M2Y0M2M2MTU3MjYzMjg5NGY0NyIsImlhdCI6MTU5MTY5ODQyMCwiZXhwIjoxNjAwMzM4NDIwfQ.rp-VE6oqGqqMIlRutzOHtnknEPqv3w4UY5yg5UQZ568',
+                    },
+                })
                 const result = await response.json()
                 if (response.ok) {
                     setData(result)
