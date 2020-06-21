@@ -9,7 +9,7 @@ function handleError(setHasError, result, setErrorMessage, response) {
 }
 
 
-const useFetch = (initialUrl, skip = false, method = 'GET') => {
+const useFetch = (initialUrl, {skip = false, method = 'GET', headers = {}} = {}) => {
     const [url, updateUrl] = useState(initialUrl)
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +19,7 @@ const useFetch = (initialUrl, skip = false, method = 'GET') => {
 
     const refetch = () =>
         setRefetchIndex((prevRefetchIndex) => prevRefetchIndex + 1)
+    const token = window.localStorage.getItem('JPBET_TOKEN')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,8 +30,7 @@ const useFetch = (initialUrl, skip = false, method = 'GET') => {
                     method,
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization:
-                            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGY2M2Y0M2M2MTU3MjYzMjg5NGY0NyIsImlhdCI6MTU5MTY5ODQyMCwiZXhwIjoxNjAwMzM4NDIwfQ.rp-VE6oqGqqMIlRutzOHtnknEPqv3w4UY5yg5UQZ568',
+                        ...(token && {Authorization: `Bearer ${token}`}),
                     },
                 })
                 const result = await response.json()
@@ -47,7 +47,7 @@ const useFetch = (initialUrl, skip = false, method = 'GET') => {
             }
         }
         fetchData()
-    },[skip, url, refetchIndex, method])
+    },[skip, url, refetchIndex, method, token])
     return { data, isLoading, hasError, errorMessage, updateUrl, refetch }
 }
 

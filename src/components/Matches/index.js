@@ -13,7 +13,6 @@ const Matches = (props) => {
     const url = `${Config.endpoint}/api/v1/match`
 
     const { data, isLoading, hasError, errorMessage } = useFetch(url)
-    console.log(data)
 
     return (
         <>

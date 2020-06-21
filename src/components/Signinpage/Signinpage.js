@@ -18,12 +18,13 @@ import Container from '@material-ui/core/Container'
 import Grow from '@material-ui/core/Grow'
 import { onSignin } from '../../Utils/apiclient'
 import { useAuth } from '../../context/auth'
+
 //import jwt from 'jsonwebtoken'
 
 const SignIn = (props) => {
     const classes = useStyles()
 
-    const referer = props.location.state.referer.pathname || '/'
+    const referer = (props.location.state && props.location.state.referer.pathname) || '/'
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isError, setIsError] = useState(false)
@@ -39,6 +40,10 @@ const SignIn = (props) => {
         setInputs((input) => ({ ...input, [name]: value }))
     }
 
+    
+
+
+
     const postSignin = (e) => {
         e.preventDefault()
         onSignin(inputs)
@@ -50,7 +55,7 @@ const SignIn = (props) => {
                 setIsError(true)
             })
     }
-
+ 
     if (isLoggedIn) {
         return <Redirect to={referer} />
     }
@@ -141,3 +146,7 @@ const SignIn = (props) => {
 }
 
 export default SignIn
+
+
+
+
