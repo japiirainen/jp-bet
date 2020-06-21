@@ -17,12 +17,15 @@ export async function getMatches(authToken) {
 
 export const onSignup = async (data) => {
     try {
+        console.log(data)
         const resp = await fetch(`${endpoint}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+
             body: JSON.stringify(data),
+
         })
         if (!resp.ok) {
             throw new Error('Signup failed')
@@ -36,6 +39,7 @@ export const onSignup = async (data) => {
 
 export const onSignin = async (data) => {
     try {
+        console.log(data)
         const resp = await fetch(`${endpoint}/signin`, {
             method: 'POST',
             headers: {

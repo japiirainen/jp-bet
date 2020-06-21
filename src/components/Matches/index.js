@@ -10,12 +10,11 @@ import useStyles from './styles'
 const Matches = (props) => {
     const classes = useStyles()
 
-    const url = `${Config.endpoint}/match`
+    const url = `${Config.endpoint}/api/v1/match`
 
     const { data, isLoading, hasError, errorMessage } = useFetch(url)
     console.log(data)
 
-    var match = []
     return (
         <>
             {isLoading ? (
@@ -24,7 +23,7 @@ const Matches = (props) => {
                     color="secondary"
                 />
             ) : (
-                match.map((match) => <Match key={match._id} {...match} />)
+                data.map((match) => <Match key={match._id} {...match} />)
             )}
             {hasError && <Alert severity="error">{errorMessage}</Alert>}
         </>

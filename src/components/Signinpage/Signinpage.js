@@ -23,7 +23,7 @@ import { useAuth } from '../../context/auth'
 const SignIn = (props) => {
     const classes = useStyles()
 
-    const referer = '/' || props.location.state.referer
+    const referer = props.location.state.referer.pathname || '/'
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isError, setIsError] = useState(false)

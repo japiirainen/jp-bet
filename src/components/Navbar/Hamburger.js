@@ -23,6 +23,8 @@ const Hamburger = () => {
 
     function logOut() {
         setAuthTokens()
+        setAnchorEl(null)
+        return <Redirect to="/" />
     }
 
     const handleAccount = () => {

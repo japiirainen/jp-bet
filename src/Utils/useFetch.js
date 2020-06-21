@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react'
 
-const useFetch = (initialUrl, skip = false) => {
+function handleError(setHasError, result, setErrorMessage, response) {
+    setHasError(true)
+    if (result.errors) {
+        setErrorMessage(result.errors.join(' '))
+    }
+    setErrorMessage(response.statusText)
+}
+
+
+const useFetch = (initialUrl, skip = false, method = 'GET') => {
     const [url, updateUrl] = useState(initialUrl)
-    const [data, setData] = useState(null)
+    const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [hasError, setHasError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -17,6 +26,7 @@ const useFetch = (initialUrl, skip = false) => {
             setIsLoading(true)
             try {
                 const response = await fetch(url, {
+                    method,
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization:
@@ -27,8 +37,7 @@ const useFetch = (initialUrl, skip = false) => {
                 if (response.ok) {
                     setData(result.data)
                 } else {
-                    setHasError(true)
-                    setErrorMessage(result)
+                    handleError(setHasError, result, setErrorMessage, response)
                 }
             } catch (error) {
                 setHasError(true)
@@ -38,8 +47,9 @@ const useFetch = (initialUrl, skip = false) => {
             }
         }
         fetchData()
-    }, [skip, url, refetchIndex])
+    },[skip, url, refetchIndex, method])
     return { data, isLoading, hasError, errorMessage, updateUrl, refetch }
 }
 
 export default useFetch
+

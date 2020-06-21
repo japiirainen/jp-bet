@@ -19,7 +19,11 @@ const App = (props) => {
     const [authTokens, setAuthTokens] = useState(existingTokens)
 
     const setTokens = (data) => {
-        localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
+        if (!data) {
+            localStorage.removeItem('JPBET_TOKEN')
+        } else {
+            localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
+        }
         return setAuthTokens(data)
     }
 
