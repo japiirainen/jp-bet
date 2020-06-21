@@ -8,7 +8,7 @@ import PrivateRoute from '../PrivateRoute'
 import Admin from '../Admin'
 import Account from '../Account'
 import Settings from '../Settings'
-//import Footer from '../Footer'
+import Footer from '../Footer'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
@@ -26,7 +26,7 @@ const App = (props) => {
     return (
         <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
             <ThemeProvider theme={lightTheme}>
-                <Paper style={{ height: '100vh' }}>
+                <Paper style={{}}>
                     <Navbar />
                     <Container maxWidth="sm">
                         <Switch>
@@ -46,6 +46,7 @@ const App = (props) => {
                             />
                         </Switch>
                     </Container>
+                    <Footer />
                 </Paper>
             </ThemeProvider>
         </AuthContext.Provider>

@@ -46,8 +46,8 @@ const Match = (props) => {
                     <ExpansionPanelDetails className={classes.details}>
                         <div className={classes.column} />
                         <div className={classes.column}>
-                            <Typography>{props.category}</Typography>
                             <Typography>{props.odds.team2Win}</Typography>
+                            <Typography>{props.odds.tie}</Typography>
                             <Typography>{props.odds.team1Win}</Typography>
                         </div>
                     </ExpansionPanelDetails>

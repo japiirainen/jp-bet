@@ -6,15 +6,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     minHeight: '100vh',
   },
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
   footer: {
+    color:'black',
     padding: theme.spacing(3, 2),
     marginTop: 'auto',
+    opacity: '80%',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
+      theme.palette.type === 'light' ? theme.palette.grey[100] : theme.palette.grey[800],
   },
   }));
 

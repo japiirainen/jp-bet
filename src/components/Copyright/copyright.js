@@ -6,7 +6,7 @@ const Copyright = () => {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link target= '_blank' color="inherit" href="https://joonapiirainen.com/">
-                Joona Piirainen
+                JP-bet
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

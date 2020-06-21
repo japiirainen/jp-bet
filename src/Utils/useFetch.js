@@ -25,7 +25,7 @@ const useFetch = (initialUrl, skip = false) => {
                 })
                 const result = await response.json()
                 if (response.ok) {
-                    setData(result)
+                    setData(result.data)
                 } else {
                     setHasError(true)
                     setErrorMessage(result)
@@ -38,7 +38,7 @@ const useFetch = (initialUrl, skip = false) => {
             }
         }
         fetchData()
-    }, [url, skip, refetchIndex])
+    }, [skip, url, refetchIndex])
     return { data, isLoading, hasError, errorMessage, updateUrl, refetch }
 }
 

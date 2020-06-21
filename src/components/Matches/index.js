@@ -1,37 +1,32 @@
-import React, { useEffect, useState } from 'react'
-// eslint-disable-next-line
+import React from 'react'
 import useFetch from '../../Utils/useFetch'
+import { Config } from '../../Utils/config'
 import Match from './match'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { Alert } from '../Alert'
-import { getMatches, token } from '../../Utils/apiclient'
+
+import useStyles from './styles'
 
 const Matches = (props) => {
-    const [matches, setMatches] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    //TODO: change to use  useFetch
-    useEffect(() => {
-        setLoading(true)
-        setError(null)
-        getMatches(token)
-            .then(setMatches)
-            .then(setLoading(false))
-            .catch((error) => {
-                setError(error)
-            })
-    }, [])
+    const classes = useStyles()
 
+    const url = `${Config.endpoint}/match`
+
+    const { data, isLoading, hasError, errorMessage } = useFetch(url)
+    console.log(data)
+
+    var match = []
     return (
         <>
-            {loading ? (
-                <CircularProgress color="secondary" />
+            {isLoading ? (
+                <CircularProgress
+                    className={classes.loader}
+                    color="secondary"
+                />
             ) : (
-                matches.map((match) => <Match key={match._id} {...match} />)
+                match.map((match) => <Match key={match._id} {...match} />)
             )}
-            {error && (
-                <Alert severity="error">Username or password incorrect!</Alert>
-            )}
+            {hasError && <Alert severity="error">{errorMessage}</Alert>}
         </>
     )
 }
