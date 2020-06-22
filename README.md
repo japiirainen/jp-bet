@@ -3,9 +3,15 @@
 ## Frontend
 
 -   [] make a bet button checks for auth and redirects
--   [] logout weird bugs
+
 -   [] Footer fixes!!
--   [x] maybe burger in navbar at logged state
--   [x] admin and account page
--   [x] conditional rendering in navbar
+
 -   [] password validation on signup (maybe yup?)
+
+-   [] make color palette
+
+-   [] settings page to have ability to update email, password, email, preferred color mode
+
+-   [] account page to show balance and deposit and withdraw
+
+-   [] account page to show all bets made by that user
