@@ -6,15 +6,21 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'space-bethween'
-    
+        alignItems: 'space-bethween',
     },
     heading: {
         fontSize: theme.typography.pxToRem(20),
+        color: theme.palette.text.primary,
     },
-    secondaryHeading: {
+    item: {
         fontSize: theme.typography.pxToRem(18),
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
+    },
+    odds: {
+        marginBottom: theme.spacing(4),
+    },
+    oddsNames: {
+        marginTop: theme.spacing(4),
     },
     icon: {
         verticalAlign: 'bottom',
@@ -40,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     },
     loader: {
         width: '100%',
-        height: '100%'
-    }
+        height: '100%',
+    },
 }))
 
 export default useStyles
