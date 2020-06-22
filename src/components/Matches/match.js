@@ -28,17 +28,17 @@ const Match = (props) => {
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.secondaryHeading}>
+                            <Typography className={classes.heading}>
                                 {props.team1}
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.secondaryHeading}>
+                            <Typography className={classes.heading}>
                                 vs
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.secondaryHeading}>
+                            <Typography className={classes.heading}>
                                 {props.team2}
                             </Typography>
                         </div>
@@ -47,7 +47,11 @@ const Match = (props) => {
                         <div className={classes.column} />
                         <div className={classes.column}>
                             <Typography>{props.odds.team2Win}</Typography>
+                        </div>
+                        <div className={classes.column}>
                             <Typography>{props.odds.tie}</Typography>
+                        </div>
+                        <div className={classes.column}>
                             <Typography>{props.odds.team1Win}</Typography>
                         </div>
                     </ExpansionPanelDetails>

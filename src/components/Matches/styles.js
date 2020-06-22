@@ -3,17 +3,17 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing(4),
+        marginTop: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'space-bethween'
     
     },
     heading: {
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(20),
     },
     secondaryHeading: {
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(18),
         color: theme.palette.text.secondary,
     },
     icon: {
