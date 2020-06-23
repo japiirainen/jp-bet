@@ -49,8 +49,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     loader: {
-        justifyContent: 'center',
-        textAlign: 'center',
+        marginTop: theme.spacing(6),
     },
 }))
 

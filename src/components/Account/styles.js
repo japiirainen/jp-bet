@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     root: {
         width: '100%',
-        maxWidth: 360,
+        maxWidth: 330,
         margin: theme.spacing(4),
         backgroundColor: theme.palette.background.paper,
     },

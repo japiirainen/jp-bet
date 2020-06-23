@@ -2,7 +2,7 @@ import React from 'react'
 import useFetch from '../../Utils/useFetch'
 import { Config } from '../../Utils/config'
 import Match from './match'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Alert'
 
 import useStyles from './styles'
@@ -17,7 +17,9 @@ const Matches = (props) => {
     return (
         <div className={classes.matchContainer}>
             {isLoading ? (
-                <CircularProgress className={classes.loader} color="inherit" />
+                <div id="foobar" className={classes.loader}>
+                    <LinearProgress color="secondary" />
+                </div>
             ) : (
                 data.map((match) => <Match key={match._id} {...match} />)
             )}

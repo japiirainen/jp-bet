@@ -6,8 +6,6 @@
 
 -   [] make a bet button checks for auth and redirects
 
--   [] Footer fixes!!
-
 -   [] password validation on signup (maybe yup?)
 
 -   [] make color palette

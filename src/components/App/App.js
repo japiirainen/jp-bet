@@ -9,12 +9,15 @@ import Admin from '../Admin'
 import Account from '../Account'
 import Settings from '../Settings'
 import Footer from '../Footer'
+import { useStyles } from './styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../context/auth'
 
 const App = (props) => {
+    const classes = useStyles()
+
     const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
     const [authTokens, setAuthTokens] = useState(existingTokens)
 
@@ -32,7 +35,11 @@ const App = (props) => {
             <ThemeProvider theme={lightTheme}>
                 <Paper style={{}}>
                     <Navbar />
-                    <Container maxWidth="sm">
+                    <Container
+                        elementType="div"
+                        maxWidth="sm"
+                        className={classes.mainContainer}
+                    >
                         <Switch>
                             <Route exact path="/" component={Matches} />
 
