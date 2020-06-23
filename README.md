@@ -2,6 +2,8 @@
 
 ## Frontend
 
+-   [] maybe make balance open
+
 -   [] make a bet button checks for auth and redirects
 
 -   [] Footer fixes!!

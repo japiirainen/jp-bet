@@ -1,9 +1,14 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import Balance from './Balance'
+import { useStyles } from './styles'
 
 const Account = () => {
-    return(
-        <h1>This is account page</h1>
+    const classes = useStyles()
+
+    return (
+        <div className={classes.main}>
+            <Balance />
+        </div>
     )
 }
 

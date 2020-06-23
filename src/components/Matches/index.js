@@ -15,17 +15,14 @@ const Matches = (props) => {
     const { data, isLoading, hasError, errorMessage } = useFetch(url)
 
     return (
-        <>
+        <div className={classes.matchContainer}>
             {isLoading ? (
-                <CircularProgress
-                    className={classes.loader}
-                    color="secondary"
-                />
+                <CircularProgress className={classes.loader} color="inherit" />
             ) : (
                 data.map((match) => <Match key={match._id} {...match} />)
             )}
             {hasError && <Alert severity="error">{errorMessage}</Alert>}
-        </>
+        </div>
     )
 }
 

@@ -44,9 +44,13 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'underline',
         },
     },
+    matchContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
     loader: {
-        width: '100%',
-        height: '100%',
+        justifyContent: 'center',
+        textAlign: 'center',
     },
 }))
 
