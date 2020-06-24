@@ -3,13 +3,13 @@ import Balance from './Balance'
 import { useStyles } from './styles'
 
 const Account = () => {
-    const classes = useStyles()
+  const classes = useStyles()
 
-    return (
-        <div className={classes.main}>
-            <Balance />
-        </div>
-    )
+  return (
+    <div className={classes.main}>
+      <Balance />
+    </div>
+  )
 }
 
 export default Account
