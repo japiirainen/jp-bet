@@ -5,15 +5,15 @@ import ClosedBetList from './BetList/ClosedBetList'
 import { useStyles } from './balanceStyles'
 
 const Account = () => {
-  const classes = useStyles()
+    const classes = useStyles()
 
-  return (
-    <div className={classes.main}>
-      <Balance />
-      <OpenBetList />
-      <ClosedBetList />
-    </div>
-  )
+    return (
+        <div className={classes.main}>
+            <Balance />
+            <OpenBetList />
+            <ClosedBetList />
+        </div>
+    )
 }
 
 export default Account

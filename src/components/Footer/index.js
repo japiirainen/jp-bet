@@ -7,21 +7,21 @@ import Container from '@material-ui/core/Container'
 import Copyright from './Copyright'
 
 const Footer = () => {
-  const classes = useStyles()
+    const classes = useStyles()
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <footer className={classes.footer}>
-        <Container>
-          <Typography variant="body1">
-            My placeholder text. need to think what to put here
-          </Typography>
-          <Copyright />
-        </Container>
-      </footer>
-    </div>
-  )
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <footer className={classes.footer}>
+                <Container>
+                    <Typography variant="body1">
+                        My placeholder text. need to think what to put here
+                    </Typography>
+                    <Copyright />
+                </Container>
+            </footer>
+        </div>
+    )
 }
 
 export default Footer

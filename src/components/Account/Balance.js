@@ -14,61 +14,61 @@ import { useStyles } from './balanceStyles'
 import { TextField, Button } from '@material-ui/core'
 
 const Balance = () => {
-  const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
+    const classes = useStyles()
+    const [open, setOpen] = React.useState(false)
 
-  const handleClick = () => {
-    setOpen(!open)
-  }
+    const handleClick = () => {
+        setOpen(!open)
+    }
 
-  return (
-    <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      subheader={
-        <Typography variant="h6" className={classes.title}>
-          Account balance
-        </Typography>
-      }
-      className={classes.root}
-    >
-      <ListItem>
-        <ListItemIcon>
-          <AccountBalanceIcon />
-        </ListItemIcon>
-        <ListItemText primary="50€" />
-      </ListItem>
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <PaymentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Deposit" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem className={classes.nested}>
-            <TextField
-              className={classes.input}
-              id="standard-number"
-              label="Amount (€)"
-              type="number"
-            />
-            <Button
-              className={classes.button}
-              variant="text"
-              size="large"
-              color="inherit"
-            >
-              <ListItemIcon>
-                <DoubleArrowIcon />
-              </ListItemIcon>
-            </Button>
-          </ListItem>
+    return (
+        <List
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+                <Typography variant="h6" className={classes.title}>
+                    Account balance
+                </Typography>
+            }
+            className={classes.root}
+        >
+            <ListItem>
+                <ListItemIcon>
+                    <AccountBalanceIcon />
+                </ListItemIcon>
+                <ListItemText primary="50€" />
+            </ListItem>
+            <ListItem button onClick={handleClick}>
+                <ListItemIcon>
+                    <PaymentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Deposit" />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem className={classes.nested}>
+                        <TextField
+                            className={classes.input}
+                            id="standard-number"
+                            label="Amount (€)"
+                            type="number"
+                        />
+                        <Button
+                            className={classes.button}
+                            variant="text"
+                            size="large"
+                            color="inherit"
+                        >
+                            <ListItemIcon>
+                                <DoubleArrowIcon />
+                            </ListItemIcon>
+                        </Button>
+                    </ListItem>
+                </List>
+            </Collapse>
         </List>
-      </Collapse>
-    </List>
-  )
+    )
 }
 
 export default Balance
