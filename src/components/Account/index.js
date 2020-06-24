@@ -1,6 +1,8 @@
 import React from 'react'
 import Balance from './Balance'
-import { useStyles } from './styles'
+import OpenBetList from './BetList/OpenBetList'
+import ClosedBetList from './BetList/ClosedBetList'
+import { useStyles } from './balanceStyles'
 
 const Account = () => {
   const classes = useStyles()
@@ -8,6 +10,8 @@ const Account = () => {
   return (
     <div className={classes.main}>
       <Balance />
+      <OpenBetList />
+      <ClosedBetList />
     </div>
   )
 }

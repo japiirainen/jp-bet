@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import Matches from '../Matches'
-import Loginpage from '../Signinpage/Signinpage'
+import Signinpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
 import PrivateRoute from '../PrivateRoute'
 import Admin from '../Admin'
@@ -16,52 +16,49 @@ import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../context/auth'
 
 const App = (props) => {
-    const classes = useStyles()
+  const classes = useStyles()
 
-    const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
-    const [authTokens, setAuthTokens] = useState(existingTokens)
+  const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
+  const [authTokens, setAuthTokens] = useState(existingTokens)
 
-    const setTokens = (data) => {
-        if (!data) {
-            localStorage.removeItem('JPBET_TOKEN')
-        } else {
-            localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
-        }
-        return setAuthTokens(data)
+  const setTokens = (data) => {
+    if (!data) {
+      localStorage.removeItem('JPBET_TOKEN')
+    } else {
+      localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
     }
+    return setAuthTokens(data)
+  }
 
-    return (
-        <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-            <ThemeProvider theme={lightTheme}>
-                <Paper style={{}}>
-                    <Navbar />
-                    <Container
-                        elementType="div"
-                        maxWidth="sm"
-                        className={classes.mainContainer}
-                    >
-                        <Switch>
-                            <Route exact path="/" component={Matches} />
+  return (
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <ThemeProvider theme={lightTheme}>
+        <Paper style={{}}>
+          <Navbar />
+          <Container
+            elementType="div"
+            maxWidth="sm"
+            className={classes.mainContainer}
+          >
+            <Switch>
+              <Route exact path="/" component={Matches} />
 
-                            <Route path="/signin" component={Loginpage} />
+              <Route path="/signin" component={Signinpage} />
 
-                            <Route path="/signup" component={Signuppage} />
+              <Route path="/signup" component={Signuppage} />
 
-                            <PrivateRoute path="/admin" component={Admin} />
+              <PrivateRoute path="/admin" component={Admin} />
 
-                            <PrivateRoute path="/account" component={Account} />
+              <PrivateRoute path="/account" component={Account} />
 
-                            <PrivateRoute
-                                path="/settings"
-                                component={Settings}
-                            />
-                        </Switch>
-                    </Container>
-                    <Footer />
-                </Paper>
-            </ThemeProvider>
-        </AuthContext.Provider>
-    )
+              <PrivateRoute path="/settings" component={Settings} />
+            </Switch>
+          </Container>
+          <Footer />
+        </Paper>
+      </ThemeProvider>
+    </AuthContext.Provider>
+  )
 }
 
 export default App

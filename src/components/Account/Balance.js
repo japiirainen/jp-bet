@@ -10,7 +10,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
 import Typography from '@material-ui/core/Typography'
-import { useStyles } from './styles'
+import { useStyles } from './balanceStyles'
 import { TextField, Button } from '@material-ui/core'
 
 const Balance = () => {
