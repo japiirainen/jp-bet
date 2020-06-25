@@ -41,7 +41,6 @@ const App = (props) => {
                 <Paper style={{}}>
                     <Navbar />
                     <Container
-                        elementType="div"
                         maxWidth="sm"
                         className={classes.mainContainer}
                     >
