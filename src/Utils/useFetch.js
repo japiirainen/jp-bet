@@ -8,8 +8,10 @@ function handleError(setHasError, result, setErrorMessage, response) {
     setErrorMessage(response.statusText)
 }
 
-
-const useFetch = (initialUrl, {skip = false, method = 'GET', headers = {}} = {}) => {
+const useFetch = (
+    initialUrl,
+    { skip = false, method = 'GET', headers = {} } = {}
+) => {
     const [url, updateUrl] = useState(initialUrl)
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -30,7 +32,7 @@ const useFetch = (initialUrl, {skip = false, method = 'GET', headers = {}} = {})
                     method,
                     headers: {
                         'Content-Type': 'application/json',
-                        ...(token && {Authorization: `Bearer ${token}`}),
+                        ...(token && { Authorization: `Bearer ${token}` }),
                     },
                 })
                 const result = await response.json()
@@ -47,9 +49,8 @@ const useFetch = (initialUrl, {skip = false, method = 'GET', headers = {}} = {})
             }
         }
         fetchData()
-    },[skip, url, refetchIndex, method, token])
+    }, [skip, url, refetchIndex, method, token])
     return { data, isLoading, hasError, errorMessage, updateUrl, refetch }
 }
 
 export default useFetch
-

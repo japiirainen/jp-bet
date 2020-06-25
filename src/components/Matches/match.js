@@ -13,10 +13,14 @@ import { TextField, Checkbox } from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { useAuth } from '../../stateManagement/auth'
-import { Redirect } from 'react-router-dom'
+import { Alert } from '../Helpers/Alert'
+import { CustomModal } from '../Helpers/CustomModal'
+import { modalState } from '../../stateManagement/Atoms/appAtoms'
+import { useRecoilState } from 'recoil'
 
 const Match = (props) => {
     const classes = useStyles()
+    const [isOpen, setIsOpen] = useRecoilState(modalState)
 
     const { authTokens } = useAuth()
 
@@ -32,10 +36,15 @@ const Match = (props) => {
 
     const onBet = () => {
         if (!authTokens) {
-            if (!authTokens) return <Redirect to="/signin" />
+            return (
+                <Alert severity="error">
+                    You need to be signed in to make a bet!
+                </Alert>
+            )
         } else {
             //TODO:
             //open modal and fetch user information and set it to state
+            setIsOpen(true)
         }
     }
 
@@ -154,6 +163,13 @@ const Match = (props) => {
                             color="inherit"
                             onClick={onBet}
                         >
+                            <CustomModal
+                                isOpen={isOpen}
+                                handleClose={() => setIsOpen(false)}
+                                title="Confirm bet"
+                            >
+                                <h1>Hello World!</h1>
+                            </CustomModal>
                             make a bet
                         </Button>
                     </ExpansionPanelActions>

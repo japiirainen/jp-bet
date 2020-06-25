@@ -16,15 +16,14 @@ const Matches = (props) => {
 
     return (
         <div className={classes.matchContainer}>
-            {' '}
             {isLoading ? (
                 <div className={classes.loader}>
                     <LinearProgress color="secondary" />
                 </div>
             ) : (
                 data.map((match) => <Match key={match._id} {...match} />)
-            )}{' '}
-            {hasError && <Alert severity="error"> {errorMessage} </Alert>}{' '}
+            )}
+            {hasError && <Alert severity="error"> {errorMessage} </Alert>}
         </div>
     )
 }

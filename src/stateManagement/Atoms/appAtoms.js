@@ -1,12 +1,11 @@
-import { atom, selector } from 'recoil'
+import { atom } from 'recoil'
 
-export const modalOpen = atom({
+export const modalState = atom({
     key: 'modalOpen',
-    default: false
+    default: false,
 })
 
-export const themeOpen = ({
+export const themeOpen = {
     key: 'themeOpen',
-    default: 'light'
-})
-
+    default: 'light',
+}
