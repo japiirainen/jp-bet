@@ -15,9 +15,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import useStyles from './styles'
 import Container from '@material-ui/core/Container'
-import Grow from '@material-ui/core/Grow'
+import { Grow } from '@material-ui/core'
 import { onSignin } from '../../Utils/apiclient'
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../stateManagement/auth'
 
 //import jwt from 'jsonwebtoken'
 
@@ -140,7 +140,7 @@ const SignIn = (props) => {
                 <Box mt={8}>
                     <Copyright />
                 </Box>{' '}
-            </Container>{' '}
+            </Container>
         </Grow>
     )
 }

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../stateManagement/auth'
 
 const Navbar = (props) => {
     const classes = useStyles()

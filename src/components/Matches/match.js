@@ -12,9 +12,13 @@ import useStyles from './styles'
 import { TextField, Checkbox } from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import { useAuth } from '../../stateManagement/auth'
+import { Redirect } from 'react-router-dom'
 
 const Match = (props) => {
     const classes = useStyles()
+
+    const { authTokens } = useAuth()
 
     const [state, setState] = useState({
         checkedTeam1: false,
@@ -24,6 +28,15 @@ const Match = (props) => {
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked })
+    }
+
+    const onBet = () => {
+        if (!authTokens) {
+            if (!authTokens) return <Redirect to="/signin" />
+        } else {
+            //TODO:
+            //open modal and fetch user information and set it to state
+        }
     }
 
     return (
@@ -135,7 +148,12 @@ const Match = (props) => {
                         <div className={classes.column}>
                             <Typography className={classes.item}>€</Typography>
                         </div>
-                        <Button variant="outlined" size="large" color="inherit">
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            color="inherit"
+                            onClick={onBet}
+                        >
                             make a bet
                         </Button>
                     </ExpansionPanelActions>

@@ -27,7 +27,7 @@ const Balance = () => {
             aria-labelledby="nested-list-subheader"
             subheader={
                 <Typography variant="h6" className={classes.title}>
-                    Account balance
+                    Your account balance
                 </Typography>
             }
             className={classes.root}

@@ -13,11 +13,11 @@ import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import Grow from '@material-ui/core/Grow'
+import { Grow } from '@material-ui/core'
 import Copyright from '../Helpers/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../stateManagement/auth'
 //import jwt from 'jsonwebtoken'
 
 const SignUp = (props) => {
@@ -66,10 +66,10 @@ const SignUp = (props) => {
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
-                    </Avatar>{' '}
+                    </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up{' '}
-                    </Typography>{' '}
+                        Sign up
+                    </Typography>
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
@@ -84,7 +84,7 @@ const SignUp = (props) => {
                                     autoFocus
                                     onChange={handleChange}
                                     value={username}
-                                ></TextField>{' '}
+                                ></TextField>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -97,8 +97,8 @@ const SignUp = (props) => {
                                     autoComplete="email"
                                     onChange={handleChange}
                                     value={email}
-                                />{' '}
-                            </Grid>{' '}
+                                />
+                            </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
@@ -111,8 +111,8 @@ const SignUp = (props) => {
                                     autoComplete="current-password"
                                     onChange={handleChange}
                                     value={password}
-                                />{' '}
-                            </Grid>{' '}
+                                />
+                            </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={
@@ -123,8 +123,8 @@ const SignUp = (props) => {
                                     }
                                     label="I agree with the terms of service"
                                 />
-                            </Grid>{' '}
-                        </Grid>{' '}
+                            </Grid>
+                        </Grid>
                         <Button
                             type="submit"
                             fullWidth
@@ -133,8 +133,8 @@ const SignUp = (props) => {
                             className={classes.submit}
                             onClick={postSignup}
                         >
-                            Sign Up{' '}
-                        </Button>{' '}
+                            Sign Up
+                        </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link
@@ -143,9 +143,9 @@ const SignUp = (props) => {
                                     variant="body2"
                                 >
                                     Already have an account ? Sign in
-                                </Link>{' '}
-                            </Grid>{' '}
-                        </Grid>{' '}
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </form>{' '}
                 </div>{' '}
                 {isError && (
@@ -153,11 +153,11 @@ const SignUp = (props) => {
                         {' '}
                         need to do validation for this!!{' '}
                     </Alert>
-                )}{' '}
+                )}
                 <Box mt={5}>
                     <Copyright />
-                </Box>{' '}
-            </Container>{' '}
+                </Box>
+            </Container>
         </Grow>
     )
 }

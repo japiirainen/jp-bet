@@ -13,7 +13,7 @@ import { useStyles } from './styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
-import { AuthContext } from '../../context/auth'
+import { AuthContext } from '../../stateManagement/auth'
 
 const App = (props) => {
     const classes = useStyles()
@@ -31,7 +31,12 @@ const App = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+        <AuthContext.Provider
+            value={{
+                authTokens,
+                setAuthTokens: setTokens,
+            }}
+        >
             <ThemeProvider theme={lightTheme}>
                 <Paper style={{}}>
                     <Navbar />
@@ -42,24 +47,19 @@ const App = (props) => {
                     >
                         <Switch>
                             <Route exact path="/" component={Matches} />
-
                             <Route path="/signin" component={Signinpage} />
-
                             <Route path="/signup" component={Signuppage} />
-
                             <PrivateRoute path="/admin" component={Admin} />
-
                             <PrivateRoute path="/account" component={Account} />
-
                             <PrivateRoute
                                 path="/settings"
                                 component={Settings}
-                            />
-                        </Switch>
-                    </Container>
+                            />{' '}
+                        </Switch>{' '}
+                    </Container>{' '}
                     <Footer />
-                </Paper>
-            </ThemeProvider>
+                </Paper>{' '}
+            </ThemeProvider>{' '}
         </AuthContext.Provider>
     )
 }

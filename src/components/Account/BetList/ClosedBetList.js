@@ -8,7 +8,7 @@ const ClosedBetList = () => {
 
     return (
         <div>
-            <Typography className={classes.header} variant="h5">
+            <Typography className={classes.header} variant="h6">
                 Your closed bets:
             </Typography>
             <BetListItem />

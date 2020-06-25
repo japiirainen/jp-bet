@@ -1,4 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {
+    makeStyles
+} from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -6,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'space-bethween',
+        alignItems: 'space-between',
     },
     heading: {
         fontSize: theme.typography.pxToRem(20),
