@@ -18,7 +18,7 @@ import Copyright from '../Helpers/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-//import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 const SignUp = (props) => {
     const classes = useStyles()
@@ -47,7 +47,7 @@ const SignUp = (props) => {
         e.preventDefault()
         onSignup(inputs)
             .then(({ token }) => {
-                setAuthTokens(token)
+                setAuthTokens(jwt.decode(token))
                 setLoggedIn(true)
             })
             .catch((e) => {

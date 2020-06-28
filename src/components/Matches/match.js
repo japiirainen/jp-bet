@@ -15,7 +15,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { useAuth } from '../../stateManagement/auth'
 import { Alert } from '../Helpers/Alert'
 import { CustomModal } from '../Helpers/CustomModal'
-import { modalState } from '../../stateManagement/Atoms/appAtoms'
+import { modalState } from '../../stateManagement/Recoil/Atoms/appAtoms'
 import { useRecoilState } from 'recoil'
 
 const Match = (props) => {

@@ -6,8 +6,11 @@ import ClosedBetList from './BetList/ClosedBetList'
 import { useStyles } from './balanceStyles'
 import { Typography } from '@material-ui/core'
 
+
+
 const Account = () => {
     const classes = useStyles()
+
 
     return (
         <div className={classes.main}>

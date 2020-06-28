@@ -40,10 +40,7 @@ const App = (props) => {
             <ThemeProvider theme={lightTheme}>
                 <Paper style={{}}>
                     <Navbar />
-                    <Container
-                        maxWidth="sm"
-                        className={classes.mainContainer}
-                    >
+                    <Container maxWidth="sm" className={classes.mainContainer}>
                         <Switch>
                             <Route exact path="/" component={Matches} />
                             <Route path="/signin" component={Signinpage} />

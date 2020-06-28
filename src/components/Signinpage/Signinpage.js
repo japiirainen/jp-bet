@@ -18,8 +18,9 @@ import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import { onSignin } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-
-//import jwt from 'jsonwebtoken'
+import { currentUserId } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { useRecoilState } from 'recoil'
+import jwt from 'jsonwebtoken'
 
 const SignIn = (props) => {
     const classes = useStyles()
@@ -44,11 +45,15 @@ const SignIn = (props) => {
         }))
     }
 
+    const [userId, setUserId] = useRecoilState(currentUserId)
+
     const postSignin = (e) => {
         e.preventDefault()
         onSignin(inputs)
             .then(({ token }) => {
-                setAuthTokens(token)
+                const decodedToken = jwt.decode(token)
+                setAuthTokens(decodedToken)
+                setUserId(decodedToken.id)
                 setLoggedIn(true)
             })
             .catch((e) => {
