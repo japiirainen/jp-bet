@@ -11,9 +11,13 @@ import Settings from '../Settings'
 import Footer from '../Footer'
 import { useStyles } from './styles'
 import { ThemeProvider } from '@material-ui/core/styles'
-import { Paper, Container } from '@material-ui/core'
+import { Paper, Container, LinearProgress } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../stateManagement/auth'
+import { userStateQuery } from '../../stateManagement/Recoil/Selectors/auth'
+import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
+import { Alert } from '../Helpers/Alert'
 
 const App = (props) => {
     const classes = useStyles()
@@ -30,6 +34,17 @@ const App = (props) => {
         return setAuthTokens(data)
     }
 
+    // putting user into recoil state
+    const setUser = useSetRecoilState(currentUserState)
+    const user = useRecoilValueLoadable(userStateQuery)
+    if (user.state === 'hasValue') {
+        setUser(user.contents)
+    } else if (user.state === 'loading') {
+        return <LinearProgress color="secondary" />
+    } else {
+        return <Alert severity="error"> {user.contents} </Alert>
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -38,7 +53,7 @@ const App = (props) => {
             }}
         >
             <ThemeProvider theme={lightTheme}>
-                <Paper style={{}}>
+                <Paper>
                     <Navbar />
                     <Container maxWidth="sm" className={classes.mainContainer}>
                         <Switch>
@@ -50,12 +65,12 @@ const App = (props) => {
                             <PrivateRoute
                                 path="/settings"
                                 component={Settings}
-                            />{' '}
-                        </Switch>{' '}
-                    </Container>{' '}
+                            />
+                        </Switch>
+                    </Container>
                     <Footer />
-                </Paper>{' '}
-            </ThemeProvider>{' '}
+                </Paper>
+            </ThemeProvider>
         </AuthContext.Provider>
     )
 }

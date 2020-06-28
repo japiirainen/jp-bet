@@ -18,9 +18,8 @@ import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import { onSignin } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-import { currentUserId } from '../../stateManagement/Recoil/Atoms/userAtoms'
-import { useRecoilState } from 'recoil'
-import jwt from 'jsonwebtoken'
+import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { useSetRecoilState } from 'recoil'
 
 const SignIn = (props) => {
     const classes = useStyles()
@@ -45,15 +44,14 @@ const SignIn = (props) => {
         }))
     }
 
-    const [userId, setUserId] = useRecoilState(currentUserId)
+    const setUser = useSetRecoilState(currentUserState)
 
     const postSignin = (e) => {
         e.preventDefault()
         onSignin(inputs)
-            .then(({ token }) => {
-                const decodedToken = jwt.decode(token)
-                setAuthTokens(decodedToken)
-                setUserId(decodedToken.id)
+            .then(({ token, user }) => {
+                setAuthTokens(token)
+                setUser(user)
                 setLoggedIn(true)
             })
             .catch((e) => {
@@ -72,10 +70,10 @@ const SignIn = (props) => {
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
-                    </Avatar>{' '}
+                    </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
-                    </Typography>{' '}
+                    </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
@@ -89,7 +87,7 @@ const SignIn = (props) => {
                             autoFocus
                             onChange={handleChange}
                             value={email}
-                        />{' '}
+                        />
                         <TextField
                             variant="outlined"
                             margin="normal"

@@ -1,6 +1,11 @@
 import { atom } from 'recoil'
 
-export const currentUserId = atom({
+export const currentUserState = atom({
     key: 'currentUserState',
-    default: 1,
+    default: null,
+})
+
+export const authTokens = atom({
+    key: 'authTokens',
+    default: JSON.parse(localStorage.getItem('JPBET_TOKEN')),
 })

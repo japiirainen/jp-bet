@@ -1,18 +1,22 @@
 import { selector } from 'recoil'
-import useFetch from '../../../Utils/useFetch'
 import { Config } from '../../../Utils/config'
-import { useAuth } from '../../auth'
-import { currentUserId } from '../Atoms/userAtoms'
+import { authTokens } from '../Atoms/userAtoms'
+import jwt from 'jsonwebtoken'
 
-const { authTokens } = useAuth()
-const userId = authTokens.id
-const url = Config.endpoint + `/api/v1/user/${userId}`
+const url = Config.endpoint + '/api/v1/user'
 
-export const currentUserDetails = selector({
-    key: 'currentUserDetails',
+export const userStateQuery = selector({
+    key: 'userStateQuery',
     get: async ({ get }) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const { data } = await useFetch(get(url + currentUserId))
-        return data
+        const token = get(authTokens)
+        const decodedToken = jwt.decode(token)
+        const response = await fetch(`${url}/${decodedToken.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        return await response.json()
     },
 })

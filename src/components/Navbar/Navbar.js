@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../stateManagement/auth'
-
 const Navbar = (props) => {
     const classes = useStyles()
 
