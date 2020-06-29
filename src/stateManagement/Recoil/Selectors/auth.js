@@ -9,6 +9,7 @@ export const userStateQuery = selector({
     key: 'userStateQuery',
     get: async ({ get }) => {
         const token = get(authTokens)
+        if (!token) return null
         const decodedToken = jwt.decode(token)
         const response = await fetch(`${url}/${decodedToken.id}`, {
             headers: {

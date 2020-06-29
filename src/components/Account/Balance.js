@@ -12,6 +12,8 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
 import Typography from '@material-ui/core/Typography'
 import { useStyles } from './balanceStyles'
 import { TextField, Button } from '@material-ui/core'
+import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { useRecoilValue } from 'recoil'
 
 const Balance = () => {
     const classes = useStyles()
@@ -20,14 +22,16 @@ const Balance = () => {
     const handleClick = () => {
         setOpen(!open)
     }
+    const user = useRecoilValue(currentUserState)
 
+    
     return (
         <List
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
                 <Typography variant="h6" className={classes.title}>
-                    Your account balance
+                    {user.username} account balance
                 </Typography>
             }
             className={classes.root}
@@ -36,7 +40,7 @@ const Balance = () => {
                 <ListItemIcon>
                     <AccountBalanceIcon />
                 </ListItemIcon>
-                <ListItemText primary="50€" />
+                <ListItemText primary={user.balance} />
             </ListItem>
             <ListItem button onClick={handleClick}>
                 <ListItemIcon>

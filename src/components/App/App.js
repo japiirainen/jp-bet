@@ -19,7 +19,7 @@ import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import { Alert } from '../Helpers/Alert'
 
-const App = (props) => {
+const App = () => {
     const classes = useStyles()
 
     const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
@@ -34,11 +34,11 @@ const App = (props) => {
         return setAuthTokens(data)
     }
 
-    // putting user into recoil state
+    //putting user into recoil state
     const setUser = useSetRecoilState(currentUserState)
     const user = useRecoilValueLoadable(userStateQuery)
     if (user.state === 'hasValue') {
-        setUser(user.contents)
+        setUser(user.contents ? user.contents.data : null)
     } else if (user.state === 'loading') {
         return <LinearProgress color="secondary" />
     } else {

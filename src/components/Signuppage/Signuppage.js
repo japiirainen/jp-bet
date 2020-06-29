@@ -18,7 +18,9 @@ import Copyright from '../Helpers/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-import jwt from 'jsonwebtoken'
+import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { useSetRecoilState } from 'recoil'
+
 
 const SignUp = (props) => {
     const classes = useStyles()
@@ -43,11 +45,14 @@ const SignUp = (props) => {
         }))
     }
 
+    const setUser = useSetRecoilState(currentUserState)
+
     const postSignup = (e) => {
         e.preventDefault()
         onSignup(inputs)
-            .then(({ token }) => {
-                setAuthTokens(jwt.decode(token))
+            .then(({ token, user }) => {
+                setAuthTokens(token)
+                setUser(user)
                 setLoggedIn(true)
             })
             .catch((e) => {
