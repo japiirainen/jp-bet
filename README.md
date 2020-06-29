@@ -4,6 +4,8 @@
 
 -   [] maybe make balance open
 
+-   [] setAuthTokens with recoil
+
 -   [] make a bet button checks for auth and redirects
 
 -   [] password validation on signup (maybe yup?)

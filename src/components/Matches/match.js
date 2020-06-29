@@ -12,18 +12,26 @@ import useStyles from './styles'
 import { TextField, Checkbox } from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
-import { useAuth } from '../../stateManagement/auth'
-import { Alert } from '../Helpers/Alert'
+import {
+    authTokens,
+    currentUserState,
+} from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
-import { modalState } from '../../stateManagement/Recoil/Atoms/appAtoms'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
+import { Alert } from '../Helpers/Alert'
 
 const Match = (props) => {
     const classes = useStyles()
-    const [isOpen, setIsOpen] = useRecoilState(modalState)
+    const [isOpen, setIsOpen] = useState(false)
 
-    const { authTokens } = useAuth()
+    const handleCloseModal = () => {
+        setIsOpen(false)
+    }
 
+    const auth = useRecoilValue(authTokens)
+    const user = useRecoilValue(currentUserState)
+
+    const [amount, setAmount] = useState('')
     const [state, setState] = useState({
         checkedTeam1: false,
         checkedTeam2: false,
@@ -33,20 +41,20 @@ const Match = (props) => {
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked })
     }
-
     const onBet = () => {
-        if (!authTokens) {
+        if (auth !== null) {
+            //need to do something to make it work
+            setIsOpen(true)
+        } else {
             return (
                 <Alert severity="error">
                     You need to be signed in to make a bet!
                 </Alert>
             )
-        } else {
-            //TODO:
-            //open modal and fetch user information and set it to state
-            setIsOpen(true)
         }
     }
+
+    const confirmBet = () => {}
 
     return (
         <div className={classes.root}>
@@ -152,6 +160,8 @@ const Match = (props) => {
                                 id="standard-number"
                                 label="Amount"
                                 type="number"
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
                             />
                         </div>
                         <div className={classes.column}>
@@ -165,10 +175,14 @@ const Match = (props) => {
                         >
                             <CustomModal
                                 isOpen={isOpen}
-                                handleClose={() => setIsOpen(false)}
+                                handleClose={handleCloseModal}
+                                handleConfirm={confirmBet}
                                 title="Confirm bet"
                             >
-                                <h1>Hello World!</h1>
+                                <Typography>
+                                    {user.username} account balance:{'  '}
+                                    {user.balance}
+                                </Typography>
                             </CustomModal>
                             make a bet
                         </Button>

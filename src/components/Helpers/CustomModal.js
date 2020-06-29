@@ -14,12 +14,13 @@ export const CustomModal = ({
     title,
     subtitle,
     children,
+    handleConfirm,
 }) => {
     return (
         <>
             <Dialog
                 fullWidth
-                maxWidth="md"
+                maxWidth="sm"
                 open={isOpen}
                 onClose={handleClose}
                 aria-labelledby="max-width-dialog-title"
@@ -32,6 +33,9 @@ export const CustomModal = ({
                 <DialogActions>
                     <Button onClick={handleClose} color="secondary">
                         Close
+                    </Button>
+                    <Button onClick={handleConfirm} color="secondary">
+                        Confirm bet
                     </Button>
                 </DialogActions>
             </Dialog>
