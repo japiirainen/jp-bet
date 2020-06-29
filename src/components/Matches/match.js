@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider'
 import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
 import { TextField, Radio } from '@material-ui/core'
+import { postBetSlip } from '../../Utils/apiclient'
 import {
     authTokens,
     currentUserState,
@@ -35,7 +36,7 @@ const Match = (props) => {
 
     const auth = useRecoilValue(authTokens)
     const user = useRecoilValue(currentUserState)
-
+    
     const onBet = () => {
         if (auth !== null) {
             //need to do something to make it work
@@ -48,9 +49,15 @@ const Match = (props) => {
             )
         }
     }
+    //fix fix
+    const data = { 
+        amount: amount,
+
+     }
+
 
     const confirmBet = () => {
-        setIsOpen(false)
+        postBetSlip(data, user._id)
     }
 
     return (

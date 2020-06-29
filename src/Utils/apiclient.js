@@ -53,3 +53,21 @@ export const onSignin = async (data) => {
         throw e
     }
 }
+
+export const postBetSlip = async (data, userId) => {
+    try {
+        const resp = await fetch(`${endpoint}/api/v1/betslip/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok) {
+            throw new Error('Balance too low!')
+        }
+        return resp.json()
+    } catch (e) {
+        console.error(e)
+    }
+}
