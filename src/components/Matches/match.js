@@ -9,9 +9,7 @@ import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
-import { TextField, Checkbox } from '@material-ui/core'
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
-import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import { TextField, Radio } from '@material-ui/core'
 import {
     authTokens,
     currentUserState,
@@ -28,19 +26,16 @@ const Match = (props) => {
         setIsOpen(false)
     }
 
+    // form data
+    const [amount, setAmount] = useState('')
+    const [selectedValue, setSelectedValue] = React.useState('')
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value)
+    }
+
     const auth = useRecoilValue(authTokens)
     const user = useRecoilValue(currentUserState)
 
-    const [amount, setAmount] = useState('')
-    const [state, setState] = useState({
-        checkedTeam1: false,
-        checkedTeam2: false,
-        checkedTie: false,
-    })
-
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked })
-    }
     const onBet = () => {
         if (auth !== null) {
             //need to do something to make it work
@@ -54,7 +49,9 @@ const Match = (props) => {
         }
     }
 
-    const confirmBet = () => {}
+    const confirmBet = () => {
+        setIsOpen(false)
+    }
 
     return (
         <div className={classes.root}>
@@ -104,47 +101,44 @@ const Match = (props) => {
                     </ExpansionPanelDetails>
                     <ExpansionPanelDetails className={classes.odds}>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>
+                            <Typography
+                                component="div"
+                                className={classes.item}
+                            >
                                 {props.odds.team1Win}{' '}
-                                <Checkbox
-                                    icon={
-                                        <CheckBoxOutlineBlankIcon fontSize="small" />
-                                    }
-                                    checkedIcon={
-                                        <CheckBoxIcon fontSize="small" />
-                                    }
-                                    name="checkedTeam1"
+                                <Radio
+                                    checked={selectedValue === 'team1'}
                                     onChange={handleChange}
+                                    name="team1"
+                                    value="team1"
                                 />
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>
+                            <Typography
+                                component="div"
+                                className={classes.item}
+                            >
                                 {props.odds.tie}
-                                <Checkbox
-                                    icon={
-                                        <CheckBoxOutlineBlankIcon fontSize="small" />
-                                    }
-                                    checkedIcon={
-                                        <CheckBoxIcon fontSize="small" />
-                                    }
-                                    name="checkedTie"
+                                <Radio
+                                    checked={selectedValue === 'tie'}
                                     onChange={handleChange}
+                                    name="tie"
+                                    value="tie"
                                 />
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>
+                            <Typography
+                                component="div"
+                                className={classes.item}
+                            >
                                 {props.odds.team2Win}
-                                <Checkbox
-                                    icon={
-                                        <CheckBoxOutlineBlankIcon fontSize="small" />
-                                    }
-                                    checkedIcon={
-                                        <CheckBoxIcon fontSize="small" />
-                                    }
-                                    name="checkedTeam2"
+                                <Radio
+                                    checked={selectedValue === 'team2'}
                                     onChange={handleChange}
+                                    name="team2"
+                                    value="team2"
                                 />
                             </Typography>
                         </div>
@@ -162,6 +156,7 @@ const Match = (props) => {
                                 type="number"
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
+                                required
                             />
                         </div>
                         <div className={classes.column}>

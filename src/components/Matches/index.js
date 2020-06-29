@@ -7,7 +7,7 @@ import { Alert } from '../Helpers/Alert'
 
 import useStyles from './styles'
 
-const Matches = (props) => {
+const Matches = () => {
     const classes = useStyles()
 
     const { data, isLoading, hasError, errorMessage } = useFetch(
