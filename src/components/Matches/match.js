@@ -21,11 +21,7 @@ import { Alert } from '../Helpers/Alert'
 
 const Match = (props) => {
     const classes = useStyles()
-    const [isOpen, setIsOpen] = useState(false)
-
-    const handleCloseModal = () => {
-        setIsOpen(false)
-    }
+    const [confirmOpen, setConfirmOpen] = useState(false)
 
     // form data
     const [amount, setAmount] = useState('')
@@ -36,11 +32,11 @@ const Match = (props) => {
 
     const auth = useRecoilValue(authTokens)
     const user = useRecoilValue(currentUserState)
-    
+
     const onBet = () => {
-        if (auth !== null) {
+        if (auth !== null && user !== null) {
             //need to do something to make it work
-            setIsOpen(true)
+            setConfirmOpen(true)
         } else {
             return (
                 <Alert severity="error">
@@ -50,11 +46,9 @@ const Match = (props) => {
         }
     }
     //fix fix
-    const data = { 
+    const data = {
         amount: amount,
-
-     }
-
+    }
 
     const confirmBet = () => {
         postBetSlip(data, user._id)
@@ -176,15 +170,17 @@ const Match = (props) => {
                             onClick={onBet}
                         >
                             <CustomModal
-                                isOpen={isOpen}
-                                handleClose={handleCloseModal}
-                                handleConfirm={confirmBet}
+                                open={confirmOpen}
+                                setOpen={setConfirmOpen}
+                                onConfirm={confirmBet}
                                 title="Confirm bet"
                             >
-                                <Typography>
-                                    {user.username} account balance:{'  '}
-                                    {user.balance}
-                                </Typography>
+                                {user !== null && (
+                                    <Typography>
+                                        {user.username} account balance:{'  '}
+                                        {user.balance}
+                                    </Typography>
+                                )}
                             </CustomModal>
                             make a bet
                         </Button>

@@ -9,33 +9,44 @@ import {
 } from '@material-ui/core'
 
 export const CustomModal = ({
-    isOpen,
-    handleClose,
+    open,
+    setOpen,
     title,
     subtitle,
     children,
-    handleConfirm,
+    onConfirm,
 }) => {
     return (
         <>
             <Dialog
                 fullWidth
                 maxWidth="sm"
-                open={isOpen}
-                onClose={handleClose}
-                aria-labelledby="max-width-dialog-title"
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="confirm-dialog"
             >
-                <DialogTitle id="max-width-dialog-title">{title}</DialogTitle>
+                <DialogTitle id="confirm-dialog">{title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>{subtitle}</DialogContentText>
                     {children}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Close
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                            onConfirm()
+                        }}
+                        color="secondary"
+                    >
+                        Confirm
                     </Button>
-                    <Button onClick={handleConfirm} color="secondary">
-                        Confirm bet
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                        color="secondary"
+                    >
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>

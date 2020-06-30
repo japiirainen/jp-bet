@@ -1,6 +1,5 @@
 import React from 'react'
 import useFetch from '../../Utils/useFetch'
-
 import Match from './match'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
