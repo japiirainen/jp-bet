@@ -38,7 +38,9 @@ const App = () => {
     const setUser = useSetRecoilState(currentUserState)
     const user = useRecoilValueLoadable(userStateQuery)
     if (user.state === 'hasValue') {
-        setUser(user.contents ? user.contents.data : null)
+        if (user.contents && user.contents.fetched) {
+            setUser(user.contents.fetched.data)
+        }
     } else if (user.state === 'loading') {
         return <LinearProgress color="secondary" />
     } else {

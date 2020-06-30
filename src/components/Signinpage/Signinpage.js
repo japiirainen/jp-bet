@@ -44,6 +44,7 @@ const SignIn = (props) => {
         }))
     }
 
+    //putting user into recoil state
     const setUser = useSetRecoilState(currentUserState)
 
     const postSignin = (e) => {

@@ -1,15 +1,19 @@
 import { selector } from 'recoil'
 import { Config } from '../../../Utils/config'
-import { authTokens } from '../Atoms/userAtoms'
+import { authTokens, currentUserState } from '../Atoms/userAtoms'
 import jwt from 'jsonwebtoken'
 
 const url = Config.endpoint + '/api/v1/user'
+
+//maybe useEffect
 
 export const userStateQuery = selector({
     key: 'userStateQuery',
     get: async ({ get }) => {
         const token = get(authTokens)
         if (!token) return null
+        const user = get(currentUserState)
+        if (user) return user
         const decodedToken = jwt.decode(token)
         const response = await fetch(`${url}/${decodedToken.id}`, {
             headers: {
@@ -18,6 +22,6 @@ export const userStateQuery = selector({
                 Authorization: `Bearer ${token}`,
             },
         })
-        return await response.json()
+        return { fetched: await response.json() }
     },
 })

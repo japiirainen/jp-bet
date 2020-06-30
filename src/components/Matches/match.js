@@ -30,11 +30,11 @@ const Match = (props) => {
         setSelectedValue(event.target.value)
     }
 
-    const auth = useRecoilValue(authTokens)
+    //const auth = useRecoilValue(authTokens)
     const user = useRecoilValue(currentUserState)
 
     const onBet = () => {
-        if (auth !== null && user !== null) {
+        if (user !== null) {
             //need to do something to make it work
             setConfirmOpen(true)
         } else {
@@ -45,6 +45,7 @@ const Match = (props) => {
             )
         }
     }
+    console.log('user:', user)
     //fix fix
     const data = {
         amount: amount,
