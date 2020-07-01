@@ -11,17 +11,18 @@ import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
 import { TextField, Radio } from '@material-ui/core'
 import { postBetSlip } from '../../Utils/apiclient'
-import {
-    authTokens,
-    currentUserState,
-} from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
 import { useRecoilValue } from 'recoil'
 import { Alert } from '../Helpers/Alert'
 
+const R = require('ramda')
+
 const Match = (props) => {
     const classes = useStyles()
     const [confirmOpen, setConfirmOpen] = useState(false)
+    const [hasError, setHasError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     // form data
     const [amount, setAmount] = useState('')
@@ -30,12 +31,14 @@ const Match = (props) => {
         setSelectedValue(event.target.value)
     }
 
-    //const auth = useRecoilValue(authTokens)
     const user = useRecoilValue(currentUserState)
 
     const onBet = () => {
         if (user !== null) {
-            //need to do something to make it work
+            if (R.isEmpty(amount) && R.isEmpty(selectedValue)) {
+                setHasError(true)
+                setErrorMessage('Amount and one option is required')
+            }
             setConfirmOpen(true)
         } else {
             return (
@@ -45,7 +48,7 @@ const Match = (props) => {
             )
         }
     }
-    console.log('user:', user)
+
     //fix fix
     const data = {
         amount: amount,
