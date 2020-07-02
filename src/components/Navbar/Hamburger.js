@@ -6,7 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { useAuth } from '../../stateManagement/auth'
 import { Redirect, Link } from 'react-router-dom'
 import useStyles from './styles'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import {
     currentUserState,
     authTokens,
@@ -20,7 +20,7 @@ const Hamburger = () => {
         setAnchorEl(event.currentTarget)
     }
 
-    const userState = useSetRecoilState(currentUserState)
+    const clearUserState = useResetRecoilState(currentUserState)
     const tokens = useRecoilState(authTokens)
 
     const handleClose = () => {
@@ -30,7 +30,7 @@ const Hamburger = () => {
     const { setAuthTokens } = useAuth()
 
     function logOut() {
-        userState(null)
+        clearUserState()
         setAuthTokens()
         setAnchorEl(null)
         return <Redirect to="/" />
