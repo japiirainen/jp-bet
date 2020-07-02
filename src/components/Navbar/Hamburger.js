@@ -8,7 +8,7 @@ import { Redirect, Link } from 'react-router-dom'
 import useStyles from './styles'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import {
-    currentUserState,
+    currentUserInfo,
     authTokens,
 } from '../../stateManagement/Recoil/Atoms/userAtoms'
 
@@ -20,7 +20,7 @@ const Hamburger = () => {
         setAnchorEl(event.currentTarget)
     }
 
-    const clearUserState = useResetRecoilState(currentUserState)
+    const clearUserState = useResetRecoilState(currentUserInfo)
     const tokens = useRecoilState(authTokens)
 
     const handleClose = () => {

@@ -12,7 +12,7 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
 import Typography from '@material-ui/core/Typography'
 import { useStyles } from './balanceStyles'
 import { TextField, Button } from '@material-ui/core'
-import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useRecoilValue } from 'recoil'
 
 const Balance = () => {
@@ -22,9 +22,8 @@ const Balance = () => {
     const handleClick = () => {
         setOpen(!open)
     }
-    const user = useRecoilValue(currentUserState)
+    const user = useRecoilValue(currentUserInfo)
 
-    
     return (
         <List
             component="nav"

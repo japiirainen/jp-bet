@@ -18,7 +18,7 @@ import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import { onSignin } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState } from 'recoil'
 
 const SignIn = (props) => {
@@ -45,7 +45,7 @@ const SignIn = (props) => {
     }
 
     //putting user into recoil state
-    const setUser = useSetRecoilState(currentUserState)
+    const setUser = useSetRecoilState(currentUserInfo)
 
     const postSignin = (e) => {
         e.preventDefault()

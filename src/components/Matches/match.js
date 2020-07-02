@@ -11,7 +11,7 @@ import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
 import { TextField, Radio } from '@material-ui/core'
 import { postBetSlip } from '../../Utils/apiclient'
-import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
 import { useRecoilValue } from 'recoil'
 import { Alert } from '../Helpers/Alert'
@@ -31,7 +31,7 @@ const Match = (props) => {
         setSelectedValue(event.target.value)
     }
 
-    const user = useRecoilValue(currentUserState)
+    const user = useRecoilValue(currentUserInfo)
 
     const onBet = () => {
         if (user !== null) {

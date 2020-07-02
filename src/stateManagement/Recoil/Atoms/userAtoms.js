@@ -1,7 +1,14 @@
-import { atom } from 'recoil'
+import {
+    atom
+} from 'recoil'
 
-export const currentUserState = atom({
-    key: 'currentUserState',
+export const loggedInState = atom({
+    key: 'loggedInState',
+    default: false
+})
+
+export const currentUserInfo = atom({
+    key: 'currentUserInfo',
     default: null,
 })
 

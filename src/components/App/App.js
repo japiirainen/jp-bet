@@ -15,7 +15,7 @@ import { Paper, Container, LinearProgress } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../stateManagement/auth'
 import { userStateQuery } from '../../stateManagement/Recoil/Selectors/auth'
-import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import { Alert } from '../Helpers/Alert'
 
@@ -35,7 +35,7 @@ const App = () => {
     }
 
     //putting user into recoil state
-    const setUser = useSetRecoilState(currentUserState)
+    const setUser = useSetRecoilState(currentUserInfo)
     const user = useRecoilValueLoadable(userStateQuery)
     if (user.state === 'hasValue') {
         if (user.contents && user.contents.fetched) {

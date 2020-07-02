@@ -8,7 +8,7 @@
 
 -   [] make a bet button checks for auth and redirects
 
--   [] password validation on signup (maybe yup?)
+-   [] password validation on signup maybe React Hook Form
 
 -   [] make color palette
 

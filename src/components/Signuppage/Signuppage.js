@@ -18,7 +18,7 @@ import Copyright from '../Helpers/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
-import { currentUserState } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState } from 'recoil'
 
 
@@ -45,7 +45,7 @@ const SignUp = (props) => {
         }))
     }
 
-    const setUser = useSetRecoilState(currentUserState)
+    const setUser = useSetRecoilState(currentUserInfo)
 
     const postSignup = (e) => {
         e.preventDefault()
