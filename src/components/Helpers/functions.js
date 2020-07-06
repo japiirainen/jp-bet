@@ -12,3 +12,5 @@ export const useFormInput = (initialValue) => {
         onChange: handleChange,
     }
 }
+
+export const calculateReturn = (odds, amount) => {}

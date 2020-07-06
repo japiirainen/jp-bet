@@ -25,7 +25,9 @@ export const CustomModal = ({
                 onClose={handleClose}
                 aria-labelledby="confirm-dialog"
             >
-                <DialogTitle id="confirm-dialog">{title}</DialogTitle>
+                <DialogTitle id="confirm-dialog" variant="h3">
+                    {title}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>{subtitle}</DialogContentText>
                     {children}

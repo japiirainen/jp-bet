@@ -1,6 +1,4 @@
-import {
-    makeStyles
-} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,7 +51,10 @@ const useStyles = makeStyles((theme) => ({
     loader: {
         marginTop: theme.spacing(6),
     },
-  
+    dialogTypography: {
+        fontSize: 16,
+        marginTop: theme.spacing(4),
+    },
 }))
 
 export default useStyles

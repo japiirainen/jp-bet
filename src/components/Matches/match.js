@@ -29,7 +29,6 @@ const Match = (props) => {
     const [hasError, setHasError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
-    // form data
     const [amount, setAmount] = useState('')
     const [selectedValue, setSelectedValue] = useState('')
     const handleChange = (event) => {
@@ -134,7 +133,7 @@ const Match = (props) => {
                         </div>
                         <div className={classes.column}>
                             <Typography className={classes.item}>
-                                {props.team2} dds &darr;
+                                {props.team2} odds &darr;
                             </Typography>
                         </div>
                     </ExpansionPanelDetails>
@@ -241,13 +240,21 @@ const Match = (props) => {
                 isOpen={open}
                 handleClose={() => handleDialog(false)}
                 handleConfirm={confirmBet}
-                title="Confirm bet"
+                title="Please confirm that your bet is as intended!"
             >
                 {user !== null && (
-                    <Typography>
-                        {user.username} account balance:{'  '}
-                        {user.balance}
-                    </Typography>
+                    <>
+                        <Typography className={classes.dialogTypography}>
+                            {user.username} account balance: {user.balance}€
+                        </Typography>
+                        <Typography className={classes.dialogTypography}>
+                            Your bet: {amount}€ for {props[selectedValue]} @
+                            {props.team1} vs {props.team2}
+                        </Typography>
+                        <Typography className={classes.dialogTypography}>
+                            Projected win: {}
+                        </Typography>
+                    </>
                 )}
             </CustomModal>
         </div>
