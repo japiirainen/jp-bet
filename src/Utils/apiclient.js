@@ -62,11 +62,12 @@ export const postBetSlip = async (data, userId, token) => {
             },
             body: JSON.stringify(data),
         })
-        if (!resp.ok) {
-            throw new Error('Balance too low!')
+        if (!resp.ok && resp.status === 400) {
+            throw new Error('Balance is too low!')
         }
         return resp.json()
     } catch (e) {
         console.error(e)
+        throw e
     }
 }

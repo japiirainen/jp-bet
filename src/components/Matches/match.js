@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import Typography from '@material-ui/core/Typography'
+import { useSnackbar } from 'notistack'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
@@ -25,28 +27,51 @@ const Match = (props) => {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [hasError, setHasError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     // form data
     const [amount, setAmount] = useState('')
-    const [selectedValue, setSelectedValue] = React.useState('')
+    const [selectedValue, setSelectedValue] = useState('')
     const handleChange = (event) => {
         setSelectedValue(event.target.value)
     }
+    const { enqueueSnackbar } = useSnackbar()
 
-    const handleDialogOpen = () => {
-        setOpen(true)
+    const handleDialog = (open) => {
+        setOpen(open)
     }
-    const handleDialogClose = () => {
-        setOpen(false)
+
+    const handleToast = (variant) => {
+        enqueueSnackbar('Your bet was created!', {
+            variant,
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'center',
+            },
+        })
+    }
+    const handleErrorToast = (variant, message) => {
+        enqueueSnackbar(message, {
+            variant,
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'center',
+            },
+        })
     }
 
     const user = useRecoilValue(currentUserInfo)
     const tokens = useRecoilValue(authTokens)
 
     const onBet = () => {
-        user !== null && R.isEmpty(amount) && R.isEmpty(selectedValue)
-            ? setHasError(true)
-            : handleDialogOpen()
+        if (!user) {
+            setHasError(true)
+            setErrorMessage('Must me signed in!')
+        } else if (R.isEmpty(amount)) {
+            setErrorMessage('Amount is required')
+        } else {
+            handleDialog(true)
+        }
     }
 
     const inputs = {
@@ -57,8 +82,14 @@ const Match = (props) => {
     }
 
     const confirmBet = () => {
-        console.log('fetching...')
         postBetSlip(inputs, user._id, tokens)
+            .then(() => {
+                handleToast('success')
+            })
+            .catch((e) => {
+                console.log(e)
+                handleErrorToast('error', e.message)
+            })
     }
 
     return (
@@ -113,13 +144,16 @@ const Match = (props) => {
                                 component="div"
                                 className={classes.item}
                             >
-                                {props.odds.team1Win}{' '}
-                                <Radio
-                                    checked={selectedValue === 'team1'}
-                                    onChange={handleChange}
-                                    name="team1"
-                                    value="team1"
-                                />
+                                {props.odds.team1Win}
+
+                                {user && (
+                                    <Radio
+                                        checked={selectedValue === 'team1'}
+                                        onChange={handleChange}
+                                        name="team1"
+                                        value="team1"
+                                    />
+                                )}
                             </Typography>
                         </div>
                         <div className={classes.column}>
@@ -128,12 +162,14 @@ const Match = (props) => {
                                 className={classes.item}
                             >
                                 {props.odds.tie}
-                                <Radio
-                                    checked={selectedValue === 'tie'}
-                                    onChange={handleChange}
-                                    name="tie"
-                                    value="tie"
-                                />
+                                {user && (
+                                    <Radio
+                                        checked={selectedValue === 'tie'}
+                                        onChange={handleChange}
+                                        name="tie"
+                                        value="tie"
+                                    />
+                                )}
                             </Typography>
                         </div>
                         <div className={classes.column}>
@@ -142,12 +178,14 @@ const Match = (props) => {
                                 className={classes.item}
                             >
                                 {props.odds.team2Win}
-                                <Radio
-                                    checked={selectedValue === 'team2'}
-                                    onChange={handleChange}
-                                    name="team2"
-                                    value="team2"
-                                />
+                                {user && (
+                                    <Radio
+                                        checked={selectedValue === 'team2'}
+                                        onChange={handleChange}
+                                        name="team2"
+                                        value="team2"
+                                    />
+                                )}
                             </Typography>
                         </div>
                     </ExpansionPanelDetails>
@@ -163,44 +201,55 @@ const Match = (props) => {
 
                     <ExpansionPanelActions>
                         <div className={classes.column}>
-                            <TextField
-                                className={classes.input}
-                                variant="outlined"
-                                id="standard-number"
-                                label="Amount"
-                                type="number"
-                                value={amount}
-                                onChange={(e) => setAmount(e.target.value)}
-                                required
-                            />
+                            {user && (
+                                <TextField
+                                    className={classes.input}
+                                    variant="outlined"
+                                    id="standard-number"
+                                    label="Amount"
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    required
+                                    error={Boolean(errorMessage)}
+                                    helperText={errorMessage}
+                                />
+                            )}
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>€</Typography>
+                            {user ? (
+                                <Typography className={classes.item}>
+                                    €
+                                </Typography>
+                            ) : (
+                                <Link to="/signin">Signin to place a bet!</Link>
+                            )}
                         </div>
                         <Button
+                            disabled={!selectedValue}
                             variant="outlined"
                             size="large"
                             color="inherit"
                             onClick={onBet}
                         >
-                            <CustomModal
-                                isOpen={open}
-                                handleClose={handleDialogClose}
-                                handleConfirm={confirmBet}
-                                title="Confirm bet"
-                            >
-                                {user !== null && (
-                                    <Typography>
-                                        {user.username} account balance:{'  '}
-                                        {user.balance}
-                                    </Typography>
-                                )}
-                            </CustomModal>
                             make a bet
                         </Button>
                     </ExpansionPanelActions>
                 </ExpansionPanel>
             </Grow>
+            <CustomModal
+                isOpen={open}
+                handleClose={() => handleDialog(false)}
+                handleConfirm={confirmBet}
+                title="Confirm bet"
+            >
+                {user !== null && (
+                    <Typography>
+                        {user.username} account balance:{'  '}
+                        {user.balance}
+                    </Typography>
+                )}
+            </CustomModal>
         </div>
     )
 }

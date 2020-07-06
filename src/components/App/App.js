@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { SnackbarProvider } from 'notistack'
 import Navbar from '../Navbar/Navbar'
 import Matches from '../Matches'
 import Signinpage from '../Signinpage/Signinpage'
@@ -54,25 +55,39 @@ const App = () => {
                 setAuthTokens: setTokens,
             }}
         >
-            <ThemeProvider theme={lightTheme}>
-                <Paper>
-                    <Navbar />
-                    <Container maxWidth="sm" className={classes.mainContainer}>
-                        <Switch>
-                            <Route exact path="/" component={Matches} />
-                            <Route path="/signin" component={Signinpage} />
-                            <Route path="/signup" component={Signuppage} />
-                            <PrivateRoute path="/admin" component={Admin} />
-                            <PrivateRoute path="/account" component={Account} />
-                            <PrivateRoute
-                                path="/settings"
-                                component={Settings}
-                            />
-                        </Switch>
-                    </Container>
-                    <Footer />
-                </Paper>
-            </ThemeProvider>
+            <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <ThemeProvider theme={lightTheme}>
+                    <Paper>
+                        <Navbar />
+                        <Container
+                            maxWidth="sm"
+                            className={classes.mainContainer}
+                        >
+                            <Switch>
+                                <Route exact path="/" component={Matches} />
+                                <Route path="/signin" component={Signinpage} />
+                                <Route path="/signup" component={Signuppage} />
+                                <PrivateRoute path="/admin" component={Admin} />
+                                <PrivateRoute
+                                    path="/account"
+                                    component={Account}
+                                />
+                                <PrivateRoute
+                                    path="/settings"
+                                    component={Settings}
+                                />
+                            </Switch>
+                        </Container>
+                        <Footer />
+                    </Paper>
+                </ThemeProvider>
+            </SnackbarProvider>
         </AuthContext.Provider>
     )
 }
