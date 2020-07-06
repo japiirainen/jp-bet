@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography'
 import useStyles from './styles'
 import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
-import { onSignin } from '../../Utils/apiclient'
+import { fetchSignin } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState } from 'recoil'
@@ -49,7 +49,7 @@ const SignIn = (props) => {
 
     const postSignin = (e) => {
         e.preventDefault()
-        onSignin(inputs)
+        fetchSignin(inputs)
             .then(({ token, user }) => {
                 setAuthTokens(token)
                 setUser(user)

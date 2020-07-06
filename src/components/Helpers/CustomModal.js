@@ -9,20 +9,20 @@ import {
 } from '@material-ui/core'
 
 export const CustomModal = ({
-    open,
-    setOpen,
+    isOpen,
     title,
     subtitle,
     children,
-    onConfirm,
+    handleConfirm,
+    handleClose,
 }) => {
     return (
         <>
             <Dialog
                 fullWidth
                 maxWidth="sm"
-                open={open}
-                onClose={() => setOpen(false)}
+                open={isOpen}
+                onClose={handleClose}
                 aria-labelledby="confirm-dialog"
             >
                 <DialogTitle id="confirm-dialog">{title}</DialogTitle>
@@ -31,21 +31,10 @@ export const CustomModal = ({
                     {children}
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                            onConfirm()
-                        }}
-                        color="secondary"
-                    >
+                    <Button onClick={handleConfirm} color="secondary">
                         Confirm
                     </Button>
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        color="secondary"
-                    >
+                    <Button onClick={handleClose} color="secondary">
                         Close
                     </Button>
                 </DialogActions>

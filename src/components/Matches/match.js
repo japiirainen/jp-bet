@@ -11,7 +11,10 @@ import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
 import { TextField, Radio } from '@material-ui/core'
 import { postBetSlip } from '../../Utils/apiclient'
-import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import {
+    currentUserInfo,
+    authTokens,
+} from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
 import { useRecoilValue } from 'recoil'
 import { Alert } from '../Helpers/Alert'
@@ -20,9 +23,8 @@ const R = require('ramda')
 
 const Match = (props) => {
     const classes = useStyles()
-    const [confirmOpen, setConfirmOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const [hasError, setHasError] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
 
     // form data
     const [amount, setAmount] = useState('')
@@ -31,31 +33,32 @@ const Match = (props) => {
         setSelectedValue(event.target.value)
     }
 
-    const user = useRecoilValue(currentUserInfo)
-
-    const onBet = () => {
-        if (user !== null) {
-            if (R.isEmpty(amount) && R.isEmpty(selectedValue)) {
-                setHasError(true)
-                setErrorMessage('Amount and one option is required')
-            }
-            setConfirmOpen(true)
-        } else {
-            return (
-                <Alert severity="error">
-                    You need to be signed in to make a bet!
-                </Alert>
-            )
-        }
+    const handleDialogOpen = () => {
+        setOpen(true)
+    }
+    const handleDialogClose = () => {
+        setOpen(false)
     }
 
-    //fix fix
-    const data = {
+    const user = useRecoilValue(currentUserInfo)
+    const tokens = useRecoilValue(authTokens)
+
+    const onBet = () => {
+        user !== null && R.isEmpty(amount) && R.isEmpty(selectedValue)
+            ? setHasError(true)
+            : handleDialogOpen()
+    }
+
+    const inputs = {
+        choice: setSelectedValue,
         amount: amount,
+        targetMatch: props._id,
+        createdBy: user && user._id,
     }
 
     const confirmBet = () => {
-        postBetSlip(data, user._id)
+        console.log('fetching...')
+        postBetSlip(inputs, user._id, tokens)
     }
 
     return (
@@ -151,6 +154,13 @@ const Match = (props) => {
 
                     <Divider />
 
+                    {hasError && (
+                        <Alert severity="error">
+                            {' '}
+                            {'Must be signed in and form fields filled'}{' '}
+                        </Alert>
+                    )}
+
                     <ExpansionPanelActions>
                         <div className={classes.column}>
                             <TextField
@@ -174,9 +184,9 @@ const Match = (props) => {
                             onClick={onBet}
                         >
                             <CustomModal
-                                open={confirmOpen}
-                                setOpen={setConfirmOpen}
-                                onConfirm={confirmBet}
+                                isOpen={open}
+                                handleClose={handleDialogClose}
+                                handleConfirm={confirmBet}
                                 title="Confirm bet"
                             >
                                 {user !== null && (

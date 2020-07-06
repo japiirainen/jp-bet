@@ -1,16 +1,17 @@
 import React from 'react'
-import useFetch from '../../Utils/useFetch'
+import { useQuery } from 'react-query'
 import Match from './match'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
-
+import { fetchMatches } from '../../Utils/apiclient'
 import useStyles from './styles'
 
 const Matches = () => {
     const classes = useStyles()
 
-    const { data, isLoading, hasError, errorMessage } = useFetch(
-        '/api/v1/match'
+    const { isLoading, isError, data, error } = useQuery(
+        'matchData',
+        fetchMatches
     )
 
     return (
@@ -22,7 +23,7 @@ const Matches = () => {
             ) : (
                 data.map((match) => <Match key={match._id} {...match} />)
             )}
-            {hasError && <Alert severity="error"> {errorMessage} </Alert>}
+            {isError && <Alert severity="error"> {error.message} </Alert>}
         </div>
     )
 }
