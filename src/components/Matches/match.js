@@ -20,6 +20,7 @@ import {
 import { CustomModal } from '../Helpers/CustomModal'
 import { useRecoilValue } from 'recoil'
 import { Alert } from '../Helpers/Alert'
+import { calculateReturn } from '../Helpers/functions'
 
 const R = require('ramda')
 
@@ -244,16 +245,36 @@ const Match = (props) => {
             >
                 {user !== null && (
                     <>
+                        <Divider />
                         <Typography className={classes.dialogTypography}>
-                            {user.username} account balance: {user.balance}€
+                            Account balance: <br></br>
+                            <span>{user.balance}€</span>
                         </Typography>
                         <Typography className={classes.dialogTypography}>
-                            Your bet: {amount}€ for {props[selectedValue]} @
-                            {props.team1} vs {props.team2}
+                            Your bet:<br></br>
+                            <span>
+                                {amount}€ for {props[selectedValue] || 'tie'} @{' '}
+                                {props.odds[selectedValue]}
+                                <br></br>
+                                {props.team1} vs {props.team2}
+                            </span>
                         </Typography>
                         <Typography className={classes.dialogTypography}>
-                            Projected win: {}
+                            Projected win:<br></br>
+                            <span>
+                                {console.log(props.odds)}
+                                {calculateReturn(
+                                    props.odds[
+                                        selectedValue !== 'tie'
+                                            ? `${selectedValue}Win`
+                                            : selectedValue
+                                    ],
+                                    amount
+                                )}{' '}
+                                €
+                            </span>
                         </Typography>
+                        <Divider />
                     </>
                 )}
             </CustomModal>

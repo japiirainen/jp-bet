@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(6),
     },
     dialogTypography: {
-        fontSize: 16,
+        fontSize: 20,
         marginTop: theme.spacing(4),
     },
 }))

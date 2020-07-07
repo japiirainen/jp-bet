@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const R = require('ramda')
+
 export const useFormInput = (initialValue) => {
     const [value, setValue] = useState(initialValue)
 
@@ -13,4 +15,7 @@ export const useFormInput = (initialValue) => {
     }
 }
 
-export const calculateReturn = (odds, amount) => {}
+export const calculateReturn = (odds, amount) => {
+    const result = R.multiply(odds, parseFloat(amount))
+    return result
+}
