@@ -254,7 +254,13 @@ const Match = (props) => {
                             Your bet:<br></br>
                             <span>
                                 {amount}€ for {props[selectedValue] || 'tie'} @{' '}
-                                {props.odds[selectedValue]}
+                                {
+                                    props.odds[
+                                        selectedValue !== 'tie'
+                                            ? `${selectedValue}Win`
+                                            : selectedValue
+                                    ]
+                                }
                                 <br></br>
                                 {props.team1} vs {props.team2}
                             </span>
@@ -262,7 +268,6 @@ const Match = (props) => {
                         <Typography className={classes.dialogTypography}>
                             Projected win:<br></br>
                             <span>
-                                {console.log(props.odds)}
                                 {calculateReturn(
                                     props.odds[
                                         selectedValue !== 'tie'
