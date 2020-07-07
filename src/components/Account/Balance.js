@@ -12,14 +12,24 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
 import Typography from '@material-ui/core/Typography'
 import { useStyles } from './balanceStyles'
 import { TextField, Button } from '@material-ui/core'
-import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import {
+    currentUserInfo,
+    authTokens,
+} from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useRecoilValue } from 'recoil'
 import { CustomModal } from '../Helpers/CustomModal'
+import { useFormInput } from '../Helpers/functions'
+import { updateUserBalance } from '../../Utils/apiclient'
+import { useSnackbar } from 'notistack'
+
+const R = require('ramda')
 
 const Balance = () => {
     const classes = useStyles()
     const [dialogOpen, setDialogOpen] = useState(false)
     const [open, setOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+    const amount = useFormInput('')
 
     const handleClick = () => {
         setOpen(!open)
@@ -29,9 +39,45 @@ const Balance = () => {
     }
 
     const user = useRecoilValue(currentUserInfo)
+    const tokens = useRecoilValue(authTokens)
 
-    const confirmDeposit = () => {}
-    const handleDepositClick = () => {}
+    const { enqueueSnackbar } = useSnackbar()
+
+    const handleToast = (variant) => {
+        enqueueSnackbar(`Successfully deposited ${amount.value}€`, {
+            variant,
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'center',
+            },
+        })
+    }
+    const handleErrorToast = (variant, message) => {
+        enqueueSnackbar(message, {
+            variant,
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'center',
+            },
+        })
+    }
+    const inputs = {
+        balance: amount.value,
+    }
+    const confirmDeposit = () => {
+        updateUserBalance(inputs, user._id, tokens)
+            .then(() => handleToast('success'))
+            .catch((e) => handleErrorToast('error', e.message))
+    }
+
+    const handleDepositClick = () => {
+        if (R.isEmpty(amount.value)) {
+            setErrorMessage('Amount is required!')
+        } else {
+            handleDialog(true)
+        }
+    }
+
     return (
         <>
             <List
@@ -48,7 +94,7 @@ const Balance = () => {
                     <ListItemIcon>
                         <AccountBalanceIcon />
                     </ListItemIcon>
-                    <ListItemText primary={user.balance} />
+                    <ListItemText primary={`${user.balance}€`} />
                 </ListItem>
                 <ListItem button onClick={handleClick}>
                     <ListItemIcon>
@@ -65,13 +111,17 @@ const Balance = () => {
                                 id="standard-number"
                                 label="Amount (€)"
                                 type="number"
+                                required
+                                error={Boolean(errorMessage)}
+                                helperText={errorMessage}
+                                {...amount}
                             />
                             <Button
                                 className={classes.button}
                                 variant="text"
                                 size="large"
                                 color="inherit"
-                                conClick={handleDepositClick}
+                                onClick={handleDepositClick}
                             >
                                 <ListItemIcon>
                                     <DoubleArrowIcon />
@@ -86,7 +136,11 @@ const Balance = () => {
                 handleClose={() => handleDialog(false)}
                 handleConfirm={confirmDeposit}
                 title="Please confirm that your deposit is as intended!"
-            />
+            >
+                <Typography>
+                    {amount.value} into {user.username} account.
+                </Typography>
+            </CustomModal>
         </>
     )
 }
