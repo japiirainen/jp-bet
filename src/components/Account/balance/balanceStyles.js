@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
     title: {
-        margin: theme.spacing(4, 0, 2),
+        margin: theme.spacing(4, 3, 2),
     },
     button: {
         margin: theme.spacing(2, 6, 0),

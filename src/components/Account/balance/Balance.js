@@ -88,8 +88,8 @@ const Balance = () => {
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                     subheader={
-                        <Typography variant="h6" className={classes.title}>
-                            {user.username} account balance
+                        <Typography variant="h5" className={classes.title}>
+                            Account balance
                         </Typography>
                     }
                     className={classes.root}
