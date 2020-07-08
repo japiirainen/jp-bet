@@ -15,12 +15,11 @@ import { TextField, Button, LinearProgress } from '@material-ui/core'
 import {
     currentUserInfo,
     authTokens,
-} from '../../stateManagement/Recoil/Atoms/userAtoms'
-
-import { useRecoilValue } from 'recoil'
-import { CustomModal } from '../Helpers/CustomModal'
-import { useFormInput } from '../Helpers/functions'
-import { updateUserBalance } from '../../Utils/apiclient'
+} from '../../../stateManagement/Recoil/Atoms/userAtoms'
+import { useRecoilValue, useRecoilState } from 'recoil'
+import { CustomModal } from '../../Helpers/CustomModal'
+import { useFormInput } from '../../Helpers/functions'
+import { updateUserBalance } from '../../../Utils/apiclient'
 import { useSnackbar } from 'notistack'
 
 const R = require('ramda')
@@ -38,7 +37,8 @@ const Balance = () => {
     const handleDialog = (dialogOpen) => {
         setDialogOpen(dialogOpen)
     }
-    const user = useRecoilValue(currentUserInfo)
+
+    const [user, setUser] = useRecoilState(currentUserInfo)
     const tokens = useRecoilValue(authTokens)
 
     const { enqueueSnackbar } = useSnackbar()
@@ -74,6 +74,8 @@ const Balance = () => {
     }
     const confirmDeposit = () => {
         updateUserBalance(inputs, user._id, tokens)
+            //todo user updates but toasts not, need fix!
+            .then(({ user }) => setUser(user))
             .then(() => handleToast('success'))
             .then(() => handleDialog(false))
             .catch((e) => handleErrorToast('error', e.message))

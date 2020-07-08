@@ -18,7 +18,7 @@ import {
     authTokens,
 } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { Alert } from '../Helpers/Alert'
 import { calculateReturn } from '../Helpers/functions'
 
@@ -60,7 +60,7 @@ const Match = (props) => {
         })
     }
 
-    const user = useRecoilValue(currentUserInfo)
+    const [user, setUser] = useRecoilState(currentUserInfo)
     const tokens = useRecoilValue(authTokens)
 
     const onBet = () => {
@@ -83,6 +83,8 @@ const Match = (props) => {
 
     const confirmBet = () => {
         postBetSlip(inputs, user._id, tokens)
+            //todo user updates but toasts not, need fix!
+            .then(({ user }) => setUser(user))
             .then(() => handleToast('success'))
             .then(() => handleDialog(false))
             .catch((e) => handleErrorToast('error', e.message))
