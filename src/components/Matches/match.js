@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -17,6 +17,7 @@ import {
     currentUserInfo,
     authTokens,
 } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { toastState } from '../../stateManagement/Recoil/Atoms/appAtoms'
 import { CustomModal } from '../Helpers/CustomModal'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { Alert } from '../Helpers/Alert'
@@ -29,6 +30,7 @@ const Match = (props) => {
     const [open, setOpen] = useState(false)
     const [hasError, setHasError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [notification, setNotification] = useRecoilState(toastState)
 
     const [amount, setAmount] = useState('')
     const [selectedValue, setSelectedValue] = useState('')
@@ -41,15 +43,6 @@ const Match = (props) => {
         setOpen(open)
     }
 
-    const handleToast = (variant) => {
-        enqueueSnackbar('Your bet was created!', {
-            variant,
-            anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'center',
-            },
-        })
-    }
     const handleErrorToast = (variant, message) => {
         enqueueSnackbar(message, {
             variant,
@@ -83,12 +76,33 @@ const Match = (props) => {
 
     const confirmBet = () => {
         postBetSlip(inputs, user._id, tokens)
-            //todo user updates but toasts not, need fix!
-            .then(({ user }) => setUser(user))
-            .then(() => handleToast('success'))
-            .then(() => handleDialog(false))
+            .then(({ user }) => {
+                setNotification(true)
+                setUser(user)
+                handleDialog(false)
+            })
+
             .catch((e) => handleErrorToast('error', e.message))
     }
+    useEffect(() => {
+        const handleToast = (variant) => {
+            enqueueSnackbar('success', {
+                variant,
+                preventDuplicate: true,
+                anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                },
+                onClose: () => {
+                    setNotification(false)
+                },
+            })
+        }
+
+        if (notification) {
+            handleToast('success')
+        }
+    }, [notification, enqueueSnackbar, setNotification])
 
     return (
         <div className={classes.root}>
@@ -187,9 +201,7 @@ const Match = (props) => {
                             </Typography>
                         </div>
                     </ExpansionPanelDetails>
-
                     <Divider />
-
                     {hasError && (
                         <Alert severity="error">
                             {' '}

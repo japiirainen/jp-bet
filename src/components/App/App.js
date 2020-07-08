@@ -69,11 +69,12 @@ const App = () => {
                         <Paper>
                             <Navbar />
                             <Container
-                                maxWidth="sm"
+                                maxWidth="md"
                                 className={classes.mainContainer}
                             >
                                 <Switch>
                                     <Route exact path="/" component={Matches} />
+
                                     <Route
                                         path="/signin"
                                         component={Signinpage}

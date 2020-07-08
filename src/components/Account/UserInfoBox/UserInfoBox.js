@@ -7,12 +7,14 @@ const UserInfoBox = ({ user }) => {
 
     return (
         <div className={classes.root}>
-            <Avatar
-                alt="profile pic"
-                src={user.pictureurl}
-                className={classes.avatar}
-            />
-            <Typography variant="h5" className={classes.fullname}>
+            <div className={classes.img}>
+                <Avatar
+                    alt="profile pic"
+                    src={user.pictureurl}
+                    className={classes.avatar}
+                />
+            </div>
+            <Typography variant="h4" className={classes.fullname}>
                 {user.firstname} {user.lastname}
             </Typography>
             <Typography className={classes.username}>

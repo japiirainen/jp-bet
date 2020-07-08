@@ -11,21 +11,26 @@ const AccountNav = () => {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={3} alignItems="center" justify="center">
-                <Grid item xs={6} sm={6}>
+            <Grid
+                container
+                spacing={3}
+                direction="row"
+                alignItems="center"
+                justify="flex-end"
+            >
+                <Grid item xs={'auto'} sm={'auto'}>
                     <Link to="/account/balance" className={classes.link}>
                         <Button
                             variant="text"
                             color="inherit"
                             className={classes.button}
-                            active
                         >
                             Balance
                             <AccountBalanceIcon />
                         </Button>
                     </Link>
                 </Grid>
-                <Grid item xs={6} sm={6}>
+                <Grid item xs={'auto'} sm={'auto'}>
                     <Link to="/account/betlists" className={classes.link}>
                         <Button
                             variant="text"

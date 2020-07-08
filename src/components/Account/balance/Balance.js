@@ -43,15 +43,6 @@ const Balance = () => {
 
     const { enqueueSnackbar } = useSnackbar()
 
-    const handleToast = (variant) => {
-        enqueueSnackbar(`Successfully deposited ${amount.value}€`, {
-            variant,
-            anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'center',
-            },
-        })
-    }
     const handleErrorToast = (variant, message) => {
         enqueueSnackbar(message, {
             variant,
@@ -74,9 +65,7 @@ const Balance = () => {
     }
     const confirmDeposit = () => {
         updateUserBalance(inputs, user._id, tokens)
-            //todo user updates but toasts not, need fix!
             .then(({ user }) => setUser(user))
-            .then(() => handleToast('success'))
             .then(() => handleDialog(false))
             .catch((e) => handleErrorToast('error', e.message))
     }

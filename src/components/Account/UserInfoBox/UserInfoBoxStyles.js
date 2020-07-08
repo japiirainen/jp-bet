@@ -4,9 +4,13 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    img: {
+        width: '80%',
+        height: '80%',
+    },
     avatar: {
-        width: theme.spacing(16),
-        height: theme.spacing(16),
+        width: '100%',
+        height: '100%',
     },
     fullname: {
         marginTop: theme.spacing(4),

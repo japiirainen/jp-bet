@@ -1,11 +1,6 @@
 import { atom } from 'recoil'
 
-export const modalState = atom({
-    key: 'modalOpen',
+export const toastState = atom({
+    key: 'toastState',
     default: false,
 })
-
-export const themeOpen = {
-    key: 'themeOpen',
-    default: 'light',
-}

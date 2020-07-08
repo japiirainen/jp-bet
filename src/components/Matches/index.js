@@ -5,6 +5,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
 import { fetchMatches } from '../../Utils/apiclient'
 import useStyles from './styles'
+import { Container } from '@material-ui/core'
 
 const Matches = () => {
     const classes = useStyles()
@@ -15,16 +16,18 @@ const Matches = () => {
     )
 
     return (
-        <div className={classes.matchContainer}>
-            {isLoading ? (
-                <div className={classes.loader}>
-                    <LinearProgress color="secondary" />
-                </div>
-            ) : (
-                data.map((match) => <Match key={match._id} {...match} />)
-            )}
-            {isError && <Alert severity="error"> {error.message} </Alert>}
-        </div>
+        <Container maxWidth="sm">
+            <div className={classes.matchContainer}>
+                {isLoading ? (
+                    <div className={classes.loader}>
+                        <LinearProgress color="secondary" />
+                    </div>
+                ) : (
+                    data.map((match) => <Match key={match._id} {...match} />)
+                )}
+                {isError && <Alert severity="error"> {error.message} </Alert>}
+            </div>
+        </Container>
     )
 }
 
