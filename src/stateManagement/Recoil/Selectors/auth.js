@@ -1,11 +1,9 @@
-import { selector } from 'recoil'
+import { selector, selectorFamily } from 'recoil'
 import { Config } from '../../../Utils/config'
 import { authTokens, currentUserInfo, loggedInState } from '../Atoms/userAtoms'
 import jwt from 'jsonwebtoken'
 
 const url = Config.endpoint + '/api/v1/user'
-
-//maybe useEffect
 
 export const setLoggedInState = selector({
     key: 'setLoggedInState',
@@ -33,5 +31,22 @@ export const userStateQuery = selector({
             },
         })
         return { fetched: await response.json() }
+    },
+})
+
+export const userInfoQuery = selectorFamily({
+    key: 'userInfo',
+    get: (userID, token) => async () => {
+        const response = await fetch(`${url}/${userID}`, {
+            headers: {
+                'Content-Type': 'application/json',
+
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        if (response.error) {
+            throw response.error
+        }
+        return response.data
     },
 })

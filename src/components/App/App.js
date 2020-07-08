@@ -17,8 +17,10 @@ import { lightTheme } from './Themeprovider'
 import { AuthContext } from '../../stateManagement/auth'
 import { userStateQuery } from '../../stateManagement/Recoil/Selectors/auth'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilValueLoadable } from 'recoil'
 import { Alert } from '../Helpers/Alert'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from '../Helpers/ErrorFallback'
 
 const App = () => {
     const classes = useStyles()
@@ -49,46 +51,57 @@ const App = () => {
     }
 
     return (
-        <AuthContext.Provider
-            value={{
-                authTokens,
-                setAuthTokens: setTokens,
-            }}
-        >
-            <SnackbarProvider
-                maxSnack={3}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <AuthContext.Provider
+                value={{
+                    authTokens,
+                    setAuthTokens: setTokens,
                 }}
             >
-                <ThemeProvider theme={lightTheme}>
-                    <Paper>
-                        <Navbar />
-                        <Container
-                            maxWidth="sm"
-                            className={classes.mainContainer}
-                        >
-                            <Switch>
-                                <Route exact path="/" component={Matches} />
-                                <Route path="/signin" component={Signinpage} />
-                                <Route path="/signup" component={Signuppage} />
-                                <PrivateRoute path="/admin" component={Admin} />
-                                <PrivateRoute
-                                    path="/account"
-                                    component={Account}
-                                />
-                                <PrivateRoute
-                                    path="/settings"
-                                    component={Settings}
-                                />
-                            </Switch>
-                        </Container>
-                        <Footer />
-                    </Paper>
-                </ThemeProvider>
-            </SnackbarProvider>
-        </AuthContext.Provider>
+                <SnackbarProvider
+                    maxSnack={3}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                >
+                    <ThemeProvider theme={lightTheme}>
+                        <Paper>
+                            <Navbar />
+                            <Container
+                                maxWidth="sm"
+                                className={classes.mainContainer}
+                            >
+                                <Switch>
+                                    <Route exact path="/" component={Matches} />
+                                    <Route
+                                        path="/signin"
+                                        component={Signinpage}
+                                    />
+                                    <Route
+                                        path="/signup"
+                                        component={Signuppage}
+                                    />
+                                    <PrivateRoute
+                                        path="/admin"
+                                        component={Admin}
+                                    />
+                                    <PrivateRoute
+                                        path="/account"
+                                        component={Account}
+                                    />
+                                    <PrivateRoute
+                                        path="/settings"
+                                        component={Settings}
+                                    />
+                                </Switch>
+                            </Container>
+                            <Footer />
+                        </Paper>
+                    </ThemeProvider>
+                </SnackbarProvider>
+            </AuthContext.Provider>
+        </ErrorBoundary>
     )
 }
 

@@ -84,6 +84,7 @@ const Match = (props) => {
     const confirmBet = () => {
         postBetSlip(inputs, user._id, tokens)
             .then(() => handleToast('success'))
+            .then(() => handleDialog(false))
             .catch((e) => handleErrorToast('error', e.message))
     }
 

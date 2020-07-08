@@ -74,14 +74,17 @@ export const postBetSlip = async (data, userId, token) => {
 
 export const updateUserBalance = async (data, userId, token) => {
     try {
-        const resp = await fetch(`${endpoint}/api/v1/user/${userId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(data),
-        })
+        const resp = await fetch(
+            `${endpoint}/api/v1/user/incBalance/${userId}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            }
+        )
         if (!resp.ok && resp.status !== 200) {
             throw new Error('Deposit failed. Please try again later!')
         }
