@@ -32,6 +32,12 @@ const ChangeInfoForm = () => {
             },
         })
     }
+    const autoComplete = {
+        autoComplete: 'new-password',
+        form: {
+            autoComplete: 'off',
+        },
+    }
 
     const [notification, setNotification] = useRecoilState(toastState)
     const [user, setUser] = useRecoilState(currentUserInfo)
@@ -39,16 +45,16 @@ const ChangeInfoForm = () => {
 
     const onSubmit = (data) => {
         updateUserInfo(data, user._id, tokens)
-            .then(({ user }) => {
+            .then(({ data }) => {
                 setNotification(true)
-                setUser(user)
+                setUser(data)
             })
             .catch((e) => handleErrorToast('error', e.message))
     }
 
     useEffect(() => {
         const handleToast = (variant) => {
-            enqueueSnackbar(`Deposit Successful!`, {
+            enqueueSnackbar(`You're personal info has been updated!`, {
                 variant,
                 preventDuplicate: true,
                 anchorOrigin: {
@@ -84,6 +90,7 @@ const ChangeInfoForm = () => {
                                 fullWidth
                                 name="firstname"
                                 inputRef={register({ min: 2, max: 99 })}
+                                inputProps={autoComplete}
                             />
                             <TextField
                                 color="secondary"
@@ -96,6 +103,7 @@ const ChangeInfoForm = () => {
                                 fullWidth
                                 name="lastname"
                                 inputRef={register}
+                                inputProps={autoComplete}
                             />
                             <TextField
                                 color="secondary"
@@ -108,6 +116,7 @@ const ChangeInfoForm = () => {
                                 fullWidth
                                 name="email"
                                 inputRef={register}
+                                inputProps={autoComplete}
                             />
                             <TextField
                                 type="password"
@@ -121,6 +130,7 @@ const ChangeInfoForm = () => {
                                 fullWidth
                                 name="newpassword"
                                 inputRef={register}
+                                inputProps={autoComplete}
                             />
 
                             <Button
