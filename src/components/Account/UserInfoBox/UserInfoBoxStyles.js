@@ -11,8 +11,12 @@ export const useStyles = makeStyles((theme) => ({
     avatar: {
         width: '100%',
         height: '100%',
+        maxHeight: theme.spacing(25),
+        maxWidth: theme.spacing(25),
     },
     fullname: {
         marginTop: theme.spacing(4),
+        width: '80%',
+        height: '100%',
     },
 }))

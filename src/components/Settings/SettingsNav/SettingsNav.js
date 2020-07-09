@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useStyles } from './AccountNavStyles'
+import { useStyles } from './SettingsNavStyles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { containedTabsStylesHook } from '@mui-treasury/styles/tabs'
 import { useHistory } from 'react-router-dom'
+import { Container } from '@material-ui/core'
 
-const AccountNav = () => {
+const Settings = () => {
     const classes = useStyles()
 
     let history = useHistory()
@@ -18,9 +19,8 @@ const AccountNav = () => {
         initialValue = null
     }
 
-    const linkToBalance = () => history.push('/account/balance')
-    const linkToBets = () => history.push('/account/betlists')
-
+    const linkToBalance = () => history.push('/settings/changeinfo')
+    const linkToBets = () => history.push('/settings/misc')
     const [tabIndex, setTabIndex] = useState(initialValue)
     const tabsStyles = containedTabsStylesHook.useTabs()
     const tabItemStyles = containedTabsStylesHook.useTabItem()
@@ -33,13 +33,13 @@ const AccountNav = () => {
         >
             <Tab
                 classes={tabItemStyles}
-                label={'Balance'}
+                label={'Edit user info'}
                 onClick={linkToBalance}
             />
 
-            <Tab classes={tabItemStyles} label={'Bets'} onClick={linkToBets} />
+            <Tab classes={tabItemStyles} label={'misc'} onClick={linkToBets} />
         </Tabs>
     )
 }
 
-export default AccountNav
+export default Settings

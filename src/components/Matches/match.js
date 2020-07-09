@@ -86,7 +86,7 @@ const Match = (props) => {
     }
     useEffect(() => {
         const handleToast = (variant) => {
-            enqueueSnackbar('success', {
+            enqueueSnackbar('Bet created successfully!', {
                 variant,
                 preventDuplicate: true,
                 anchorOrigin: {

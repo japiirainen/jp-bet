@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react'
+import React, { useState, Suspense, useEffect } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -16,6 +16,7 @@ import {
     currentUserInfo,
     authTokens,
 } from '../../../stateManagement/Recoil/Atoms/userAtoms'
+import { toastState } from '../../../stateManagement/Recoil/Atoms/appAtoms'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { CustomModal } from '../../Helpers/CustomModal'
 import { useFormInput } from '../../Helpers/functions'
@@ -29,6 +30,7 @@ const Balance = () => {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [open, setOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [notification, setNotification] = useRecoilState(toastState)
     const amount = useFormInput('')
 
     const handleClick = () => {
@@ -65,10 +67,33 @@ const Balance = () => {
     }
     const confirmDeposit = () => {
         updateUserBalance(inputs, user._id, tokens)
-            .then(({ user }) => setUser(user))
-            .then(() => handleDialog(false))
+            .then(({ user }) => {
+                setNotification(true)
+                setUser(user)
+                handleDialog(false)
+            })
+
             .catch((e) => handleErrorToast('error', e.message))
     }
+    useEffect(() => {
+        const handleToast = (variant) => {
+            enqueueSnackbar(`Deposit Successful!`, {
+                variant,
+                preventDuplicate: true,
+                anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                },
+                onClose: () => {
+                    setNotification(false)
+                },
+            })
+        }
+
+        if (notification) {
+            handleToast('success')
+        }
+    }, [notification, enqueueSnackbar, setNotification])
 
     return (
         <>

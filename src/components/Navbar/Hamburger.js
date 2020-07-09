@@ -61,7 +61,7 @@ const Hamburger = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <Link className={classes.link} to="/account">
+                <Link className={classes.link} to="/account/">
                     <MenuItem
                         className={classes.menuItem}
                         onClick={handleAccount}
@@ -69,7 +69,7 @@ const Hamburger = () => {
                         My Account
                     </MenuItem>
                 </Link>
-                <Link className={classes.link} to="/settings">
+                <Link className={classes.link} to="/settings/">
                     <MenuItem
                         className={classes.menuItem}
                         onClick={handleSettings}

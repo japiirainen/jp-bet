@@ -8,9 +8,12 @@ const OpenBetList = () => {
 
     return (
         <div>
-            <Typography className={classes.header} variant="h6">
-                Your open bets:
+            <Typography className={classes.header} variant="h5">
+                Your open bets
             </Typography>
+            <BetListItem />
+            <BetListItem />
+            <BetListItem />
             <BetListItem />
         </div>
     )

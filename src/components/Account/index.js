@@ -18,19 +18,14 @@ const Account = () => {
 
     return (
         <div className={classes.main}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <AccountNav />
-                    <Divider />
-                </Grid>
-            </Grid>
-            <Grid container spacing={3}>
-                <Grid item xs={4} sm={4}>
+            <Grid container>
+                <Grid item md={4} sm={3} xs={12}>
                     <UserInfoBox user={user} />
                 </Grid>
-
-                <Switch>
-                    <Grid item xs={8} sm={8}>
+                <Grid item md={8} sm={8} xs={10}>
+                    <AccountNav />
+                    <Divider />
+                    <Switch>
                         <PrivateRoute
                             path="/account/balance"
                             component={Balance}
@@ -39,8 +34,8 @@ const Account = () => {
                             path="/account/betlists"
                             component={OpenBetList}
                         />
-                    </Grid>
-                </Switch>
+                    </Switch>
+                </Grid>
             </Grid>
         </div>
     )

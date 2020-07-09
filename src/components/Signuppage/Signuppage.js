@@ -21,7 +21,6 @@ import { useAuth } from '../../stateManagement/auth'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState } from 'recoil'
 
-
 const SignUp = (props) => {
     const classes = useStyles()
     const referer =

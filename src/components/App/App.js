@@ -88,11 +88,11 @@ const App = () => {
                                         component={Admin}
                                     />
                                     <PrivateRoute
-                                        path="/account"
+                                        path="/account/"
                                         component={Account}
                                     />
                                     <PrivateRoute
-                                        path="/settings"
+                                        path="/settings/"
                                         component={Settings}
                                     />
                                 </Switch>
