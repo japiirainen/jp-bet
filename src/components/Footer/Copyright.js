@@ -6,11 +6,15 @@ const Copyright = () => {
     return (
         <Typography variant="body2" color="textSecondary">
             {' '}
-            {'Copyright © '}{' '}
-            <Link color="inherit" href="https://joonapiirainen.com">
-                JP - bet{' '}
+            {'Design and build by'}{' '}
+            <Link
+                color="inherit"
+                target="_blank"
+                href="https://joonapiirainen.com"
+            >
+                Joona{' '}
             </Link>{' '}
-            {new Date().getFullYear()} {'.'}{' '}
+            {new Date().getFullYear()}
         </Typography>
     )
 }

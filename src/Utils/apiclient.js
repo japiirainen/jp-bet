@@ -94,3 +94,23 @@ export const updateUserBalance = async (data, userId, token) => {
         throw e
     }
 }
+
+export const updateUserInfo = async (data, userId, token) => {
+    try {
+        const resp = await fetch(`${endpoint}/api/v1/user/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok && resp.status !== 200) {
+            throw new Error('Deposit failed. Please try again later!')
+        }
+        return resp.json()
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}

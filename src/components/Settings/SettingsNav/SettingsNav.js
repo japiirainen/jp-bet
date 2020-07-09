@@ -10,9 +10,9 @@ const Settings = () => {
 
     let history = useHistory()
     let initialValue
-    if (history.location.pathname === '/account/balance') {
+    if (history.location.pathname === '/settings/changeinfo') {
         initialValue = 0
-    } else if (history.location.pathname === '/account/betlists') {
+    } else if (history.location.pathname === '/settings/misc') {
         initialValue = 1
     } else {
         initialValue = null

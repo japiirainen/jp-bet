@@ -1,5 +1,6 @@
 import React, { useState, Suspense, useEffect } from 'react'
 import List from '@material-ui/core/List'
+import { useSnackbar } from 'notistack'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -21,7 +22,6 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { CustomModal } from '../../Helpers/CustomModal'
 import { useFormInput } from '../../Helpers/functions'
 import { updateUserBalance } from '../../../Utils/apiclient'
-import { useSnackbar } from 'notistack'
 
 const R = require('ramda')
 
