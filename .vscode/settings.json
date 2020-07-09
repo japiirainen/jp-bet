@@ -1,6 +1,7 @@
 {
     "deno.enable": false,
     "cSpell.words": [
-        "aria-labe"
+        "aria-labe",
+        "newpassword"
     ]
 }

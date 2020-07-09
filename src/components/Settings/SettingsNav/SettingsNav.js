@@ -4,7 +4,6 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { containedTabsStylesHook } from '@mui-treasury/styles/tabs'
 import { useHistory } from 'react-router-dom'
-import { Container } from '@material-ui/core'
 
 const Settings = () => {
     const classes = useStyles()
