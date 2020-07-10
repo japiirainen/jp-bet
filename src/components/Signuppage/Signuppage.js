@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import { Redirect } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 import { Alert } from '../Helpers/Alert'
-import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
-import Copyright from '../Helpers/copyright'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
 import { useAuth } from '../../stateManagement/auth'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
-import { useSetRecoilState } from 'recoil'
+import schema from './Validation'
 
 const SignUp = (props) => {
     const classes = useStyles()
@@ -28,27 +27,24 @@ const SignUp = (props) => {
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [inputs, setInputs] = useState({
-        username: '',
-        email: '',
-        password: '',
-    })
-    const { username, email, password } = inputs
-    const { setAuthTokens } = useAuth()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setInputs((input) => ({
-            ...input,
-            [name]: value,
-        }))
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(schema),
+    })
+
+    const autoComplete = {
+        autoComplete: 'new-password',
+        form: {
+            autoComplete: 'off',
+        },
     }
+
+    const { setAuthTokens } = useAuth()
 
     const setUser = useSetRecoilState(currentUserInfo)
 
-    const postSignup = (e) => {
-        e.preventDefault()
-        onSignup(inputs)
+    const onSubmit = (data) => {
+        onSignup(data)
             .then(({ token, user }) => {
                 setAuthTokens(token)
                 setUser(user)
@@ -74,58 +70,95 @@ const SignUp = (props) => {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form
+                        className={classes.form}
+                        onSubmit={handleSubmit(onSubmit)}
+                    >
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
-                                    autoComplete="username"
+                                    color="secondary"
+                                    margin="normal"
+                                    id="firstname"
+                                    label="First Name"
+                                    variant="outlined"
+                                    helperText={errors.firstname?.message}
+                                    error={Boolean(errors.firstname?.message)}
+                                    fullWidth
+                                    name="firstname"
+                                    inputRef={register}
+                                    inputProps={autoComplete}
+                                />
+                                <TextField
+                                    color="secondary"
+                                    margin="normal"
+                                    id="lastname"
+                                    label="Last Name"
+                                    variant="outlined"
+                                    helperText={errors.lastname?.message}
+                                    error={Boolean(errors.lastname?.message)}
+                                    fullWidth
+                                    name="lastname"
+                                    inputRef={register}
+                                    inputProps={autoComplete}
+                                />
+                                <TextField
                                     name="username"
                                     variant="outlined"
+                                    helperText={errors.username?.message}
+                                    error={Boolean(errors.username?.message)}
                                     required
                                     fullWidth
                                     id="username"
                                     label="Username"
                                     autoFocus
-                                    onChange={handleChange}
-                                    value={username}
+                                    inputRef={register}
+                                    inputProps={autoComplete}
                                 ></TextField>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
+                                    helperText={errors.email?.message}
+                                    error={Boolean(errors.email?.message)}
                                     required
                                     fullWidth
                                     id="email"
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
-                                    onChange={handleChange}
-                                    value={email}
+                                    inputRef={register}
+                                    inputProps={autoComplete}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    helperText={errors.password?.message}
+                                    error={Boolean(errors.password?.message)}
                                     fullWidth
                                     name="password"
                                     label="Password"
                                     type="password"
                                     id="password"
-                                    autoComplete="current-password"
-                                    onChange={handleChange}
-                                    value={password}
+                                    inputRef={register}
+                                    inputProps={autoComplete}
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="allowExtraEmails"
-                                            color="default"
-                                        />
-                                    }
-                                    label="I agree with the terms of service"
+                                <TextField
+                                    type="password"
+                                    color="secondary"
+                                    margin="normal"
+                                    id="confirmpassword"
+                                    label="confirm password"
+                                    variant="outlined"
+                                    helperText={errors.confirmPassword?.message}
+                                    error={Boolean(
+                                        errors.confirmPassword?.message
+                                    )}
+                                    fullWidth
+                                    name="confirm password"
+                                    inputRef={register}
+                                    inputProps={autoComplete}
                                 />
                             </Grid>
                         </Grid>
@@ -133,9 +166,8 @@ const SignUp = (props) => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color="inherit"
+                            color="secondary"
                             className={classes.submit}
-                            onClick={postSignup}
                         >
                             Sign Up
                         </Button>
@@ -154,13 +186,9 @@ const SignUp = (props) => {
                 </div>{' '}
                 {isError && (
                     <Alert severity="error">
-                        {' '}
-                        need to do validation for this!!{' '}
+                        Signup failed, try again later!
                     </Alert>
                 )}
-                <Box mt={5}>
-                    <Copyright />
-                </Box>
             </Container>
         </Grow>
     )

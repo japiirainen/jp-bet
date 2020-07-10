@@ -89,7 +89,7 @@ const ChangeInfoForm = () => {
                                 error={Boolean(errors.firstname?.message)}
                                 fullWidth
                                 name="firstname"
-                                inputRef={register({ min: 2, max: 99 })}
+                                inputRef={register}
                                 inputProps={autoComplete}
                             />
                             <TextField
@@ -102,6 +102,19 @@ const ChangeInfoForm = () => {
                                 error={Boolean(errors.lastname?.message)}
                                 fullWidth
                                 name="lastname"
+                                inputRef={register}
+                                inputProps={autoComplete}
+                            />
+                            <TextField
+                                color="secondary"
+                                margin="normal"
+                                id="username"
+                                label="Username"
+                                variant="outlined"
+                                helperText={errors.username?.message}
+                                error={Boolean(errors.username?.message)}
+                                fullWidth
+                                name="username"
                                 inputRef={register}
                                 inputProps={autoComplete}
                             />
@@ -122,13 +135,27 @@ const ChangeInfoForm = () => {
                                 type="password"
                                 color="secondary"
                                 margin="normal"
-                                id="oldpassword"
+                                id="password"
                                 label="new password"
                                 variant="outlined"
-                                helperText={errors.oldpassword?.message}
-                                error={Boolean(errors.oldpassword?.message)}
+                                helperText={errors.password?.message}
+                                error={Boolean(errors.password?.message)}
                                 fullWidth
-                                name="newpassword"
+                                name="password"
+                                inputRef={register}
+                                inputProps={autoComplete}
+                            />
+                            <TextField
+                                type="password"
+                                color="secondary"
+                                margin="normal"
+                                id="confirmpassword"
+                                label="confirm password"
+                                variant="outlined"
+                                helperText={errors.confirmPassword?.message}
+                                error={Boolean(errors.confirmPassword?.message)}
+                                fullWidth
+                                name="confirm password"
                                 inputRef={register}
                                 inputProps={autoComplete}
                             />

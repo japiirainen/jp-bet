@@ -1,10 +1,10 @@
 import * as yup from 'yup'
 
 const schema = yup.object().shape({
-    firstname: yup.string().max(99).trim(),
-    lastname: yup.string().max(99).trim(),
-    username: yup.string().max(15).trim(),
-    email: yup.string().email().trim(),
+    firstname: yup.string().max(99).trim().required(),
+    lastname: yup.string().max(99).trim().required(),
+    username: yup.string().max(15).trim().required(),
+    email: yup.string().email().trim().required(),
     password: yup
         .string()
         .min(8)
