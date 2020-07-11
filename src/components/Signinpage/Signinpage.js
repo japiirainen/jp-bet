@@ -17,8 +17,10 @@ import useStyles from './styles'
 import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import { fetchSignin } from '../../Utils/apiclient'
-import { useAuth } from '../../stateManagement/auth'
-import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import {
+    currentUserInfo,
+    authTokens,
+} from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState } from 'recoil'
 
 const SignIn = (props) => {
@@ -34,7 +36,6 @@ const SignIn = (props) => {
         password: '',
     })
     const { email, password } = inputs
-    const { setAuthTokens } = useAuth()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -44,8 +45,8 @@ const SignIn = (props) => {
         }))
     }
 
-    //putting user into recoil state
     const setUser = useSetRecoilState(currentUserInfo)
+    const setAuthTokens = useSetRecoilState(authTokens)
 
     const postSignin = (e) => {
         e.preventDefault()

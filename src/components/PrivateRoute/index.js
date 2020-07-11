@@ -1,15 +1,16 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { useAuth } from '../../stateManagement/auth'
+import { useRecoilValue } from 'recoil'
+import { authTokens } from '../../stateManagement/Recoil/Atoms/userAtoms'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { authTokens } = useAuth()
+    const tokens = useRecoilValue(authTokens)
 
     return (
         <Route
             {...rest}
             render={(props) =>
-                authTokens ? (
+                tokens ? (
                     <Component {...props} />
                 ) : (
                     <Redirect

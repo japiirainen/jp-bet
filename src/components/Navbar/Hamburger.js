@@ -3,10 +3,9 @@ import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu'
-import { useAuth } from '../../stateManagement/auth'
-import { Redirect, Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import useStyles from './styles'
-import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import {
     currentUserInfo,
     authTokens,
@@ -15,33 +14,31 @@ import {
 const Hamburger = () => {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = useState(null)
-
+    const history = useHistory()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
 
-    const clearUserState = useResetRecoilState(currentUserInfo)
-    const tokens = useRecoilState(authTokens)
+    const setUser = useSetRecoilState(currentUserInfo)
+    const setTokens = useSetRecoilState(authTokens)
 
     const handleClose = () => {
         setAnchorEl(null)
     }
 
-    const { setAuthTokens } = useAuth()
-
     function logOut() {
-        clearUserState()
-        setAuthTokens()
+        setUser(null)
+        setTokens()
         setAnchorEl(null)
-        return <Redirect to="/" />
+        history.push('/')
     }
 
     const handleAccount = () => {
-        if (!tokens) return <Redirect to="/signin" />
+        history.push('/signin')
         setAnchorEl(null)
     }
     const handleSettings = () => {
-        if (!tokens) return <Redirect to="/signin" />
+        history.push('/signin')
         setAnchorEl(null)
     }
 

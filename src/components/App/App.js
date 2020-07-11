@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { SnackbarProvider } from 'notistack'
 import Navbar from '../Navbar/Navbar'
@@ -14,94 +14,68 @@ import { useStyles } from './styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Paper, Container, LinearProgress } from '@material-ui/core'
 import { lightTheme } from './Themeprovider'
-import { AuthContext } from '../../stateManagement/auth'
 import { userStateQuery } from '../../stateManagement/Recoil/Selectors/auth'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState, useRecoilValueLoadable } from 'recoil'
-import { Alert } from '../Helpers/Alert'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../Helpers/ErrorFallback'
 
 const App = () => {
     const classes = useStyles()
-
-    const existingTokens = JSON.parse(localStorage.getItem('JPBET_TOKEN'))
-    const [authTokens, setAuthTokens] = useState(existingTokens)
-
-    const setTokens = (data) => {
-        if (!data) {
-            localStorage.removeItem('JPBET_TOKEN')
-        } else {
-            localStorage.setItem('JPBET_TOKEN', JSON.stringify(data))
-        }
-        return setAuthTokens(data)
-    }
+    const [loading, setLoading] = useState(false)
 
     //putting user into recoil state
     const setUser = useSetRecoilState(currentUserInfo)
     const user = useRecoilValueLoadable(userStateQuery)
-    if (user.state === 'hasValue') {
-        if (user.contents && user.contents.fetched) {
-            setUser(user.contents.fetched.data)
+
+    useEffect(() => {
+        if (user.state === 'hasValue') {
+            setUser(user.contents)
+        } else if (user.state === 'loading') {
+            setLoading(true)
         }
-    } else if (user.state === 'loading') {
-        return <LinearProgress color="secondary" />
-    } else {
-        return <Alert severity="error"> {user.contents} </Alert>
-    }
+        //eslint-disable-next-line
+    }, [])
 
     return (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <AuthContext.Provider
-                value={{
-                    authTokens,
-                    setAuthTokens: setTokens,
+            <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
                 }}
             >
-                <SnackbarProvider
-                    maxSnack={3}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }}
-                >
-                    <ThemeProvider theme={lightTheme}>
-                        <Paper>
-                            <Navbar />
-                            <Container
-                                maxWidth="md"
-                                className={classes.mainContainer}
-                            >
-                                <Switch>
-                                    <Route exact path="/" component={Matches} />
+                <ThemeProvider theme={lightTheme}>
+                    <Paper>
+                        <Navbar />
+                        <Container
+                            maxWidth="md"
+                            className={classes.mainContainer}
+                        >
+                            <Switch>
+                                <Route exact path="/" component={Matches} />
 
-                                    <Route
-                                        path="/signin"
-                                        component={Signinpage}
-                                    />
-                                    <Route
-                                        path="/signup"
-                                        component={Signuppage}
-                                    />
-                                    <PrivateRoute
-                                        path="/admin"
-                                        component={Admin}
-                                    />
-                                    <PrivateRoute
-                                        path="/account/"
-                                        component={Account}
-                                    />
-                                    <PrivateRoute
-                                        path="/settings/"
-                                        component={Settings}
-                                    />
-                                </Switch>
-                            </Container>
-                            <Footer />
-                        </Paper>
-                    </ThemeProvider>
-                </SnackbarProvider>
-            </AuthContext.Provider>
+                                <Route path="/signin" component={Signinpage} />
+                                <Route path="/signup" component={Signuppage} />
+                                <PrivateRoute path="/admin" component={Admin} />
+                                <PrivateRoute
+                                    path="/account/"
+                                    component={Account}
+                                />
+                                <PrivateRoute
+                                    path="/settings/"
+                                    component={Settings}
+                                />
+                                {loading && (
+                                    <LinearProgress color="secondary" />
+                                )}
+                            </Switch>
+                        </Container>
+                        <Footer />
+                    </Paper>
+                </ThemeProvider>
+            </SnackbarProvider>
         </ErrorBoundary>
     )
 }

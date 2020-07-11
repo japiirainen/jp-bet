@@ -16,8 +16,11 @@ import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
-import { useAuth } from '../../stateManagement/auth'
-import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
+//import { useAuth } from '../../stateManagement/auth'
+import {
+    currentUserInfo,
+    authTokens,
+} from '../../stateManagement/Recoil/Atoms/userAtoms'
 import schema from './Validation'
 
 const SignUp = (props) => {
@@ -39,10 +42,10 @@ const SignUp = (props) => {
         },
     }
 
-    const { setAuthTokens } = useAuth()
+    //const { setAuthTokens } = useAuth()
 
     const setUser = useSetRecoilState(currentUserInfo)
-
+    const setAuthTokens = useSetRecoilState(authTokens)
     const onSubmit = (data) => {
         onSignup(data)
             .then(({ token, user }) => {

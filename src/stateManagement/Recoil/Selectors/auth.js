@@ -5,6 +5,16 @@ import jwt from 'jsonwebtoken'
 
 const url = Config.endpoint + '/api/v1/user'
 
+// export const tokenLocalStorage = selector({
+//     key: 'tokenLocalStorage',
+//     get: () => localStorage.getItem('JPBET_TOKEN'),
+
+//     set: ({ set }, newValue) => {
+//         set(authTokens, newValue)
+//         localStorage.setItem('JPBET_TOKEN', newValue)
+//     },
+// })
+
 export const setLoggedInState = selector({
     key: 'setLoggedInState',
     get: ({ get }) => {
@@ -19,7 +29,10 @@ export const userStateQuery = selector({
     key: 'userStateQuery',
     get: async ({ get }) => {
         const token = get(authTokens)
-        if (!token) return null
+        // const token = get(authTokens)
+        if (!token) {
+            return null
+        }
         const user = get(currentUserInfo)
         if (user) return user
         const decodedToken = jwt.decode(token)
@@ -30,7 +43,8 @@ export const userStateQuery = selector({
                 Authorization: `Bearer ${token}`,
             },
         })
-        return { fetched: await response.json() }
+        return (await response.json()).data
+        // return { fetched: await response.json() }
     },
 })
 

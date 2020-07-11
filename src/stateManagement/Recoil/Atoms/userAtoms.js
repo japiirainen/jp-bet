@@ -12,5 +12,5 @@ export const currentUserInfo = atom({
 
 export const authTokens = atom({
     key: 'authTokens',
-    default: JSON.parse(localStorage.getItem('JPBET_TOKEN')),
+    default: localStorage.getItem('JPBET_TOKEN'),
 })

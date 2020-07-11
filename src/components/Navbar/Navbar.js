@@ -7,13 +7,15 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../stateManagement/auth'
-const Navbar = (props) => {
+import { useRecoilValue } from 'recoil'
+import { authTokens } from '../../stateManagement/Recoil/Atoms/userAtoms'
+
+const Navbar = () => {
     const classes = useStyles()
 
-    const { authTokens } = useAuth()
+    const tokens = useRecoilValue(authTokens)
 
-    if (authTokens)
+    if (tokens)
         return (
             <div className={classes.root}>
                 <AppBar position="static" color="secondary">
