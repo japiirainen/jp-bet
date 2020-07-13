@@ -68,10 +68,16 @@ const Match = (props) => {
     }
 
     const inputs = {
-        choice: setSelectedValue,
+        choice: selectedValue,
         amount: amount,
         targetMatch: props._id,
         createdBy: user && user._id,
+        projectedWin: calculateReturn(
+            props.odds[
+                selectedValue !== 'tie' ? `${selectedValue}Win` : selectedValue
+            ],
+            amount
+        ),
     }
 
     const confirmBet = () => {

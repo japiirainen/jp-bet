@@ -34,8 +34,7 @@ const App = () => {
         } else if (user.state === 'loading') {
             setLoading(true)
         }
-        //eslint-disable-next-line
-    }, [])
+    }, [setUser, user.contents, user.state])
 
     return (
         <ErrorBoundary FallbackComponent={ErrorFallback}>

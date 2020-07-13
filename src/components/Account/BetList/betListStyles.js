@@ -6,10 +6,10 @@ export const useStyles = makeStyles(({ spacing, palette }) => {
         card: {
             display: 'flex',
             padding: spacing(2),
-            margin: spacing(1),
+            margin: spacing(2),
             maxWidth: '100%',
             borderRadius: 12,
-            boxShadow: '0 2px 4px 0 rgba(138, 148, 159, 0.2)',
+            boxShadow: '0 4px 8px 0 rgba(138, 148, 159, 0.2)',
             '& > *:nth-child(1)': {
                 marginRight: spacing(2),
             },
@@ -25,7 +25,7 @@ export const useStyles = makeStyles(({ spacing, palette }) => {
         subheader: {
             fontFamily: family,
             fontSize: 14,
-            color: palette.grey[600],
+            color: palette.grey[800],
             letterSpacing: '1px',
             marginBottom: 4,
         },

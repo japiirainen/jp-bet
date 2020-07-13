@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 import { Config } from './config'
+import { authTokens } from '../stateManagement/Recoil/Atoms/userAtoms'
 
 function handleError(setHasError, result, setErrorMessage, response) {
     setHasError(true)
@@ -22,7 +24,7 @@ const useFetch = (
 
     const refetch = () =>
         setRefetchIndex((prevRefetchIndex) => prevRefetchIndex + 1)
-    const token = window.localStorage.getItem('JPBET_TOKEN')
+    const token = useRecoilValue(authTokens)
 
     useEffect(() => {
         const fetchData = async () => {

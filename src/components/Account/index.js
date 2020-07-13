@@ -6,7 +6,7 @@ import UserInfoBox from './UserInfoBox/UserInfoBox'
 import { Divider } from '@material-ui/core'
 import AccountNav from './Nav/AccountNav'
 import Balance from './balance/Balance'
-import OpenBetList from './BetList/OpenBetList'
+import BetList from './BetList/BetList'
 import { useStyles } from './balance/balanceStyles'
 import PrivateRoute from '../PrivateRoute'
 import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
@@ -32,7 +32,7 @@ const Account = () => {
                         />
                         <PrivateRoute
                             path="/account/betlists"
-                            component={OpenBetList}
+                            component={BetList}
                         />
                     </Switch>
                 </Grid>

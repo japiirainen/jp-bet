@@ -34,11 +34,9 @@ const Hamburger = () => {
     }
 
     const handleAccount = () => {
-        history.push('/signin')
         setAnchorEl(null)
     }
     const handleSettings = () => {
-        history.push('/signin')
         setAnchorEl(null)
     }
 
