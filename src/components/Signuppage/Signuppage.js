@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import Avatar from '@material-ui/core/Avatar'
@@ -16,7 +16,6 @@ import Container from '@material-ui/core/Container'
 import { Grow } from '@material-ui/core'
 import useStyles from './styles'
 import { onSignup } from '../../Utils/apiclient'
-//import { useAuth } from '../../stateManagement/auth'
 import {
     currentUserInfo,
     authTokens,
@@ -25,6 +24,7 @@ import schema from './Validation'
 
 const SignUp = (props) => {
     const classes = useStyles()
+    const history = useHistory()
     const referer =
         (props.location.state && props.location.state.referer.pathname) || '/'
 
@@ -42,8 +42,6 @@ const SignUp = (props) => {
         },
     }
 
-    //const { setAuthTokens } = useAuth()
-
     const setUser = useSetRecoilState(currentUserInfo)
     const setAuthTokens = useSetRecoilState(authTokens)
     const onSubmit = (data) => {
@@ -59,7 +57,7 @@ const SignUp = (props) => {
     }
 
     if (isLoggedIn) {
-        return <Redirect to={referer} />
+        history.push(referer)
     }
 
     return (

@@ -4,6 +4,8 @@
 
 -   [ x] referer not working properly when signin in sometimes
 
+-   [ x] Render bets from user in account/betslist
+
 -   [ ] private route doesn't work when writing url for some reason, says tokens are null
--   [ ] referer not working properly when signin in sometimes
--   [ ] Render bets from user in accont/betslist
+
+-   [ ] maybe toast when logged out

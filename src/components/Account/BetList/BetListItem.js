@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
 
 export const BetListItem = memo(function KanbanCard({ bet, targetMatch }) {
-    console.log('bet', bet, 'targetMatch', targetMatch)
     const classes = useStyles()
     return (
         <Card className={cx(classes.card)} elevation={0}>

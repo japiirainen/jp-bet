@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar'
 import Copyright from '../Helpers/copyright'
 import Button from '@material-ui/core/Button'
@@ -25,7 +25,7 @@ import { useSetRecoilState } from 'recoil'
 
 const SignIn = (props) => {
     const classes = useStyles()
-
+    const history = useHistory()
     const referer =
         (props.location.state && props.location.state.referer.pathname) || '/'
 
@@ -62,7 +62,7 @@ const SignIn = (props) => {
     }
 
     if (isLoggedIn) {
-        return <Redirect to={referer} />
+        history.push(referer)
     }
 
     return (
