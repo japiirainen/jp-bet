@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useSnackbar } from 'notistack'
+import { useHistory, Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu'
-import { useHistory, Link } from 'react-router-dom'
 import useStyles from './styles'
-import { useSetRecoilState } from 'recoil'
 import {
     currentUserInfo,
     authTokens,
 } from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { logoutToastState } from '../../stateManagement/Recoil/Atoms/appAtoms'
 
 const Hamburger = () => {
     const classes = useStyles()
@@ -18,6 +20,8 @@ const Hamburger = () => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
+    const [notification, setNotification] = useRecoilState(logoutToastState)
+    const { enqueueSnackbar } = useSnackbar()
 
     const setUser = useSetRecoilState(currentUserInfo)
     const setTokens = useSetRecoilState(authTokens)
@@ -27,6 +31,7 @@ const Hamburger = () => {
     }
 
     function logOut() {
+        setNotification(true)
         setUser(null)
         setTokens()
         setAnchorEl(null)
@@ -39,6 +44,25 @@ const Hamburger = () => {
     const handleSettings = () => {
         setAnchorEl(null)
     }
+    useEffect(() => {
+        const handleToast = (variant) => {
+            enqueueSnackbar('Signed out.', {
+                variant,
+                preventDuplicate: true,
+                anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                },
+                onClose: () => {
+                    setNotification(false)
+                },
+            })
+        }
+
+        if (notification) {
+            handleToast('info')
+        }
+    }, [notification, enqueueSnackbar, setNotification])
 
     return (
         <div>
