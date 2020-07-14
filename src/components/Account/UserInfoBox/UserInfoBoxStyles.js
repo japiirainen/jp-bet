@@ -19,4 +19,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '80%',
         height: '100%',
     },
+    userItem: {
+        margin: theme.spacing(1),
+    },
 }))

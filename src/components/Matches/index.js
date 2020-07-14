@@ -20,7 +20,7 @@ const Matches = () => {
             <div className={classes.matchContainer}>
                 {isLoading ? (
                     <div className={classes.loader}>
-                        <LinearProgress color="secondary" />
+                        <LinearProgress color="primary" />
                     </div>
                 ) : (
                     data.map((match) => <Match key={match._id} {...match} />)

@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
+import deepPurple from '@material-ui/core/colors/deepPurple'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,9 +14,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 'auto',
         opacity: '80%',
         backgroundColor:
-            theme.palette.type === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[800],
+            theme.palette.type === 'light' ? deepPurple[200] : blueGrey[400],
     },
 }))
 

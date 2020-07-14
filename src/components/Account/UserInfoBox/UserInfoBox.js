@@ -17,8 +17,12 @@ const UserInfoBox = ({ user }) => {
             <Typography variant="h4" className={classes.fullname}>
                 {user.firstname} {user.lastname}
             </Typography>
-            <Typography className={classes.username}>
+            <Typography variant="h6" className={classes.userItem}>
                 {user.username}
+            </Typography>
+            <Typography className={classes.userItem}>
+                Member since &rarr; <br />
+                {user.createdAt}
             </Typography>
         </div>
     )

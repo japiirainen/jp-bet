@@ -2,7 +2,7 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { useQuery } from 'react-query'
 import { fetchBetslips } from '../../../Utils/apiclient'
-import BetListItem from './BetListItem'
+import ClosedBetListItem from './BetListItem'
 import { useStyles } from './betListStyles'
 import { Typography, Divider, LinearProgress } from '@material-ui/core'
 import { Alert } from '../../Helpers/Alert'
@@ -11,7 +11,7 @@ import {
     currentUserInfo,
 } from '../../../stateManagement/Recoil/Atoms/userAtoms'
 
-const OpenBetList = () => {
+const ClosedBetList = () => {
     const classes = useStyles()
 
     const { _id } = useRecoilValue(currentUserInfo)
@@ -24,14 +24,14 @@ const OpenBetList = () => {
     return (
         <div>
             <Typography className={classes.header} variant="h5">
-                Open bets
+                Betting history
             </Typography>
             {isLoading ? (
                 <div className={classes.loader}>
                     <LinearProgress color="primary" />
                 </div>
             ) : (
-                data.map((item) => <BetListItem key={item.bet._id} {...item} />)
+                <p>lol</p> //  data.map((item) => <ClosedBetListItem key={item.bet._id} {...item} />)
             )}
 
             {isError && <Alert severity="error"> {error.message} </Alert>}
@@ -39,4 +39,4 @@ const OpenBetList = () => {
     )
 }
 
-export default OpenBetList
+export default ClosedBetList

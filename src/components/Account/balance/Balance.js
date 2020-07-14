@@ -65,6 +65,7 @@ const Balance = () => {
             handleDialog(true)
         }
     }
+
     const confirmDeposit = () => {
         updateUserBalance(inputs, user._id, tokens)
             .then(({ user }) => {
