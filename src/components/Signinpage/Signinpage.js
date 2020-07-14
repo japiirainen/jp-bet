@@ -78,6 +78,7 @@ const SignIn = (props) => {
                     </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
+                            color="secondary"
                             variant="outlined"
                             margin="normal"
                             required
@@ -91,6 +92,7 @@ const SignIn = (props) => {
                             value={email}
                         />
                         <TextField
+                            color="secondary"
                             variant="outlined"
                             margin="normal"
                             required
@@ -112,8 +114,8 @@ const SignIn = (props) => {
                         <Button
                             type="submit"
                             fullWidth
-                            variant="contained"
-                            color="inherit"
+                            variant="outlined"
+                            color="secondary"
                             className={classes.submit}
                             onClick={postSignin}
                         >
@@ -142,9 +144,6 @@ const SignIn = (props) => {
                         Username or password incorrect!
                     </Alert>
                 )}{' '}
-                <Box mt={8}>
-                    <Copyright />
-                </Box>{' '}
             </Container>
         </Grow>
     )

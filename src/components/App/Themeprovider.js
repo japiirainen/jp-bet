@@ -9,7 +9,12 @@ export const darkTheme = createMuiTheme({
 
 export const lightTheme = createMuiTheme({
     palette: {
-        type: 'light',
+        secondary: {
+            main: '#b39ddb',
+        },
+        primary: {
+            main: '#ffd600',
+        },
     },
 })
 

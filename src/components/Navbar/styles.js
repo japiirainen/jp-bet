@@ -6,19 +6,20 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        color: 'black'
+        color: 'black',
     },
     title: {
         flexGrow: 1,
         textAlign: 'center',
+        color: 'white',
     },
     link: {
         textDecoration: 'none',
         color: 'white',
     },
     menuItem: {
-        color: 'black'
-    }
+        color: 'black',
+    },
 }))
 
 export default useStyles

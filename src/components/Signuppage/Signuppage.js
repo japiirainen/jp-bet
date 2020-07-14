@@ -104,6 +104,7 @@ const SignUp = (props) => {
                                     inputProps={autoComplete}
                                 />
                                 <TextField
+                                    color="secondary"
                                     name="username"
                                     variant="outlined"
                                     helperText={errors.username?.message}
@@ -119,6 +120,7 @@ const SignUp = (props) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    color="secondary"
                                     variant="outlined"
                                     helperText={errors.email?.message}
                                     error={Boolean(errors.email?.message)}
@@ -134,6 +136,7 @@ const SignUp = (props) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    color="secondary"
                                     variant="outlined"
                                     helperText={errors.password?.message}
                                     error={Boolean(errors.password?.message)}
