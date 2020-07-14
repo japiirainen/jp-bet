@@ -2,8 +2,8 @@ import React from 'react'
 import { Switch, useLocation } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import Grid from '@material-ui/core/Grid'
+import { Divider, LinearProgress } from '@material-ui/core'
 import UserInfoBox from './UserInfoBox/UserInfoBox'
-import { Divider } from '@material-ui/core'
 import AccountNav from './Nav/AccountNav'
 import Balance from './balance/Balance'
 import BetList from './BetList/BetList'
@@ -23,21 +23,37 @@ const Account = () => {
         <div className={classes.main}>
             <Grid container>
                 <Grid item md={4} sm={3} xs={12}>
-                    <UserInfoBox user={user} />
+                    {user ? (
+                        <UserInfoBox user={user} />
+                    ) : (
+                        <LinearProgress color="primary" />
+                    )}
                 </Grid>
                 <Grid item md={8} sm={8} xs={10}>
                     <AccountNav />
                     <Divider />
-                    {location.pathname === '/account/' && <BetList />}
+                    {user ? (
+                        location.pathname === '/account/' && <BetList />
+                    ) : (
+                        <LinearProgress color="primary" />
+                    )}
                     <Switch>
-                        <PrivateRoute
-                            path="/account/balance"
-                            component={Balance}
-                        />
-                        <PrivateRoute
-                            path="/account/closedbets"
-                            component={ClosedBetList}
-                        />
+                        {user ? (
+                            <PrivateRoute
+                                path="/account/balance"
+                                component={Balance}
+                            />
+                        ) : (
+                            <LinearProgress color="primary" />
+                        )}
+                        {user ? (
+                            <PrivateRoute
+                                path="/account/closedbets"
+                                component={ClosedBetList}
+                            />
+                        ) : (
+                            <LinearProgress color="primary" />
+                        )}
                     </Switch>
                 </Grid>
             </Grid>

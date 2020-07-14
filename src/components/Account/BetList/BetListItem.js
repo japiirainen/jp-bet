@@ -32,7 +32,7 @@ export const BetListItem = memo(function KanbanCard({ bet, targetMatch }) {
                 </p>
                 <p className={classes.subheader}>
                     Bet made: <br />
-                    {bet.createdAt}
+                    {new Date(bet.createdAt).toLocaleString()}
                 </p>
                 <Box display={'flex'} alignItems={'center'}></Box>
             </Box>

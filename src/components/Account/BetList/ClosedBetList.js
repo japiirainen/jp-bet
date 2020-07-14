@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import { fetchBetslips } from '../../../Utils/apiclient'
 import ClosedBetListItem from './BetListItem'
 import { useStyles } from './betListStyles'
-import { Typography, Divider, LinearProgress } from '@material-ui/core'
+import { Typography, LinearProgress } from '@material-ui/core'
 import { Alert } from '../../Helpers/Alert'
 import {
     authTokens,
@@ -18,7 +18,7 @@ const ClosedBetList = () => {
     const tokens = useRecoilValue(authTokens)
 
     const { isLoading, isError, data, error } = useQuery('betslipData', () =>
-        fetchBetslips(_id, tokens)
+        fetchBetslips(_id, tokens, true)
     )
 
     return (
@@ -31,7 +31,9 @@ const ClosedBetList = () => {
                     <LinearProgress color="primary" />
                 </div>
             ) : (
-                <p>lol</p> //  data.map((item) => <ClosedBetListItem key={item.bet._id} {...item} />)
+                data.map((item) => (
+                    <ClosedBetListItem key={item.bet._id} {...item} />
+                ))
             )}
 
             {isError && <Alert severity="error"> {error.message} </Alert>}

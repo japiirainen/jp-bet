@@ -31,6 +31,7 @@ const Hamburger = () => {
     }
 
     function logOut() {
+        localStorage.removeItem('JPBET_TOKEN')
         setNotification(true)
         setUser(null)
         setTokens()

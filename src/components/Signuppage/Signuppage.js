@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -44,9 +44,11 @@ const SignUp = (props) => {
 
     const setUser = useSetRecoilState(currentUserInfo)
     const setAuthTokens = useSetRecoilState(authTokens)
+
     const onSubmit = (data) => {
         onSignup(data)
             .then(({ token, user }) => {
+                localStorage.setItem('JPBET_TOKEN', token)
                 setAuthTokens(token)
                 setUser(user)
                 setLoggedIn(true)

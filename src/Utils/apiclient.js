@@ -115,14 +115,17 @@ export const updateUserInfo = async (data, userId, token) => {
     }
 }
 
-export const fetchBetslips = async (userId, token) => {
-    const resp = await fetch(`${endpoint}/api/v1/betslip/user/${userId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-    })
+export const fetchBetslips = async (userId, token, closedValue) => {
+    const resp = await fetch(
+        `${endpoint}/api/v1/betslip/user/${userId}/${closedValue}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
     const data = (await resp.json()).data
 
     return data

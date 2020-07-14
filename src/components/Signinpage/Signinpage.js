@@ -50,6 +50,7 @@ const SignIn = (props) => {
         e.preventDefault()
         fetchSignin(inputs)
             .then(({ token, user }) => {
+                localStorage.setItem('JPBET_TOKEN', token)
                 setAuthTokens(token)
                 setUser(user)
                 setLoggedIn(true)

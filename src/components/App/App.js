@@ -66,9 +66,7 @@ const App = () => {
                                     path="/settings/"
                                     component={Settings}
                                 />
-                                {loading && (
-                                    <LinearProgress color="secondary" />
-                                )}
+                                {loading && <LinearProgress color="primary" />}
                             </Switch>
                         </Container>
                         <Footer />

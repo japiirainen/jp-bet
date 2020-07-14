@@ -8,15 +8,15 @@ import { useHistory } from 'react-router-dom'
 const AccountNav = () => {
     const classes = useStyles()
 
-    let history = useHistory()
-    let initialValue
-    if (history.location.pathname === '/account/balance') {
-        initialValue = 2
-    } else if (history.location.pathname === '/account/closedBets') {
-        initialValue = 1
-    } else {
-        initialValue = 0
-    }
+    const history = useHistory()
+
+    const tabs = new Map([
+        ['/account', 0],
+        ['/account/balance', 1],
+        ['/account/closedbets', 2],
+    ])
+
+    const initialValue = tabs.get(history.location.pathname.replace(/\/$/, ''))
 
     const linkToBets = () => history.push('/account/')
     const linkToBalance = () => history.push('/account/balance')

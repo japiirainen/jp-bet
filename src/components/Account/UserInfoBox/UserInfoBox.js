@@ -22,7 +22,7 @@ const UserInfoBox = ({ user }) => {
             </Typography>
             <Typography className={classes.userItem}>
                 Member since &rarr; <br />
-                {user.createdAt}
+                {new Date(user.createdAt).toLocaleString()}
             </Typography>
         </div>
     )
