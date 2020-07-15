@@ -118,13 +118,23 @@ const Match = (props) => {
                                 {props.category}
                             </Typography>
                         </div>
+                        <div>
+                            <Typography
+                                variant="body1"
+                                color="textSecondary"
+                                component="p"
+                            >
+                                Time: <br />{' '}
+                                {new Date(props.matchDate).toLocaleString()}
+                            </Typography>
+                        </div>
                         <div className={classes.column}>
                             <Typography className={classes.item}>
                                 {props.team1}
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>vs</Typography>
+                            <Typography className={classes.item}>-</Typography>
                         </div>
                         <div className={classes.column}>
                             <Typography className={classes.item}>
@@ -160,6 +170,7 @@ const Match = (props) => {
 
                                 {user && (
                                     <Radio
+                                        color="primary"
                                         checked={selectedValue === 'team1'}
                                         onChange={handleChange}
                                         name="team1"
@@ -176,6 +187,7 @@ const Match = (props) => {
                                 {props.odds.tie}
                                 {user && (
                                     <Radio
+                                        color="primary"
                                         checked={selectedValue === 'tie'}
                                         onChange={handleChange}
                                         name="tie"
@@ -192,6 +204,7 @@ const Match = (props) => {
                                 {props.odds.team2Win}
                                 {user && (
                                     <Radio
+                                        color="primary"
                                         checked={selectedValue === 'team2'}
                                         onChange={handleChange}
                                         name="team2"
