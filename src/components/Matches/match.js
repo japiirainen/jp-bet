@@ -239,7 +239,7 @@ const Match = (props) => {
                             disabled={!selectedValue}
                             variant="outlined"
                             size="large"
-                            color="inherit"
+                            color="primary"
                             onClick={onBet}
                         >
                             make a bet

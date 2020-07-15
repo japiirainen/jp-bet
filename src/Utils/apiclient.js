@@ -3,8 +3,8 @@ import { Config } from './config'
 export const endpoint = Config.endpoint
 export const token = Config.token
 
-export const fetchMatches = async () => {
-    const resp = await fetch(`${endpoint}/api/v1/match`, {
+export const fetchMatches = async (params) => {
+    const resp = await fetch(`${endpoint}/api/v1/match/${params}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -129,4 +129,24 @@ export const fetchBetslips = async (userId, token, closedValue) => {
     const data = (await resp.json()).data
 
     return data
+}
+
+export const setMatchResults = async (data, userId, token) => {
+    try {
+        const resp = await fetch(`${endpoint}/api/v1/match/result/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok && resp.status !== 200) {
+            throw new Error('Something went wrong!')
+        }
+        return resp.json()
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
 }
