@@ -5,21 +5,18 @@ import Match from './SetMatchResult'
 import ClosedMatchList from './ClosedMatchList'
 import { LinearProgress, Divider } from '@material-ui/core'
 import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
+import CreateIcon from '@material-ui/icons/Create'
 import Tooltip from '@material-ui/core/Tooltip'
 import { Alert } from '../Helpers/Alert'
 import { fetchMatches } from '../../Utils/apiclient'
-import {
-    currentUserInfo,
-    authTokens,
-} from '../../stateManagement/Recoil/Atoms/userAtoms'
+import { authTokens } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { setMatchResults } from '../../Utils/apiclient'
 import { useStyles } from './AdminStyles'
 import { AddMatchModal } from './AddMatch'
 
 const Admin = () => {
     const classes = useStyles()
-    const user = useRecoilValue(currentUserInfo)
+
     const tokens = useRecoilValue(authTokens)
 
     const { isLoading, isError, data, error } = useQuery('adminMatchData', () =>
@@ -39,7 +36,7 @@ const Admin = () => {
                     className={classes.absolute}
                     onClick={() => handleDialog(true)}
                 >
-                    <AddIcon />
+                    <CreateIcon />
                 </Fab>
             </Tooltip>
             <AddMatchModal

@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useSnackbar } from 'notistack'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
+import Tooltip from '@material-ui/core/Tooltip'
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
 import Typography from '@material-ui/core/Typography'
 import { TextField } from '@material-ui/core'
 import { CustomModal } from '../Helpers/CustomModal'
@@ -56,13 +58,16 @@ const SetMatchResult = (props) => {
                     1x2 result: {props.products.onextwo.result}
                 </Typography>
             </CardContent>
-
-            <Button onClick={onClick} size="small" color="secondary">
-                Set result
-            </Button>
-            <Button variant="text" size="medium" color="secondary">
-                Modify
-            </Button>
+            <Tooltip title="set match result" aria-label="setter-button">
+                <Fab
+                    onClick={onClick}
+                    size="small"
+                    color="primary"
+                    style={{ margin: '1rem' }}
+                >
+                    <DoneOutlineIcon />
+                </Fab>
+            </Tooltip>
             <CustomModal
                 isOpen={dialogOpen}
                 handleClose={() => handleDialog(false)}
