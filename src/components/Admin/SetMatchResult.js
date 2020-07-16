@@ -61,11 +61,12 @@ const SetMatchResult = (props) => {
             <Tooltip title="set match result" aria-label="setter-button">
                 <Fab
                     onClick={onClick}
+                    variant="extended"
                     size="small"
                     color="primary"
                     style={{ margin: '1rem' }}
                 >
-                    <DoneOutlineIcon />
+                    <DoneOutlineIcon /> Set result
                 </Fab>
             </Tooltip>
             <CustomModal
