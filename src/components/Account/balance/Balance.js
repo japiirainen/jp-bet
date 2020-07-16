@@ -126,6 +126,8 @@ const Balance = () => {
                         <List component="div" disablePadding>
                             <ListItem className={classes.nested}>
                                 <TextField
+                                    color="secondary"
+                                    variant="standard"
                                     className={classes.input}
                                     id="standard-number"
                                     label="Amount (€)"
@@ -139,7 +141,7 @@ const Balance = () => {
                                     className={classes.button}
                                     variant="text"
                                     size="large"
-                                    color="inherit"
+                                    color="primary"
                                     onClick={handleDepositClick}
                                 >
                                     <ListItemIcon>

@@ -144,24 +144,24 @@ const Match = (props) => {
                     </ExpansionPanelSummary>
                     <Divider />
                     <ExpansionPanelDetails className={classes.oddsNames}>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography className={classes.item}>
                                 {props.team1} odds &darr;
                             </Typography>
                         </div>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography className={classes.item}>
                                 tie odds &darr;
                             </Typography>
                         </div>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography className={classes.item}>
                                 {props.team2} odds &darr;
                             </Typography>
                         </div>
                     </ExpansionPanelDetails>
                     <ExpansionPanelDetails className={classes.odds}>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography
                                 component="div"
                                 className={classes.item}
@@ -179,7 +179,7 @@ const Match = (props) => {
                                 )}
                             </Typography>
                         </div>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography
                                 component="div"
                                 className={classes.item}
@@ -196,7 +196,7 @@ const Match = (props) => {
                                 )}
                             </Typography>
                         </div>
-                        <div className={classes.column}>
+                        <div className={classes.columnMid}>
                             <Typography
                                 component="div"
                                 className={classes.item}
@@ -223,7 +223,7 @@ const Match = (props) => {
                     )}
 
                     <ExpansionPanelActions>
-                        <div className={classes.column}>
+                        <div className={classes.columnBottom}>
                             {user && (
                                 <TextField
                                     className={classes.input}
@@ -239,7 +239,7 @@ const Match = (props) => {
                                 />
                             )}
                         </div>
-                        <div className={classes.column}>
+                        <div className={classes.columnBottom}>
                             {user ? (
                                 <Typography className={classes.item}>
                                     €
@@ -249,8 +249,9 @@ const Match = (props) => {
                             )}
                         </div>
                         <Button
+                            className={classes.columnBottom}
                             disabled={!selectedValue}
-                            variant="outlined"
+                            variant="text"
                             size="large"
                             color="primary"
                             onClick={onBet}

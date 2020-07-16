@@ -150,3 +150,23 @@ export const setMatchResults = async (data, userId, token) => {
         throw e
     }
 }
+
+export const postNewMatch = async (data, token) => {
+    try {
+        const resp = await fetch(`${endpoint}/api/v1/match`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok && resp.status === 400) {
+            throw new Error('Something went wrong!')
+        }
+        return resp.json()
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}

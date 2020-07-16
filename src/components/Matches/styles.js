@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
     column: {
         flexBasis: '25%',
     },
+    columnBotton: {
+        flexBasis: '50%',
+    },
+    columnMid: {
+        flexBasis: '30%',
+    },
     helper: {
         borderLeft: `2px solid ${theme.palette.divider}`,
         padding: theme.spacing(1, 2),
