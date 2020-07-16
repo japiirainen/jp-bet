@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 20,
         marginTop: theme.spacing(4),
     },
+    alert: {
+        marginTop: theme.spacing(6),
+    },
 }))
 
 export default useStyles

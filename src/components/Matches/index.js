@@ -25,7 +25,12 @@ const Matches = () => {
                 ) : (
                     data.map((match) => <Match key={match._id} {...match} />)
                 )}
-                {isError && <Alert severity="error"> {error.message} </Alert>}
+                {isError && (
+                    <Alert className={classes.alert} severity="error">
+                        {' '}
+                        {error.message}{' '}
+                    </Alert>
+                )}
             </div>
         </Container>
     )
