@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Grow from '@material-ui/core/Grow'
 import useStyles from './styles'
-import { TextField, Radio } from '@material-ui/core'
+import { TextField, Radio, Avatar } from '@material-ui/core'
 import { postBetSlip } from '../../Utils/apiclient'
 import {
     currentUserInfo,
@@ -130,7 +130,12 @@ const Match = (props) => {
                         </div>
                         <div className={classes.column}>
                             <Typography className={classes.item}>
-                                {props.team1}
+                                {props.team1} <br />{' '}
+                                <Avatar
+                                    variant="rounded"
+                                    alt="team1logo"
+                                    src={props.teamLogos.team1Logo}
+                                />
                             </Typography>
                         </div>
                         <div className={classes.column}>
@@ -138,7 +143,12 @@ const Match = (props) => {
                         </div>
                         <div className={classes.column}>
                             <Typography className={classes.item}>
-                                {props.team2}
+                                {props.team2} <br />{' '}
+                                <Avatar
+                                    variant="rounded"
+                                    alt="team2logo"
+                                    src={props.teamLogos.team2Logo}
+                                />
                             </Typography>
                         </div>
                     </ExpansionPanelSummary>

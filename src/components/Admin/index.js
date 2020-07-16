@@ -46,7 +46,6 @@ const Admin = () => {
                 tokens={tokens}
                 isOpen={dialogOpen}
                 handleClose={() => handleDialog(false)}
-                handleConfirm={() => handleDialog(false)}
             />
             <h2>Set match results</h2>
             {isLoading ? (
