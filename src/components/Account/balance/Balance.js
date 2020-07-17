@@ -22,6 +22,7 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { CustomModal } from '../../Helpers/CustomModal'
 import { useFormInput } from '../../Helpers/functions'
 import { updateUserBalance } from '../../../Utils/apiclient'
+import DepositHistory from './DepositHistory'
 
 const R = require('ramda')
 
@@ -103,7 +104,7 @@ const Balance = () => {
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                     subheader={
-                        <Typography variant="h5" className={classes.title}>
+                        <Typography variant="h6" className={classes.title}>
                             Account balance
                         </Typography>
                     }
@@ -151,6 +152,7 @@ const Balance = () => {
                             </ListItem>
                         </List>
                     </Collapse>
+                    <DepositHistory />
                 </List>
                 <CustomModal
                     isOpen={dialogOpen}
