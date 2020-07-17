@@ -29,7 +29,7 @@ const Account = () => {
                         <LinearProgress color="primary" />
                     )}
                 </Grid>
-                <Grid item md={8} sm={8} xs={10}>
+                <Grid item md={8} sm={8} xs={11}>
                     <AccountNav />
                     <Divider />
                     {user ? (

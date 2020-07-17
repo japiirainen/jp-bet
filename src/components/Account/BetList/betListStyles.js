@@ -1,4 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
+import green from '@material-ui/core/colors/lightGreen'
+import red from '@material-ui/core/colors/red'
+
 export const useStyles = makeStyles(({ spacing, palette }) => {
     const family =
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
@@ -24,7 +27,7 @@ export const useStyles = makeStyles(({ spacing, palette }) => {
         },
         subheader: {
             fontFamily: family,
-            fontSize: 14,
+            fontSize: 16,
             color: palette.grey[800],
             letterSpacing: '1px',
             marginBottom: 4,
@@ -36,6 +39,21 @@ export const useStyles = makeStyles(({ spacing, palette }) => {
         },
         header: {
             margin: spacing(4),
+        },
+        fabSuccess: {
+            marginLeft: spacing(6),
+            backgroundColor: green[700],
+            fontSize: spacing(2),
+            color: '#fafafa',
+        },
+        fabDanger: {
+            marginLeft: spacing(6),
+            backgroundColor: red[400],
+            fontSize: spacing(2),
+            color: '#fafafa',
+        },
+        icon: {
+            color: '#fafafa',
         },
     }
 })

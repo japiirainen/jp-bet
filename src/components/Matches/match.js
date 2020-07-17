@@ -129,7 +129,10 @@ const Match = (props) => {
                             </Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>
+                            <Typography
+                                component="div"
+                                className={classes.item}
+                            >
                                 {props.team1} <br />{' '}
                                 <Avatar
                                     variant="rounded"
@@ -142,7 +145,10 @@ const Match = (props) => {
                             <Typography className={classes.item}>-</Typography>
                         </div>
                         <div className={classes.column}>
-                            <Typography className={classes.item}>
+                            <Typography
+                                component="div"
+                                className={classes.item}
+                            >
                                 {props.team2} <br />{' '}
                                 <Avatar
                                     variant="rounded"

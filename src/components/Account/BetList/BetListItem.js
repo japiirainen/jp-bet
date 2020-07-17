@@ -1,10 +1,10 @@
-import React, { memo } from 'react'
+import React from 'react'
 import cx from 'clsx'
 import { useStyles } from './betListStyles'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
 
-export const BetListItem = memo(function KanbanCard({ bet, targetMatch }) {
+export const BetListItem = ({ bet, targetMatch }) => {
     const classes = useStyles()
     return (
         <Card className={cx(classes.card)} elevation={0}>
@@ -38,6 +38,6 @@ export const BetListItem = memo(function KanbanCard({ bet, targetMatch }) {
             </Box>
         </Card>
     )
-})
+}
 
 export default BetListItem

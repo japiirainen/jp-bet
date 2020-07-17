@@ -1,46 +1,45 @@
-import React, { memo } from 'react'
+import React from 'react'
 import cx from 'clsx'
 import { useStyles } from './betListStyles'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
+import { Chip } from '@material-ui/core'
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
+import ClearIcon from '@material-ui/icons/Clear'
+import { checkEquality } from '../../Helpers/functions'
 
-export const ClosedBetListItem = memo(function KanbanCard({
-    bet,
-    targetMatch,
-}) {
+export const ClosedBetListItem = ({ bet, targetMatch }) => {
     const classes = useStyles()
+
     return (
-        <Card className={cx(classes.card)} elevation={0}>
+        <Card className={cx(classes.card)} elevation={5}>
             <Box>
                 <h3 className={classes.heading}>
-                    {targetMatch.team1} vs {targetMatch.team2}
+                    {targetMatch.team1} vs {targetMatch.team2}{' '}
                 </h3>
-                <h4>
-                    Bet size &rarr;
-                    {'  '}
-                    {bet.amount}€{' '}
-                </h4>
                 <p className={classes.subheader}>
-                    Projected win with odds @{' '}
-                    {
-                        targetMatch.odds[
-                            bet.choice !== 'tie'
-                                ? `${bet.choice}Win`
-                                : bet.choice
-                        ]
-                    }{' '}
-                    for {bet.choice} &rarr;
-                    <br />
-                    {bet.projectedWin}€
-                </p>
-                <p className={classes.subheader}>
-                    Bet made: <br />
-                    {new Date(bet.createdAt).toLocaleString()}
+                    Match date: <br />
+                    {new Date(targetMatch.matchDate).toLocaleString()}
+                    {checkEquality(bet.choice, bet.result) ? (
+                        <Chip
+                            label={`won ${bet.projectedWin}€`}
+                            size="medium"
+                            icon={<DoneOutlineIcon className={classes.icon} />}
+                            className={classes.fabSuccess}
+                        />
+                    ) : (
+                        <Chip
+                            label={`lost ${bet.amount}€`}
+                            size="medium"
+                            icon={<ClearIcon className={classes.icon} />}
+                            className={classes.fabDanger}
+                        />
+                    )}
                 </p>
                 <Box display={'flex'} alignItems={'center'}></Box>
             </Box>
         </Card>
     )
-})
+}
 
 export default ClosedBetListItem

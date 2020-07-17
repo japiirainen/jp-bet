@@ -19,3 +19,7 @@ export const calculateReturn = (odds, amount) => {
     const result = R.multiply(odds, parseFloat(amount))
     return result
 }
+
+export const checkEquality = (choice, result) => {
+    return R.equals(choice, result)
+}
