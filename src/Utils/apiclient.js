@@ -167,3 +167,16 @@ export const postNewMatch = async (data, token) => {
         throw e
     }
 }
+
+export const getDeposits = async (token, userId) => {
+    const resp = await fetch(`${endpoint}/api/v1/deposit/user/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    const data = (await resp.json()).data
+
+    return data
+}

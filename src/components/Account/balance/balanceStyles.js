@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
+import green from '@material-ui/core/colors/lightGreen'
 
 export const useStyles = makeStyles((theme) => ({
     main: {
@@ -21,5 +22,20 @@ export const useStyles = makeStyles((theme) => ({
     },
     input: {
         width: '100%',
+    },
+    loader: {
+        marginTop: theme.spacing(6),
+    },
+    fabSuccess: {
+        marginLeft: theme.spacing(6),
+        backgroundColor: green[700],
+        fontSize: theme.spacing(2),
+        color: '#fafafa',
+    },
+    box: {
+        margin: theme.spacing(1),
+    },
+    card: {
+        margin: theme.spacing(1),
     },
 }))
