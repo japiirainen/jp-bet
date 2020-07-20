@@ -7,7 +7,6 @@ import PaymentIcon from '@material-ui/icons/Payment'
 
 export const DepositHistoryItem = (props) => {
     const classes = useStyles()
-    console.log(props)
 
     return (
         <Card className={classes.card} elevation={5}>

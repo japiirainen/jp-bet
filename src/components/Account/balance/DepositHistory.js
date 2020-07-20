@@ -4,7 +4,8 @@ import { useQuery } from 'react-query'
 import { useStyles } from './balanceStyles'
 import { getDeposits } from '../../../Utils/apiclient'
 import DepositHistoryItem from './DepositHistoryItem'
-import { Typography, LinearProgress } from '@material-ui/core'
+import { Typography, LinearProgress, Chip } from '@material-ui/core'
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied'
 import { Alert } from '../../Helpers/Alert'
 import {
     authTokens,
@@ -17,16 +18,33 @@ const DepositHistory = () => {
     const { _id } = useRecoilValue(currentUserInfo)
     const tokens = useRecoilValue(authTokens)
 
-    const { isLoading, isError, data, error } = useQuery('depositHistory', () =>
-        getDeposits(tokens, _id)
-    )
-
+    const {
+        isLoading,
+        isError,
+        data,
+        error,
+        status,
+    } = useQuery('depositHistory', () => getDeposits(tokens, _id))
+    console.log(data)
     return (
         <>
             <Typography variant="h6" className={classes.title}>
                 Deposit History
             </Typography>
-            {isLoading ? (
+            {status === 'success' && data.length === 0 ? (
+                <Chip
+                    label={
+                        'You have not yet made any deposits. Make one above!'
+                    }
+                    size="medium"
+                    icon={
+                        <SentimentVeryDissatisfiedIcon
+                            className={classes.icon}
+                        />
+                    }
+                    className={classes.fabBlue}
+                />
+            ) : isLoading ? (
                 <div className={classes.loader}>
                     <LinearProgress color="primary" />
                 </div>

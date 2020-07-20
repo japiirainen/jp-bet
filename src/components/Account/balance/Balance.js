@@ -1,4 +1,5 @@
 import React, { useState, Suspense, useEffect } from 'react'
+import { useMutation, queryCache } from 'react-query'
 import List from '@material-ui/core/List'
 import { useSnackbar } from 'notistack'
 import ListItem from '@material-ui/core/ListItem'
@@ -60,6 +61,19 @@ const Balance = () => {
         user: user._id,
     }
 
+    const [onSubmit] = useMutation(
+        () => postDeposit(inputs, user._id, tokens),
+        {
+            onSuccess: ({ user }) => {
+                setNotification(true)
+                setUser(user)
+                handleDialog(false)
+            },
+            onSettled: () => queryCache.invalidateQueries('depositHistory'),
+            onError: (e) => handleErrorToast('error', e.message),
+        }
+    )
+
     const handleDepositClick = () => {
         if (R.isEmpty(amount.value)) {
             setErrorMessage('Amount is required!')
@@ -68,16 +82,6 @@ const Balance = () => {
         }
     }
 
-    const confirmDeposit = () => {
-        postDeposit(inputs, user._id, tokens)
-            .then(({ user }) => {
-                setNotification(true)
-                setUser(user)
-                handleDialog(false)
-            })
-
-            .catch((e) => handleErrorToast('error', e.message))
-    }
     useEffect(() => {
         const handleToast = (variant) => {
             enqueueSnackbar(`Deposit Successful!`, {
@@ -158,7 +162,7 @@ const Balance = () => {
                 <CustomModal
                     isOpen={dialogOpen}
                     handleClose={() => handleDialog(false)}
-                    handleConfirm={confirmDeposit}
+                    handleConfirm={onSubmit}
                     title="Please confirm that your deposit is as intended!"
                 >
                     <Typography>
