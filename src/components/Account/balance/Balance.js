@@ -21,7 +21,7 @@ import { toastState } from '../../../stateManagement/Recoil/Atoms/appAtoms'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { CustomModal } from '../../Helpers/CustomModal'
 import { useFormInput } from '../../Helpers/functions'
-import { updateUserBalance } from '../../../Utils/apiclient'
+import { postDeposit } from '../../../Utils/apiclient'
 import DepositHistory from './DepositHistory'
 
 const R = require('ramda')
@@ -57,6 +57,7 @@ const Balance = () => {
     }
     const inputs = {
         amount: amount.value,
+        user: user._id,
     }
 
     const handleDepositClick = () => {
@@ -68,7 +69,7 @@ const Balance = () => {
     }
 
     const confirmDeposit = () => {
-        updateUserBalance(inputs, user._id, tokens)
+        postDeposit(inputs, user._id, tokens)
             .then(({ user }) => {
                 setNotification(true)
                 setUser(user)
