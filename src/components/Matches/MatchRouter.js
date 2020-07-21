@@ -35,7 +35,7 @@ const MatchRouter = () => {
                 <SidebarTrigger sidebarId="unique_id" />
                 <DrawerSidebar sidebarId={'unique_id'}>
                     <SidebarContent>
-                        <Link to="/counterstrike">
+                        <Link className={classes.link} to="/counterstrike">
                             <Button
                                 key="cs"
                                 className={classes.button}

@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
         color: grey[800],
     },
+    title: {
+        textAlign: 'center',
+    },
 }))
 
 export default useStyles

@@ -180,3 +180,22 @@ export const getDeposits = async (token, userId) => {
 
     return data
 }
+
+export const getSingleMatch = async (matchId, token) => {
+    try {
+        const resp = await fetch(`${endpoint}/api/v1/match/${matchId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        if (!resp.ok && resp.status !== 200) {
+            throw new Error('Deposit failed. Please try again later!')
+        }
+        return (await resp.json()).data
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}

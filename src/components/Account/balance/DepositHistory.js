@@ -25,7 +25,7 @@ const DepositHistory = () => {
         error,
         status,
     } = useQuery('depositHistory', () => getDeposits(tokens, _id))
-    console.log(data)
+
     return (
         <>
             <Typography variant="h6" className={classes.title}>

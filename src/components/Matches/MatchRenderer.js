@@ -1,13 +1,14 @@
 import React from 'react'
 import { useQuery } from 'react-query'
+import { Link, useRouteMatch } from 'react-router-dom'
 import Match from './match'
 import MatchCard from './newMatch'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
 import { fetchMatches } from '../../Utils/apiclient'
 import useStyles from './styles'
-import { Container, Tooltip } from '@material-ui/core'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Container, Typography } from '@material-ui/core'
+import { CustomTooltip } from '../Helpers/CustomTooltip'
 
 const MatchRenderer = () => {
     const classes = useStyles()
@@ -22,6 +23,9 @@ const MatchRenderer = () => {
     return (
         <>
             <Container maxWidth="sm">
+                <Typography variant="h4" className={classes.title}>
+                    Currently open Counter-Strike matches
+                </Typography>
                 <div className={classes.matchContainer}>
                     {isLoading ? (
                         <div className={classes.loader}>
@@ -29,9 +33,10 @@ const MatchRenderer = () => {
                         </div>
                     ) : (
                         data.map((match) => (
-                            <Tooltip
+                            <CustomTooltip
+                                placement="end"
                                 key={match._id}
-                                title="Click for betting options!"
+                                title="Click for odds and betting options!"
                                 aria-label="link"
                             >
                                 <Link
@@ -41,7 +46,7 @@ const MatchRenderer = () => {
                                 >
                                     <MatchCard key={match._id} {...match} />
                                 </Link>
-                            </Tooltip>
+                            </CustomTooltip>
                         ))
                     )}
                     {isError && (

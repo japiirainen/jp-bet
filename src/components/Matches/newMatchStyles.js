@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
+import { grey } from '@material-ui/core/colors'
 
 const mainColor = '#003399'
 const lightColor = '#ecf2ff'
@@ -26,7 +27,7 @@ export const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
         [breakpoints.up('sm')]: {
             minWidth: 400,
         },
-        marginTop: spacing(3),
+        marginTop: spacing(8),
     },
     left: {
         borderTopLeftRadius: borderRadius,
@@ -96,6 +97,41 @@ export const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
         color: mainColor,
         display: 'block',
         marginBottom: spacing(2),
+    },
+    link: {
+        color: palette.primary.main,
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    },
+    button: {
+        marginTop: spacing(1),
+        color: grey[800],
+    },
+    alert: {
+        marginTop: spacing(6),
+    },
+    loader: {
+        marginTop: spacing(6),
+    },
+    productHeader: {
+        textAlign: 'center',
+        marginBottom: spacing(3),
+    },
+    absolute: {
+        textAlign: 'flex-end',
+    },
+    root: {
+        display: 'flex',
+        margin: spacing(5),
+    },
+    root2: {
+        marginLeft: spacing(4),
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'column',
     },
     moveLeft: {},
     moveRight: {},
