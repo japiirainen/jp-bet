@@ -49,7 +49,7 @@ const App = () => {
                     <Paper>
                         <Navbar />
                         <Container
-                            maxWidth="md"
+                            maxWidth="lg"
                             className={classes.mainContainer}
                         >
                             <Switch>

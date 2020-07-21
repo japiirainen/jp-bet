@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
+import grey from '@material-ui/core/colors/blueGrey'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,6 +64,10 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         marginTop: theme.spacing(6),
+    },
+    button: {
+        marginTop: theme.spacing(1),
+        color: grey[800],
     },
 }))
 
