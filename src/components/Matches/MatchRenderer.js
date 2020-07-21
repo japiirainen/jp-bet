@@ -6,8 +6,8 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
 import { fetchMatches } from '../../Utils/apiclient'
 import useStyles from './styles'
-import { Container } from '@material-ui/core'
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
+import { Container, Tooltip } from '@material-ui/core'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 const MatchRenderer = () => {
     const classes = useStyles()
@@ -17,35 +17,40 @@ const MatchRenderer = () => {
         fetchMatches
     )
 
-    const { path, url } = useRouteMatch()
+    const { url } = useRouteMatch()
 
     return (
         <>
             <Container maxWidth="sm">
-                <Switch>
-                    <Route exact path={path}>
-                        <div className={classes.matchContainer}>
-                            {isLoading ? (
-                                <div className={classes.loader}>
-                                    <LinearProgress color="primary" />
-                                </div>
-                            ) : (
-                                data.map((match) => (
-                                    <MatchCard key={match._id} {...match} />
-                                ))
-                            )}
-                            {isError && (
-                                <Alert
-                                    className={classes.alert}
-                                    severity="error"
-                                >
-                                    {' '}
-                                    {error.message}{' '}
-                                </Alert>
-                            )}
+                <div className={classes.matchContainer}>
+                    {isLoading ? (
+                        <div className={classes.loader}>
+                            <LinearProgress color="primary" />
                         </div>
-                    </Route>
-                </Switch>
+                    ) : (
+                        data.map((match) => (
+                            <Tooltip
+                                key={match._id}
+                                title="Click for betting options!"
+                                aria-label="link"
+                            >
+                                <Link
+                                    key={match._id}
+                                    to={`${url}/${match._id}`}
+                                    className={classes.link}
+                                >
+                                    <MatchCard key={match._id} {...match} />
+                                </Link>
+                            </Tooltip>
+                        ))
+                    )}
+                    {isError && (
+                        <Alert className={classes.alert} severity="error">
+                            {' '}
+                            {error.message}{' '}
+                        </Alert>
+                    )}
+                </div>
             </Container>
         </>
     )

@@ -21,6 +21,7 @@ import { ErrorFallback } from '../Helpers/ErrorFallback'
 import MatchRenderer from '../Matches/MatchRenderer'
 import MatchRouter from '../Matches/MatchRouter'
 import Home from '../Home'
+import MatchBetting from '../Matches/MatchBetting'
 
 const App = () => {
     const classes = useStyles()
@@ -50,7 +51,6 @@ const App = () => {
                 <ThemeProvider theme={lightTheme}>
                     <Paper>
                         <Navbar />
-
                         <Container
                             maxWidth="lg"
                             className={classes.mainContainer}
@@ -59,8 +59,13 @@ const App = () => {
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route
+                                    exact
                                     path="/counterstrike"
                                     component={MatchRenderer}
+                                />
+                                <Route
+                                    path="/counterstrike/:id"
+                                    component={MatchBetting}
                                 />
                                 <Route path="/signin" component={Signinpage} />
                                 <Route path="/signup" component={Signuppage} />

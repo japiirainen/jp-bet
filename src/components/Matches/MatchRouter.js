@@ -8,10 +8,10 @@ import Layout, {
     getSidebarContent,
 } from '@mui-treasury/layout'
 import Button from '@material-ui/core/Button'
-import { usePushingGutterStyles } from '@mui-treasury/styles/gutter/pushing'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { getSidebarTrigger } from '@mui-treasury/layout'
 import { useStyles } from './newMatchStyles'
+
 const SidebarTrigger = getSidebarTrigger(styled)
 const DrawerSidebar = getDrawerSidebar(styled)
 const SidebarContent = getSidebarContent(styled)
@@ -27,7 +27,6 @@ scheme.configureEdgeSidebar((builder) => {
 
 const MatchRouter = () => {
     const classes = useStyles()
-    const buttonStyle = usePushingGutterStyles()
 
     return (
         <>
@@ -38,7 +37,7 @@ const MatchRouter = () => {
                     <SidebarContent>
                         <Link to="/counterstrike">
                             <Button
-                                classes={buttonStyle}
+                                key="cs"
                                 className={classes.button}
                                 fullWidth
                             >

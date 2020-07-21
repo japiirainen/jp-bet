@@ -1,7 +1,12 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-export const MatchBetting = () => {
-    let { _id } = useParams()
-    return <h1>{_id}</h1>
+const MatchBetting = () => {
+    const { id } = useParams()
+
+    console.log('rendering' + id)
+
+    return <h1>rendering match: {id}</h1>
 }
+
+export default MatchBetting
