@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { SnackbarProvider } from 'notistack'
 import Navbar from '../Navbar/Navbar'
-import Matches from '../Matches'
 import Signinpage from '../Signinpage/Signinpage'
 import Signuppage from '../Signuppage/Signuppage'
 import PrivateRoute from '../PrivateRoute'
@@ -19,6 +18,9 @@ import { currentUserInfo } from '../../stateManagement/Recoil/Atoms/userAtoms'
 import { useSetRecoilState, useRecoilValueLoadable } from 'recoil'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../Helpers/ErrorFallback'
+import MatchRenderer from '../Matches/MatchRenderer'
+import MatchRouter from '../Matches/MatchRouter'
+import Home from '../Home'
 
 const App = () => {
     const classes = useStyles()
@@ -48,13 +50,18 @@ const App = () => {
                 <ThemeProvider theme={lightTheme}>
                     <Paper>
                         <Navbar />
+
                         <Container
                             maxWidth="lg"
                             className={classes.mainContainer}
                         >
+                            <MatchRouter />
                             <Switch>
-                                <Route exact path="/" component={Matches} />
-
+                                <Route exact path="/" component={Home} />
+                                <Route
+                                    path="/counterstrike"
+                                    component={MatchRenderer}
+                                />
                                 <Route path="/signin" component={Signinpage} />
                                 <Route path="/signup" component={Signuppage} />
                                 <PrivateRoute path="/admin" component={Admin} />

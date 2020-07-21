@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { ThemeProvider } from 'styled-components'
 
 const mainColor = '#003399'
 const lightColor = '#ecf2ff'
