@@ -43,13 +43,13 @@ export const useStyles = makeStyles(({ spacing, palette }) => {
         fabSuccess: {
             marginLeft: spacing(6),
             backgroundColor: green[700],
-            fontSize: spacing(2),
+            fontSize: spacing(2.5),
             color: '#fafafa',
         },
         fabDanger: {
             marginLeft: spacing(6),
             backgroundColor: red[400],
-            fontSize: spacing(2),
+            fontSize: spacing(2.5),
             color: '#fafafa',
         },
         icon: {

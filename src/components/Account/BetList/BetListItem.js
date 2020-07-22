@@ -3,6 +3,8 @@ import cx from 'clsx'
 import { useStyles } from './betListStyles'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
+import MoneyIcon from '@material-ui/icons/Money'
+import { Chip } from '@material-ui/core'
 
 export const BetListItem = ({ bet, targetMatch }) => {
     const classes = useStyles()
@@ -27,8 +29,12 @@ export const BetListItem = ({ bet, targetMatch }) => {
                         ]
                     }{' '}
                     for {bet.choice} &rarr;
-                    <br />
-                    {bet.projectedWin}€
+                    <Chip
+                        label={`${bet.projectedWin} €`}
+                        size="medium"
+                        icon={<MoneyIcon className={classes.icon} />}
+                        className={classes.fabSuccess}
+                    />
                 </p>
                 <p className={classes.subheader}>
                     Bet made: <br />

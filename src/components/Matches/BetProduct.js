@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { useMutation } from 'react-query'
 import { useSnackbar } from 'notistack'
@@ -23,6 +24,7 @@ const BetProduct = ({ data, user, setUser, tokens }) => {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [selectedValue, setSelectedValue] = useState(0)
+    const history = useHistory()
     const amount = useFormInput('')
     const handleChange = (event) => {
         setSelectedValue(event.target.value)
@@ -57,6 +59,7 @@ const BetProduct = ({ data, user, setUser, tokens }) => {
                 setNotification(true)
                 setUser(user)
                 handleDialog(false)
+                history.push('/account/')
             },
             onError: (e) => handleErrorToast('error', e.message),
         }
@@ -145,6 +148,7 @@ const BetProduct = ({ data, user, setUser, tokens }) => {
                             label="amount"
                             variant="outlined"
                             name="amount"
+                            required
                             {...amount}
                         />
                     </Grid>

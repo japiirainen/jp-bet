@@ -63,7 +63,7 @@ const App = () => {
                                     path="/counterstrike"
                                     component={MatchRenderer}
                                 />
-                                <Route
+                                <PrivateRoute
                                     path="/counterstrike/:id"
                                     component={MatchBetting}
                                 />
