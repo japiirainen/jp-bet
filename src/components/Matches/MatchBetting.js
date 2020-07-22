@@ -7,7 +7,7 @@ import {
     authTokens,
     currentUserInfo,
 } from '../../stateManagement/Recoil/Atoms/userAtoms'
-import { LinearProgress } from '@material-ui/core'
+import { LinearProgress, Typography, Divider, Grid } from '@material-ui/core'
 import { useStyles } from './newMatchStyles'
 import { Alert } from '../Helpers/Alert'
 import BetProduct from './BetProduct'
@@ -15,7 +15,7 @@ import BetProduct from './BetProduct'
 const MatchBetting = () => {
     const classes = useStyles()
     const { id } = useParams()
-    //const [user, setUser] = useRecoilState(currentUserInfo)
+    const [user, setUser] = useRecoilState(currentUserInfo)
     const tokens = useRecoilValue(authTokens)
 
     const { isLoading, isError, data, error } = useQuery(
@@ -29,7 +29,43 @@ const MatchBetting = () => {
                     <LinearProgress color="primary" />
                 </div>
             ) : (
-                <BetProduct data={data} />
+                <>
+                    <Typography
+                        className={classes.productHeader}
+                        variant="h5"
+                        component="h2"
+                    >
+                        {data.team1} - {data.team2} <br />
+                        {new Date(data.matchDate).toLocaleString()}
+                    </Typography>
+                    <Divider />
+                    <Grid container className={classes.root} spacing={3}>
+                        <Grid item xs>
+                            <BetProduct
+                                data={data}
+                                user={user}
+                                setUser={setUser}
+                                tokens={tokens}
+                            />
+                        </Grid>
+                        <Grid item xs>
+                            <BetProduct
+                                data={data}
+                                user={user}
+                                setUser={setUser}
+                                tokens={tokens}
+                            />
+                        </Grid>
+                        <Grid item xs>
+                            <BetProduct
+                                data={data}
+                                user={user}
+                                setUser={setUser}
+                                tokens={tokens}
+                            />
+                        </Grid>
+                    </Grid>
+                </>
             )}
 
             {isError && (

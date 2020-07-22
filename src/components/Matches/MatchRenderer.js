@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import Match from './match'
 import MatchCard from './newMatch'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -9,16 +10,22 @@ import { fetchMatches } from '../../Utils/apiclient'
 import useStyles from './styles'
 import { Container, Typography } from '@material-ui/core'
 import { CustomTooltip } from '../Helpers/CustomTooltip'
+import { authTokens } from '../../stateManagement/Recoil/Atoms/userAtoms'
 
 const MatchRenderer = () => {
     const classes = useStyles()
+
+    const tokens = useRecoilValue(authTokens)
 
     const { isLoading, isError, data, error } = useQuery(
         'matchData',
         fetchMatches
     )
-
+    const history = useHistory()
     const { url } = useRouteMatch()
+    const redirectToLogin = () => {
+        history.push('/signin')
+    }
 
     return (
         <>
@@ -34,14 +41,22 @@ const MatchRenderer = () => {
                     ) : (
                         data.map((match) => (
                             <CustomTooltip
-                                placement="end"
+                                placement="right"
                                 key={match._id}
-                                title="Click for odds and betting options!"
+                                title={
+                                    !tokens
+                                        ? 'Must be signed in to view!'
+                                        : 'Click for odds and betting options!'
+                                }
                                 aria-label="link"
                             >
                                 <Link
                                     key={match._id}
-                                    to={`${url}/${match._id}`}
+                                    to={
+                                        !tokens
+                                            ? `/signin`
+                                            : `${url}/${match._id}`
+                                    }
                                     className={classes.link}
                                 >
                                     <MatchCard key={match._id} {...match} />

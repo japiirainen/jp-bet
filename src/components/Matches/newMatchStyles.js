@@ -123,8 +123,8 @@ export const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
         textAlign: 'flex-end',
     },
     root: {
-        display: 'flex',
-        margin: spacing(5),
+        marginTop: spacing(2),
+        flexGrow: 1,
     },
     root2: {
         marginLeft: spacing(4),
