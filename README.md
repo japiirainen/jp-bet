@@ -12,3 +12,4 @@
 -   [x] match component should link to a page with different bet options
 
 -   [ ] home page
+-   [ ] /counterstrike to use privateroute
