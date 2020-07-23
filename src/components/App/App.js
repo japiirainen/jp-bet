@@ -23,6 +23,7 @@ import MatchRouter from '../Matches/MatchRouter'
 import Home from '../Home'
 import MatchBetting from '../Matches/MatchBetting'
 import ForgotPage from '../PasswordReset/ForgotPage'
+import ResetPage from '../PasswordReset/ResetPage'
 
 const App = () => {
     const classes = useStyles()
@@ -71,7 +72,10 @@ const App = () => {
                                 <Route path="/signin" component={Signinpage} />
                                 <Route path="/signup" component={Signuppage} />
                                 <Route path="/forgot" component={ForgotPage} />
-                                <Route path="/reset/:id" />
+                                <Route
+                                    path="/reset/:id"
+                                    component={ResetPage}
+                                />
                                 <PrivateRoute path="/admin" component={Admin} />
                                 <PrivateRoute
                                     path="/account/"
