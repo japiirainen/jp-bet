@@ -4,7 +4,7 @@ import { useStyles } from './betListStyles'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
 import MoneyIcon from '@material-ui/icons/Money'
-import { Chip } from '@material-ui/core'
+import { Chip, Typography } from '@material-ui/core'
 
 export const BetListItem = ({ bet, targetMatch }) => {
     const classes = useStyles()
@@ -19,7 +19,11 @@ export const BetListItem = ({ bet, targetMatch }) => {
                     {'  '}
                     {bet.amount}€{' '}
                 </h4>
-                <p className={classes.subheader}>
+                <Typography
+                    variant="body1"
+                    component="div"
+                    className={classes.subheader}
+                >
                     Projected win with odds @{' '}
                     {
                         targetMatch.odds[
@@ -35,7 +39,7 @@ export const BetListItem = ({ bet, targetMatch }) => {
                         icon={<MoneyIcon className={classes.icon} />}
                         className={classes.fabSuccess}
                     />
-                </p>
+                </Typography>
                 <p className={classes.subheader}>
                     Bet made: <br />
                     {new Date(bet.createdAt).toLocaleString()}
