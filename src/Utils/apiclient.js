@@ -199,3 +199,39 @@ export const getSingleMatch = async (matchId, token) => {
         throw e
     }
 }
+
+export const postResetPassword = async (data) => {
+    try {
+        const resp = await fetch(`${endpoint}/forgot`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok) {
+            throw new Error('Something went wrong!')
+        }
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}
+
+export const putUserPassword = async (data) => {
+    try {
+        const resp = await fetch(`${endpoint}/reset`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        if (!resp.ok) {
+            throw new Error('Something went wrong!')
+        }
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}

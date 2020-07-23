@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 import { Alert } from '../Helpers/Alert'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -122,18 +121,24 @@ const SignIn = (props) => {
                         </Button>{' '}
                         <Grid container>
                             <Grid item xs>
-                                <Link color="inherit" href="#" variant="body2">
-                                    Forgot password ?
-                                </Link>{' '}
+                                <Button
+                                    style={{ fontSize: '12px' }}
+                                    color="primary"
+                                    variant="text"
+                                    onClick={() => history.push('/forgot')}
+                                >
+                                    Forgot password?
+                                </Button>{' '}
                             </Grid>{' '}
                             <Grid item>
-                                <Link
-                                    color="inherit"
-                                    href="/signup"
-                                    variant="body2"
+                                <Button
+                                    style={{ fontSize: '12px' }}
+                                    color="primary"
+                                    variant="text"
+                                    onClick={() => history.push('/signup')}
                                 >
-                                    {"Don't have an account? Sign Up"}{' '}
-                                </Link>{' '}
+                                    Don't have an account? Sign Up
+                                </Button>{' '}
                             </Grid>{' '}
                         </Grid>{' '}
                     </form>{' '}

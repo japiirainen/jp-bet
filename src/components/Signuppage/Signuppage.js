@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 import { Alert } from '../Helpers/Alert'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -179,13 +178,14 @@ const SignUp = (props) => {
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
-                                <Link
-                                    color="inherit"
-                                    href="/signin"
-                                    variant="body2"
+                                <Button
+                                    style={{ fontSize: '12px' }}
+                                    color="primary"
+                                    variant="text"
+                                    onClick={() => history.push('/signin')}
                                 >
                                     Already have an account ? Sign in
-                                </Link>
+                                </Button>
                             </Grid>
                         </Grid>
                     </form>{' '}
