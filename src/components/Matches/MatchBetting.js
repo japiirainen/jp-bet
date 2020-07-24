@@ -48,22 +48,6 @@ const MatchBetting = () => {
                                 tokens={tokens}
                             />
                         </Grid>
-                        <Grid item xs>
-                            <BetProduct
-                                data={data}
-                                user={user}
-                                setUser={setUser}
-                                tokens={tokens}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <BetProduct
-                                data={data}
-                                user={user}
-                                setUser={setUser}
-                                tokens={tokens}
-                            />
-                        </Grid>
                     </Grid>
                 </>
             )}

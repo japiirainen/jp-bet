@@ -14,3 +14,5 @@
 -   [ ] home page
 
 -   [ ] breaks if you bet with empty amount
+
+-   [ ] make settings page form to be in multiple sections so doesn't break if you when not giving any password!

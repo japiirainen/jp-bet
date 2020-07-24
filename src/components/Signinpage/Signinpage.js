@@ -103,12 +103,6 @@ const SignIn = (props) => {
                             value={password}
                             onChange={handleChange}
                         />{' '}
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="remember" color="primary" />
-                            }
-                            label="Remember me"
-                        />
                         <Button
                             type="submit"
                             fullWidth
