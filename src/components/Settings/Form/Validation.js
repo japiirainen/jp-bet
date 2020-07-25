@@ -1,10 +1,13 @@
 import * as yup from 'yup'
 
-const schema = yup.object().shape({
+export const personalInfoSchema = yup.object().shape({
     firstname: yup.string().max(99).trim(),
     lastname: yup.string().max(99).trim(),
     username: yup.string().max(15).trim(),
     email: yup.string().email().trim(),
+})
+
+export const passwordSchema = yup.object().shape({
     password: yup
         .string()
         .min(8)
@@ -20,5 +23,3 @@ const schema = yup.object().shape({
             .oneOf([yup.ref('password')], "Password doesn't match"),
     }),
 })
-
-export default schema

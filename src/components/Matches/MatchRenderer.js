@@ -1,8 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useRecoilValue } from 'recoil'
-import { Link, useRouteMatch, useHistory } from 'react-router-dom'
-import Match from './match'
+import { Link, useRouteMatch } from 'react-router-dom'
 import MatchCard from './newMatch'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Alert } from '../Helpers/Alert'
@@ -21,11 +20,7 @@ const MatchRenderer = () => {
         'matchData',
         fetchMatches
     )
-    const history = useHistory()
     const { url } = useRouteMatch()
-    const redirectToLogin = () => {
-        history.push('/signin')
-    }
 
     return (
         <>

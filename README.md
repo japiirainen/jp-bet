@@ -10,9 +10,11 @@
 -   [x] deposit history with new route: GET '/api/v1/deposit/user/\${user_id}'
 -   [x] rework match component
 -   [x] match component should link to a page with different bet options
+-   [x] make settings page form to be in multiple sections so doesn't break if you when not giving any password!
 
 -   [ ] home page
 
 -   [ ] breaks if you bet with empty amount
 
--   [ ] make settings page form to be in multiple sections so doesn't break if you when not giving any password!
+
+
