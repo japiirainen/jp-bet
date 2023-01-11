@@ -21,7 +21,7 @@
         "axios": "^0.19.2",
         "clsx": "^1.1.1",
         "dotenv": "^8.2.0",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "jwt-decode": "^2.2.0",
         "material-ui-colors": "^1.0.0",
         "notistack": "^0.9.17",
